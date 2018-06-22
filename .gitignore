@@ -1,0 +1,10 @@
+/text/*.aux
+/*.aux
+/*.bak
+/*.idx
+/*.ilg
+/*.ind
+/*.log
+/*.out
+/*.toc
+/note_federer.pdf

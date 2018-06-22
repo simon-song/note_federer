@@ -1,0 +1,1221 @@
+%\chapter{General Measure Theory}
+\chapter{Measures and Measurable Sets}
+
+Notes on section 2.1 Measures and Measurable Sets of chapter 2 General Measure 
+Theory of H. Federer's classics Geometric Measure Theory.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         Federer 2.1.1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Measures and Measurable Sets}
+\section{Numerical Summation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition} \label{D:sum}
+Given a function $f$ and a set $A$ contained in the domain of function $f$, we
+define the numerical sum $\sum_A f$ or $\sum_{x\in A} f(x)$ as
+\footnote{Federer 2.1.1, p.52}
+
+(1) If $A$ is finite, we have the usual defintion.
+
+(2) If $A$ is infinite, 
+
+    (2.1) if $\forall x\in A$, $f(x)\geq 0$, we define
+    \begin{equation} \label{E:sum_inf}
+      \sum_A f = \sup\{ \sum_B f: B\subset A, \text{$B$ is finite} \}.
+    \end{equation}
+
+    (2.2) else we define
+    \begin{equation} \label{E:sum_gen}
+      \sum_A f = \sum_A f^+ - \sum_A f^-,
+    \end{equation}
+    where
+    \begin{equation}
+      f^+(x) = \sup(f(x),0), \qquad  f^-(x) = - \inf(f(x),0).
+    \end{equation}
+\end{definition}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+The following lemma about the properties of greatest lower bound and least 
+upper bound will be useful later.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Properties of inf and sup
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{L:infsup}
+The greatest lower bound ($\inf$) and least upper bound ($\sup$) have the 
+following properties:
+\begin{enumerate}
+  \item If $f\le g$, then $\inf f\le \inf g$ and $\sup f\le \sup g$.
+  \item If $A\subset B$ then $\inf_A f\ge \inf_B f$ and $\sup_A f\le\sup_B f$.
+  \item $\sup(-f) + \inf(f)=0$.
+  \item $\inf(f^+)=(\inf f)^+$, $\sup(f^-)=(\inf f)^-$,
+        $\sup(f^+)=(\sup f)^+$, $\inf(f^-)=(\sup f)^-$.
+  \item $\sup(f)+\sup(g)\ge \sup(f+g)$, $\inf(f)+\inf(g)\le \inf(f+g)$.
+\end{enumerate}
+\end{lemma}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+\begin{enumerate}
+  \item Trivial from definition.
+  \item Trivial from definition.
+  \item Trivial from definition.
+  \item From the definition of $f^+$ and $f^-$ and property (3) we have
+    \[
+      \inf(f^+)=\inf(\sup(f,0))=\sup(\inf f,0)=(\inf f)^+,
+    \]
+    \[
+      \sup(f^-)=\sup(-\inf(f,0))=-\inf(\inf(f,0))=-\inf(\inf f,0)=(\inf f)^-.
+    \]
+    \[
+      \sup(f^+)=\sup(\sup(f,0))=\sup(\sup f,0)=(\sup f)^+,
+    \]
+    \[
+      \inf(f^-)=\inf(-\inf(f,0))=-\sup(\inf(f,0))=-\inf(\sup f,0)=(\sup f)^-.
+    \]
+    There is also a more intuitive way to prove these. To prove the first
+    statement note that it is trivial if $\forall x\in X, f(x)\ge 0$. 
+    And if $\exists x\in X$ such that $f(X)<0$ then
+    \[
+      \inf(f^+)=0=(\inf(f))^+.
+    \]
+
+    To prove the second statement, first note that if $f\ge 0$ then 
+    $(\inf f)^-=0=\sup(f^-)$. And if $\exists x\in X$ such that $f(X)<0$ then
+    $\inf(f)=\inf(-f^-)$ thus
+    \[
+      (\inf f)^-=(\inf(-f^-))^-=-\inf(-f^-)=\sup(f^-).
+    \]
+
+    To prove the third statement, first note that if $f\le 0$ then 
+    $\sup(f^+)=0=(\sup f)^+$. And if $\exists x\in X$ such that $f(X)>0$ then
+    $\sup(f)=\sup(f^+)\ge 0$, thus $(\sup f)^+=\sup(f^+)$. 
+
+    To prove the last statement, first note that if $f\le 0$ then $f=-f^-$ and
+    $\sup f\le 0$ hence
+    \[
+      (\sup f)^- = -\sup f = \inf (-f) = \inf(f^-).
+    \]
+    And if $\exists x\in X$ such that $f(X)>0$ then $\inf(f^-)=0=(\sup f)^-$.
+  \item Note that $\forall x\in X$ we have $\sup(f)\ge f(x)$ and 
+    $\sup(g)\ge g(x)$ hence $\sup(f)+\sup(g)\ge f(x)+g(x)$ thus
+    $\sup(f)+\sup(g)$ is an upper bound of $f+g$. Hence
+    $\sup(f)+\sup(g)\ge\sup(f+g)$ because $\sup(f+g)$ is the least upper bound
+    of $f+g$. Similarly we can verify $\inf(f)+\inf(g)\le\inf(f+g)$.
+\end{enumerate}
+\end{proof}
+
+
+
+
+
+First we look at the properties of numerical sums of non-negative functions,
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%               properties of numerical sum of nonnegative functions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{L:sum_pos}
+If $\forall x\in A$, $f(x)\geq 0$, $g(x)\geq 0$, then 
+\begin{enumerate}
+  \item If $f(a)\geq 0$ for some $a\in A$, and 
+    $\forall x\in A, x\neq a, f(x)=0$, then $\sum_A f= f(a)$. 
+  \footnote{Federer 2.1.1, p.52, property (1)}
+  \item $\forall B \subset A, \sum_B f\leq \sum_A f$.
+  \item $\sum_A (f+g) \geq \sum_A f$.
+  \item $\forall B \subset A, \sum_A f= \sum_B f + \sum_{A\setminus B} f$.
+  \item $\sum_A (f+g) = \sum_A f + \sum_A g$.
+  \footnote{Federer 2.1.1, p.52, property (2)}
+  \item $\forall h:A\rightarrow Y$, 
+        $\sum_A f = \sum_{y\in Y} \sum_{h^{-1}\{y\}} f$.
+  \item If $\sum_A f\in R$, then $\{x\in A:f(x)\neq 0\}$ is countable.
+  \footnote{Federer 2.1.1, p.53, property (12)}
+\end{enumerate}
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+\begin{enumerate}
+\item Straightforward from defintion in equation \ref{E:sum_inf}.
+\item Straightforward from defintion in equation \ref{E:sum_inf}.
+\item From defintion in equation \ref{E:sum_inf}, and the fact that for any
+  finite subset $B$ of $A$, $\sum_B (f+g)=\sum_B f + \sum_B g$ hence 
+  $\sum_B (f+g)\geq \sum_B f$.
+\item Note that if $\sum_B f=\infty$ or $\sum_{A\setminus B} f=\infty$, then 
+  $\sum_A f=\infty$ and the statement is true. Otherwise we only need to 
+  verify that $\sum_A f \leq \sum_B f + \sum_{A\setminus B} f$ and
+  $\sum_A f \leq \sum_B f + \sum_{A\setminus B} f$.
+  For the former, note that for any finite subset $C$ of $A$ we have
+  \[
+    \sum_C f = \sum_{C\cap B} f + \sum_{C\cap (A\setminus B)} f,
+  \]
+  hence
+  \begin{align*}
+    \sum_A f 
+      &= \sup\{ \sum_C f: C\subset A, \text{$C$ is finite} \} \notag \\
+      &\leq \sup\{ \sum_{C\cap B} f: C\subset A, \text{$C$ is finite} \}
+            + \sup\{ \sum_{C\cap (A\setminus B)} f
+                    : C\subset A, \text{$C$ is finite} \} \notag \\
+      &\leq \sup\{ \sum_D f: D\subset B, \text{$D$ is finite} \}
+            + \sup\{ \sum_D f: D\subset A\setminus B, \text{$D$ is finite} \} 
+       \notag \\
+      &= \sum_B f + \sum_{A\setminus B} f. \notag \\
+  \end{align*}
+  For the latter we only need to verify that for any finite subset $C$ of
+  $A\setminus B$ that $\sum_A f\geq \sum_B f + \sum_C f$. This is true because
+  \begin{align*}
+    \sum_B f + \sum_C f
+      &= \sum_C f + \sup\{ \sum_D f: D\subset B, \text{$D$ is finite} \} 
+         \notag \\
+      &= \sup\{ \sum_C f + \sum_D f: D\subset B, \text{$D$ is finite} \} 
+         \notag \\
+      &= \sup\{ \sum_{C\cup D} f: D\subset B, \text{$D$ is finite} \} 
+         \notag \\
+      &\leq \sup\{ \sum_E f: E\subset A, \text{$E$ is finite} \}  \notag \\
+      &= \sum_A f. \notag \\
+  \end{align*}
+\item Note that if $\sum_A f=\infty$ or $\sum_A g=\infty$, then 
+  $\sum_A (f+g)=\infty$ and the statement is true. Otherwise we only need to 
+  verify that $\sum_A (f+g) \leq \sum_A f + \sum_A g$ and
+  $\sum_A (f+g) \geq \sum_A f + \sum_A g$. The former is a direct consequent of
+  one property of superum. To prove the latter, we only need to verify that for
+  any finite subset $B$ of $A$ that $\sum_A (f+g)\geq \sum_A f + \sum_B g$.
+  Since $B$ is finite, we have $\sum_B g=\sum_B (f+g) -\sum_B f$, hence we only 
+  need to verify that $\sum_A (f+g) - \sum_B (f+g) \geq \sum_A f -\sum_B f$.
+  And this is straightforward from Properties (3) and (4).
+\item We need to verify that
+  $\sum_A f \geq \sum_{y\in Y} \sum_{h^{-1}\{y\}} f$ and
+  $\sum_A f \leq \sum_{y\in Y} \sum_{h^{-1}\{y\}} f$. 
+  For the former, note that $A=\cup_{y\in Y}(h^{-1}\{y\})$, and
+  from the definition we have
+  \begin{align*}
+    \sum_{y\in Y} \sum_{h^{-1}\{y\}} f
+      &= \sup\{ \sum_{y\in Z} \sum_{h^{-1}\{y\}} f
+        : Z\subset Y, \text{$Z$ is finite} \}  \notag \\
+      &= \sup\{ \sum_{\cup_{y\in Z} h^{-1}\{y\}} f
+        : Z\subset Y, \text{$Z$ is finite} \} \qquad \text{(property 4)}
+        \notag \\
+      &\leq \sup\{ \sum_{\cup_{y\in Y} h^{-1}\{y\}} f
+        : Z\subset Y, \text{$Z$ is finite} \} \qquad \text{(property 2)}
+        \notag \\
+      &= \sup\{ \sum_A f: Z\subset Y, \text{$Z$ is finite} \}  \notag \\
+      &= \sum_A f.
+  \end{align*}
+  To prove the latter, we only need to verify that for any finite subset $B$ of
+  $A$ that $\sum_B f \leq \sum_{y\in Y} \sum_{h^{-1}\{y\}} f$. Note that
+  $B=\cup_{y\in Y}(h^{-1}\{y\} \cap B)$ and if $y,z\in Y$, $y\ne z$, then 
+  $h^{-1}\{y\}\cap h^{-1}\{z\}=\emptyset$. 
+  Let $Z=\{y\in Y: h^{-1}\{y\}\cap B\ne \emptyset\}$, then $Z$ is finite and
+  $B=\cup_{y\in Z}(h^{-1}\{y\} \cap B)$.
+  Thus we have
+  \begin{align*}
+    \sum_B f 
+      &= \sum_{\cup_{y\in Z}(h^{-1}\{y\} \cap B)} f \notag \\
+      &= \sum_{y\in Z}\, \sum_{h^{-1}\{y\}\cap B} f \qquad \text{(property 4)}
+        \notag \\
+      &= \sum_{y\in Y}\, \sum_{h^{-1}\{y\}\cap B} f \qquad \text{(property 1)} 
+        \notag \\
+      &\leq \sum_{y\in Y}\, \sum_{h^{-1}\{y\}} f  \qquad \text{(property 2)}.
+        \notag \\
+  \end{align*}
+\item Let $A_n=\{x\in A:f(x)>\frac{1}{n}\}$, we have
+\[
+  \frac{1}{n} |A_n| = \frac{1}{n} \sum_{A_n} 1 = \sum_{A_n} \frac{1}{n}
+    \leq \sum_{A_n} f \leq \sum_A f <\infty,
+\]
+hence $\forall n\in N, |A_n|<\infty$.
+Note that $\{x\in A:f(x)\neq 0\}=\cup_{n\in N} A_n$, i.e. it is a countable 
+union of finite sets, hence it is a countable set.
+\end{enumerate}
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Next we look at the properties of the numerical sum of arbitrary functions. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                   properties of numerical sum
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{L:sum_gen}
+Given arbitrary set $A$ and arbitrary function $f$, $\sum_A f$ satisfies the
+following:
+\begin{enumerate}
+\item $\sum_A f\in \bar{R}$ if and only if $\sum_A f^+<\infty$ or
+  $\sum_A f^- <\infty$. And $\sum_A f\in R$ if and only if 
+  $\sum_A |f|\in R$.
+  \footnote{Federer 2.1.1, p.52, property (5)}
+\item If $0\ne c\in R$, then $\sum_A cf=c\sum_A f$.
+  \footnote{Federer 2.1.1, p.52, property (6)}
+\item If $\sum_A f+\sum_A g\in R$, then $\sum_A (f+g)=\sum_A f + \sum_A g$.
+  \footnote{Federer 2.1.1, p.53, property (7)}
+\item If $\forall x, f(x)\leq g(x)$, and either $-\infty<\sum_A f$ or
+  $\sum_A g<\infty$, then $\sum_A f\leq \sum_A g$.
+  \footnote{Federer 2.1.1, p.53, property (8)}
+\item If $\sum_A f\in \bar{R}$ and $h:A\rightarrow Y$, then
+  $\sum_A f = \sum_{y\in Y} \sum_{h^{-1}\{y\}} f$.
+  \footnote{Federer 2.1.1, p.53, property (9)}
+\item If $\sum_A f\in \bar{R}$ and $A=U\times V$, then
+  \footnote{Federer 2.1.1, p.53, property (10)}
+\[
+  \sum_A f=\sum_{u\in U} \sum_{v\in V} f(u,v)
+    =\sum_{v\in V} \sum_{u\in U}f(u,v).
+\]
+\item If $f:U\times V\rightarrow [0,\infty]$ and $g:U\rightarrow R$, then
+  \footnote{Federer 2.1.1, p.53, property (11)}
+\[
+  \sum_{(u,v)\in U\times V} g(u)f(u,v)
+    =\sum_{u\in U} g(u)\sum_{v\in V}f(u,v).
+\]
+\item If $\sum_A f\in R$, then $\{x\in A:f(x)\neq 0\}$ is countable.
+  \footnote{Federer 2.1.1, p.53, property (12)}
+\item If $\sum_A f\in \bar{R}$, then for every increasing sequence of sets $B_n$
+with union $A$, $\sum_{B_n} f\rightarrow \sum_A f$ as $n\rightarrow \infty$.
+  \footnote{Federer 2.1.1, p.53, property (13)}
+\end{enumerate}
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+\begin{enumerate}
+\item The first part can be proved by noting that $\sum_A f=\infty$ if and only
+  if $\sum_A f^+=\infty$ and $\sum_A f^-<\infty$ and that $\sum_A f=-\infty$ if 
+  and only if $\sum_A f^+<\infty$ and $\sum_A f^-=\infty$.
+  The second part can be proved by noting that $\sum_A f\in R$ if and only if 
+  $\sum_A f^+<\infty$ and $\sum_A f^-<\infty$ and that $\sum_A |f|\in R$ if and
+  only if $\sum_A f^+ +\sum_A f^-<\infty$.
+\item We first verify the case with $c>0$ and nonnegative $f$. From definition
+  in eq. \ref{E:sum_inf}, we have
+  \begin{align*}
+    \sum_A cf &= \sup\{ \sum_B cf: B\subset A, \text{$B$ is finite} \} \notag \\
+              &= c \times \sup\{ \sum_B f: B\subset A, \text{$B$ is finite} \}
+                \notag \\
+              &= c \sum_A f  \notag \\
+  \end{align*}
+  Next we verify the case with $c>0$ and general $f$. From definition in eq.
+  \ref{E:sum_gen} we have
+  \begin{align*}
+    \sum_A cf&= \sum_A (cf)^+ - \sum_A (cf)^-
+               = \sum_A cf^+ - \sum_A cf^-  \notag \\
+             &= c(\sum_A f^+ - \sum_A f^-) = c\sum_A f. \notag \\
+  \end{align*}
+  Finally we verify the case with $c<0$ and general $f$. From the definition in
+  eq. \ref{E:sum_gen} and the property with $c>0$ we have
+  \begin{align*}
+    \sum_A cf&= \sum_A (cf)^+ - \sum_A (cf)^-
+             = \sum_A (-c)f^- - \sum_A (-c)f^+  \notag \\
+             &= (-c) \sum_A f^- - (-c)\sum_A f^+ =c\sum_A f. \notag \\
+  \end{align*}
+\item First note that
+  \[
+    (f+g)^+ + f^- + g^- = (f+g)^- + f^+ + g^+
+  \]
+  unless $f$ and $g$ are of opposite infinity for some $x$. Using Lemma
+  \ref{L:sum_pos}, property 5, we have
+  \[
+    \sum_A (f+g)^+ + \sum_A f^- + \sum_A g^- 
+      = \sum_A (f+g)^- + \sum_A f^+ + \sum_A g^+.
+  \]
+  Now to prove $\sum_A (f+g)=\sum_A f+\sum_A g$
+  we only need to verify that $\sum_A f^- +\sum_A g^-<\infty$ and that
+  $\sum_A (f+g)^-<\infty$ (hence we can perform substractions). From the
+  condition $\sum_A f+\sum_A g\in R$ and defintion in eq. \ref{E:sum_gen} we 
+  arrive at $\sum_A f^++\sum_A g^+<\infty$ and $\sum_A f^-+\sum_A g^-<\infty$. 
+  And from condition $\sum_A f+\sum_A g\in R$ we have $\sum_A f\in R$ and
+  $\sum_A g\in R$. Thus from Property 1 we have $\sum_A |f|<\infty$ and 
+  $\sum_A |g|<\infty$. Hence (using Lemma \ref{L:sum_pos}, properties 3 and 5)
+  \[
+    \sum_A (f+g)^+ \leq \sum_A (|f|+|g|) =\sum_A |f| +\sum_A |g| <\infty,
+  \]
+  and
+  \[
+    \sum_A (f+g)^- \leq \sum_A (|f|+|g|) =\sum_A |f| +\sum_A |g| <\infty.
+  \]
+\item First note that given $\forall x\in A, f(x)\leq g(x)$ we have
+$f^+(x)\leq g^+(x)$ and $f^-(x)\geq g^-(x)$, hence (from Lemma \ref{L:sum_pos},
+property 3) we have
+\[
+  \sum_A f^+\leq \sum_A g^+, \qquad \sum_A f^-\geq \sum_A g^-.
+\]
+If $\sum_A f>-\infty$, then $\sum_A f^+ -\sum_A f^->-\infty$, hence
+$\infty>\sum_A f^-\geq \sum_A g^- \geq 0$, thus we can perform substractions
+(of finite numbers) and get
+\[
+  \sum_A f^+ -\sum_A f^- \leq \sum_A g^+ -\sum_A g^-,
+\]
+i.e. $\sum_A f\leq \sum_A g$.
+If $\sum_A g<\infty$, we have $\sum_A g^+<\infty$, hence
+$0\leq \sum_A f^+ \leq \sum_A g^+ <\infty$. Again we can perform
+substraction (of finite numbers) and get
+\[
+  \sum_A f^- -\sum_A f^+ \geq \sum_A g^- -\sum_A g^+,
+\]
+i.e. $-\sum_A f\geq -\sum_A g$, or $\sum_A f\leq \sum_A g$.
+\item From definition in \ref{E:sum_inf} and Lemma \ref{L:sum_pos}, property 6,
+  we have
+  \[
+    \sum_A f=\sum_A f^+ -\sum_A f^-
+      = \sum_{y\in Y} \sum_{h^{-1}\{y\}} f^+ 
+        - \sum_{y\in Y} \sum_{h^{-1}\{y\}} f^-.
+  \]
+  Now if $\sum_A f\in \bar{R}$ we have (using property 3 if $\sum_A f\in R$
+  and trivial if $\sum_A f=\infty$ or $\sum_A f=-\infty$)
+  \begin{align*} 
+    \sum_A f
+      &= \sum_{y\in Y} \sum_{h^{-1}\{y\}} f^+ 
+        - \sum_{y\in Y} \sum_{h^{-1}\{y\}} f^- \notag \\
+      &= \sum_{y\in Y} 
+           \left( 
+             \sum_{h^{-1}\{y\}} f^+ -\sum_{h^{-1}\{y\}} f^- 
+           \right) \notag \\
+      &= \sum_{y\in Y} \sum_{h^{-1}\{y\}} f \notag \\
+  \end{align*} 
+\item This can be proved using property 5 and $h:U\times V\rightarrow U$ with
+$h(u,v)=u$ and $h:U\times V\rightarrow V$ with $h(u,v)=v$.
+\item This is a consequence of property 6.
+\item If $\sum_A f\in R$, then $\sum_A f^+\in R$ and $\sum_A f^-\in R$. From
+Lemma \ref{L:sum_pos}, property 7, we have that both 
+$\{x\in A:f^+(x)\ne 0\}$ and $\{x\in A:f^-(x)\ne 0\}$ are countable. Hence
+$\{x\in A:f(x)\ne 0\}=\{x\in A:f^+(x)\ne 0, f^-(x)\ne 0\}$ is countable.
+\item We first verify the case with nonnegative $f$, i.e. 
+  $\forall x\in A, f(x)\ge 0$. 
+
+  If $\sum_A f<\infty$, from definition in \ref{E:sum_inf}, it is easy to see 
+  that $\forall \epsilon>0$, there exists a finite $C\subset A$ such that
+  $\sum_A f\ge \sum_C f\ge \sum_A f-\epsilon$ (otherwise $\sum_A f-\epsilon$ 
+  will be the least upper bound instead of $\sum_A f$). Since $C$ is finite and
+  $C\subset A=\cup_n B_n$, $\forall x\in C,\exists m, x\in B_m$, hence 
+  $\exists n, C\subset B_n$. Thus 
+  \[
+    \forall \epsilon>0, \exists n, \,
+      \sum_A f\ge \sum_{B_n} f\ge \sum_A f-\epsilon,
+  \]
+  i.e., $\lim_{n\to \infty} \sum_{B_n} f=\sum_A f$.
+
+  If $\sum_A f=\infty$, again from definition in \ref{E:sum_inf}, we have
+  \[
+    \forall y>0, \exists C\subset A, |C|<\infty, \sum_C f>y.
+  \]
+  Since $C$ is finite, there exists a set $B_n$ such that $C\subset B_n$. Hence
+  \[
+    \forall y>0, \exists B_n,\, \sum_{B_n} f>y,
+  \]
+  i.e., $\lim_{n\to \infty} \sum_{B_n} f=\infty$.
+  
+  The case for general $f$ can be verified using definition
+  \[
+    \sum_A f = \sum_A f^+ - \sum_A f^-,
+  \]
+  and the property of nonnegative functions we just proved above, i.e.,
+  \[
+    \lim_{n\to\infty} \sum_{B_n} f^+ =\sum_A f^+,
+  \]
+  and 
+  \[
+    \lim_{n\to\infty} \sum_{B_n} f^- =\sum_A f^-.
+  \]
+  Since $\sum_A f\in \bar{R}$, we can safely perform substraction (i.e. no risk
+  of $\infty-\infty$)
+  \[
+    \lim_{n\to\infty} \sum_{B_n} f^+ - \lim_{n\to\infty} \sum_{B_n} f^- 
+      =\sum_A f^+ - \sum_A f^-.
+  \]
+  hence we get $\lim_{n\to \infty} \sum_{B_n} f=\sum_A f$.
+\end{enumerate}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   property of inf, sup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{L:sum_inf}
+We have the following inequalities for $\inf$ and $\sup$:
+\begin{equation}
+  \inf_{x\in X} \left( \sum_{y\in Y} f(x,y) \right)
+    \le \sum_{y\in Y} \left( \inf_{x\in X} f(x,y) \right),
+\end{equation}
+and 
+\begin{equation}
+  \sup_{x\in X} \left( \sum_{y\in Y} f(x,y) \right)
+    \ge \sum_{y\in Y} \left( \sup_{x\in X} f(x,y) \right).
+\end{equation}
+\end{lemma}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+It is easy to verify the case when $Y$ is a finite set using Lemma
+\ref{L:infsup} and mathematical induction. For the case with infinite 
+$Y$, first we verify the case with nonnegative function $f$. 
+Using the Definition of infinite sum in Equation \ref{E:sum_inf} we have
+\begin{align*}
+  \inf_{x\in X} \left( \sum_{y\in Y} f(x,y) \right)
+    &= \inf_{x\in X} \left(
+       \sup\left\{ \sum_{y\in A} f(x,y)
+         : A\subset Y, \text{$A$ is finite} \right\} \right) \notag \\
+    &= \sup
+       \left\{ 
+         \inf_{x\in X} \left( \sum_{y\in A} f(x,y) \right)
+         : A\subset Y, \text{$A$ is finite} 
+       \right\}  \notag \\
+    &\le \sup
+       \left\{ 
+         \sum_{y\in A} \left( \inf_{x\in X} f(x,y) \right)
+         : A\subset Y, \text{$A$ is finite} 
+       \right\}  \notag \\
+    &= \sum_{y\in Y} \left( \inf_{x\in X} f(x,y) \right).
+\end{align*}
+Similarly we can prove the inequality for superum.
+
+Next we verify the case with general function $f$. Using the inequalities for
+nonegative function proved above and Lemma \ref{L:infsup}, (1),(3), and (4)
+we have
+\begin{align*}
+  \inf_{x\in X} \left( \sum_{y\in Y} f(x,y) \right)
+    &= \inf_{x\in X} \left( \sum_{y\in Y} f^+ - \sum_{y\in Y} f^- \right)
+      \notag \\
+    &\le \inf_{x\in X} \sum_{y\in Y} f^+  - \sup_{x\in X} \sum_{y\in Y} f^- 
+      \notag \\
+    &\le \sum_{y\in Y} \left( \inf_{x\in X} f^+ \right)  
+         - \sum_{y\in Y} \left( \sup_{x\in X} f^- \right) \notag \\
+    &= \sum_{y\in Y} \left( \inf_{x\in X} f \right)^+
+         - \sum_{y\in Y} \left( \inf_{x\in X} f \right)^- \notag \\
+    &= \sum_{y\in Y} \left( \inf_{x\in X} f(x,y) \right),
+\end{align*}
+and similarly
+\begin{align*}
+  \sup_{x\in X} \left( \sum_{y\in Y} f(x,y) \right)
+    &= \sup_{x\in X} \left( \sum_{y\in Y} f^+ - \sum_{y\in Y} f^- \right)
+      \notag \\
+    &\ge \sup_{x\in X} \sum_{y\in Y} f^+  - \inf_{x\in X} \sum_{y\in Y} f^- 
+      \notag \\
+    &\ge \sum_{y\in Y} \left( \sup_{x\in X} f^+ \right)  
+         - \sum_{y\in Y} \left( \inf_{x\in X} f^- \right) \notag \\
+    &= \sum_{y\in Y} \left( \sup_{x\in X} f \right)^+
+         - \sum_{y\in Y} \left( \sup_{x\in X} f \right)^- \notag \\
+    &= \sum_{y\in Y} \left( \sup_{x\in X} f(x,y) \right).
+\end{align*}
+
+
+
+
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         Federer 2.1.2-3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Measurable Sets}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition}
+\footnote{Federer 2.1.2}
+For each class $X$ we let $2^X$ be the class of all subsets of X.
+We say that $\phi$ measures $X$, or that $\phi$ is a measure over $X$, if
+and only if $X$ is a set, $\phi:2^X\to [0,\infty]$, and 
+\[
+  \forall F\subset 2^X, \text{$F$ is countable}, A\subset \cup F,
+  \phi(A)\le\sum_{B\in F} \phi(B)
+\]
+Following Caratheodory, we say that $A$ is a $\phi$ measurable set if and only
+if $A\subset X$ and 
+\[
+  \forall T\subset X \quad \phi(T)=\phi(T\cap A)+\phi(T\setminus A).
+\]
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{remark} \label{R:meas}
+Because of the subadditivity of measure, we always have $\forall T\subset X$
+\[
+  \phi(T)\le \phi(T\cap A)+\phi(T\setminus A),
+\]
+hence $\phi$-measurablility of a set $A$ may be proved by showing that
+\[
+  \phi(T)\ge \phi(T\cap A)+\phi(T\setminus A), 
+    \qquad\text{whenever $\phi(T)<\infty$}.
+\]
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{L:meas_proj}
+With any measure $\phi$ over $X$, and any set $Y\subset X$, we define a function
+$\phi|_Y:2^X\to [0,\infty]$ satisfying
+\[
+  \phi|_Y(A) = \phi(Y\cap A),\, \forall A\subset X,
+\]
+then $\phi|_Y$ is also a measure on $X$. And all $\phi$-measurable sets are also
+$\phi|_Y$-measurable.
+\footnote{Adapted from Federer 2.1.2, p. 54}
+\end{lemma}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+  It is trivial to prove that $\phi|_Y$ is also a measure on $X$. Let $A$ be a
+  $\phi$-measurable set, then $\forall T\subset X$,
+  \begin{align*}
+    \phi|_Y(T\cap A) + \phi|_Y(T\setminus A)
+    &= \phi(Y\cap T\cap A) + \phi(Y\cap(T\setminus A))  \notag \\
+    &= \phi(Y\cap T\cap A) + \phi((Y\cap T)\setminus A)  \notag \\
+    &= \phi(Y\cap T) = \phi|_Y(T),  \notag \\
+  \end{align*}
+  i.e. $A$ is $\phi|_Y$-measurable.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition} \label{D:meas_map}
+Every function $f:X\to Y$ induces a map $f_\#$ which associates with each
+measure $\phi$ over $X$ a new measure $f_\#\phi$ over $Y$ by the formula
+\footnote{Federer 2.1.2, p. 54}
+\[
+  (f_\# \phi)B= \phi(f^{-1}B) \quad \forall B\subset Y.
+\]
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proposition}
+Given measure $\phi$ over $X$ and function $f:X\to Y$, for any set $B\subset Y$,
+$f^{-1}(B)$ is $\phi$-measurable iff for any $A\subset X$ that $B$ is
+$f_\# \phi|_A$-measurable.
+\footnote{Federer 2.1.2, p. 54}
+\end{proposition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+B is $f_\# \phi|_A$-measurable iff
+\[
+  \forall U\subset Y, 
+  (f_\#\phi|_A)(U)=(f_\#\phi|_A)(U\cap B) + (f_\#\phi|_A)(U\setminus B), 
+\]
+this is true iff
+\[
+  \phi|_A(f^{-1}(U)) = \phi|_A(f^{-1}(U)\cap f^{-1}(B))
+                      +  \phi|_A(f^{-1}(U)\setminus f^{-1}(B)),
+\]
+again this is ture iff $f^{-1}(B)$ is $\phi|_A$-measurable, this in turn is true
+iff $f^{-1}(B)$ is $\phi$-measurable (from Lemma \ref{L:meas_proj}).
+
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                   properties of (arbitrary) measure
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{theorem} \label{T:meas_prop}
+\footnote{Federer Theorem 2.1.3}
+Suppose $\phi$ measures $X$,
+\begin{enumerate}
+  \item If $A$ is a $\phi$-measurable set, so is $X\setminus A$.
+    \footnote{Federer Theorem 2.1.3(1)}
+    If $A,B$ are $\phi$-measurable sets, so is $A\setminus B$.
+  \item If $A_1,A_2,A_3,\cdots$ are disjoint $\phi$-measurable sets, then
+    \footnote{Federer Theorem 2.1.3(3)}
+    \[
+      \phi\left( \bigcup_{i=1}^{\infty} A_i \right) 
+        = \sum_{i=1}^{\infty} \phi(A_i).
+    \]
+  \item If $B_1\subset B_2\subset B_3\subset \cdots$ form an increasing sequence
+    of $\phi$-measurable sets, then
+    \footnote{Federer Theorem 2.1.3(4)}
+    \[
+      \phi\left( \bigcup_{i=1}^{\infty} B_i \right) 
+        = \lim_{i\to \infty}\phi(B_i).
+    \]
+  \item If $C_1\supset C_2\supset C_3\supset \cdots$ form an decreasing 
+    sequence of $\phi$-measurable sets, and $\phi(C_1)<\infty$, then
+    \footnote{Federer Theorem 2.1.3(5)}
+    \[
+      \phi\left( \bigcap_{i=1}^{\infty} C_i \right) 
+        = \lim_{i\to \infty}\phi(C_i).
+    \]
+  \item If $F$ is a countable, nonempty family of $\phi$ measurable sets, then
+    $\cup F$ and $\cap F$ are $\phi$ measurable.
+    \footnote{Federer Theorem 2.1.3(2)}
+  \item If $\phi(A)=0$, then $A$ is $\phi$-measurable.
+    \footnote{Federer Theorem 2.1.3(6)}
+  \item If $A$ is a $\phi$-measurable set and $B\subset X$, then
+    \footnote{Federer Theorem 2.1.3(7)}
+    \[
+      \phi(A)+\phi(B)=\phi(A\cap B)+\phi(A\cup B).
+    \]
+\end{enumerate}
+\end{theorem}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+\begin{enumerate}
+\item The first part is trivial from definition. For the second part, note that
+  for any set $T\subset X$,
+  \[
+    \phi(T\cap(A\setminus B)) + \phi(T\setminus (A\setminus B))
+      = \phi|_T(A\setminus B) + \phi|_T(X\setminus (A\setminus B))
+      = \phi|_T(X) = \phi(T).
+  \]
+\item To prove the equality, we only need to verify 
+  \[
+    \phi\left( \bigcup_{i=1}^{\infty} A_i \right) 
+      \le \sum_{i=1}^{\infty} \phi(A_i),
+  \]
+  and 
+  \[
+    \phi\left( \bigcup_{i=1}^{\infty} A_i \right) 
+      \ge \sum_{i=1}^{\infty} \phi(A_i).
+  \]
+  Now the former is a direct consequence of the definition of measure (i.e.
+  countable subadditivity), and for the later, first note that for any 
+  non-equal integers $i,j$, we have
+  \[
+    \phi(A_i\cup A_j)= \phi((A_i\cup A_j)\cap A_i) 
+                      + \phi((A_i\cup A_j)\setminus A_i) 
+                     = \phi(A_i) + \phi(A_j).
+  \]
+  Using mathematical induction, we have that for any finite subset $I$ of $N$
+  \[
+    \phi\left( \bigcup_{i\in I} A_i \right) = \sum_{i\in I} \phi(A_i),
+  \]
+  thus
+  \[
+    \phi\left( \bigcup_{i=1}^{\infty} A_i \right) 
+      \ge \phi\left( \bigcup_{i\in I} A_i \right)= \sum_{i\in I} \phi(A_i).
+  \]
+  From the definition of infinite sum in \ref{E:sum_gen} we have
+  \[
+    \sum_{i=1}^{\infty} \phi(A_i)
+      =\sup 
+       \left\{  
+         \phi\left( \bigcup_{i\in I} A_i \right)
+           : I\subset N, \text{$I$ is finite}
+       \right\},
+  \]
+  hence
+  \[
+    \phi\left( \bigcup_{i=1}^{\infty} A_i \right) 
+      \ge \sum_{i=1}^{\infty} \phi(A_i).
+  \]
+\item Let $A_1=B_1$, $A_2=B_2\setminus B_1$, $A_3=B_3\setminus B_2$, etc., then
+  $B_i=\bigcup_{j=1}^i A_j$, $\bigcup_{i=1}^n B_i=\bigcup_{i=1}^n A_i$, and 
+  $A_1,A_2,\cdots$ are disjoint and according to property (1) are all
+  $\phi$-measurable sets. Hence from Property (2) we have
+  \[
+    \phi\left(\bigcup_{i=1}^{\infty} B_i \right)
+    = \phi\left(\bigcup_{i=1}^{\infty} A_i \right)
+    = \sum_{i=1}^{\infty} \phi(A_i),
+  \]
+  and 
+  \[
+    \phi(B_i)=\phi\left(\bigcup_{j=1}^i A_j\right)
+             = \sum_{j=1}^{i} \phi(A_j).
+  \]
+  Thus from Lemma \ref{L:sum_gen}, property (9), we have
+  \[
+    \lim_{i\to\infty}\phi(B_i)
+    = \lim_{i\to\infty} \sum_{j=1}^{i} \phi(A_j)
+    = \sum_{j=1}^{\infty} \phi(A_j)
+    = \phi\left(\bigcup_{i=1}^{\infty} B_i \right)
+  \]
+\item We only need to verify that
+  \[
+    \phi\left(\bigcap_{i=1}^{\infty} C_i \right) \le\lim_{i\to\infty}\phi(C_i),
+  \]
+  and 
+  \[
+    \phi\left(\bigcap_{i=1}^{\infty} C_i \right) \ge\lim_{i\to\infty}\phi(C_i).
+  \]
+  The former is obvious because 
+  $\forall n,\bigcap_{i=1}^{\infty}C_i \subset C_n$,
+  hence $\phi(\bigcap_{i=1}^{\infty}C_i)\le\phi(C_n)$. To prove the latter, note 
+  that
+  \[
+    C_1 = \left(\bigcap_{i=1}^{\infty} C_i \right)
+          \bigcup \left( C_1\setminus \bigcap_{i=1}^{\infty} C_i \right)
+        = \left(\bigcap_{i=1}^{\infty} C_i \right)
+          \bigcup \left( \bigcup_{i=1}^{\infty} (C_1\setminus C_i) \right),
+  \]
+  hence from the definition of measure and Property (3) we have
+  \[
+    \phi(C_1) 
+      \le \phi\left(\bigcap_{i=1}^{\infty} C_i \right)
+          + \phi\left( \bigcup_{i=1}^{\infty} (C_1\setminus C_i) \right)
+      = \phi\left(\bigcap_{i=1}^{\infty} C_i \right)
+        + \lim_{i\to\infty} \phi(C_1\setminus C_i).
+  \]
+  Since $\phi(C_1)<\infty$, we have 
+  $\phi(C_1\setminus C_i)=\phi(C_1)-\phi(C_i)$, thus
+  \[
+    \phi(C_1) 
+      \le \phi\left(\bigcap_{i=1}^{\infty} C_i \right)
+          + \lim_{i\to\infty} [\phi(C_1)-\phi(C_i)].
+  \]
+  Again because $\phi(C_1)<\infty$, we can substract it from both side of the
+  above inequality and thus get
+  \[
+    \phi\left(\bigcap_{i=1}^{\infty} C_i \right) \ge\lim_{i\to\infty}\phi(C_i).
+  \]
+\item  
+  We only need to verify that countable union of $\phi$-measurable sets is also
+  $\phi$-measurable. The case for countable intersection is a direct consquence
+  of this and Property (1) and De Morgan's law.
+
+  First we verify that if $A$ and $B$ are $\phi$ measurable, then the union 
+  $A\cup B$ is $\phi$-measurable too. Note that for any $T\subset X$ we have
+  \[
+    \phi(T)=\phi(T\cap A) + \phi(T\setminus A)
+           =\phi(T\cap A) + \phi((T\setminus A)\cap B) 
+            + \phi((T\setminus A)\setminus B).
+  \]
+  Since $T\setminus A\setminus B=T\setminus (A\cup B)$ and
+  \[
+    (T\cap A)\cup ((T\setminus A)\cap B) = T\cap (A\cup B),
+  \]
+  we have
+  \[
+    \phi(T)\le \phi(T\cap (A\cup B)) + \phi(T\setminus (A\cup B) ).
+  \]
+  Combining with the subadditivity property of measure, we thus have
+  \[
+    \phi(T)= \phi(T\cap (A\cup B)) + \phi(T\setminus (A\cup B) ),
+  \]
+  i.e. $A\cup B$ is $\phi$-measurable.
+  Using mathematical induction we can then verify that finite union of 
+  $\phi$-measurable sets is also $\phi$-measurable. 
+
+  To prove the case that $F$ is countably infinite, say $F$ consists
+  $S_1,S_2,\cdots$, let $B_j=\bigcup_{i=1}^j S_j$, then $B_1,B_2,\cdots$ is an
+  increasing sequence of $\phi$-measurable sets, and 
+  $\cup F=\cup_{j=1}^{\infty} B_j$. Whenever $\phi(T)<\infty$ we then have
+  \begin{align*}
+    & \phi\left(T\cap\bigcup F\right) + \phi\left(T\setminus\bigcup F\right)
+      \notag \\
+    &= \phi\left(T\cap\bigcup_{j=1}^{\infty} B_j\right) 
+      + \phi\left(T\setminus \bigcup_{j=1}^{\infty} B_j \right)
+      \notag \\
+    &= \phi\left(T\cap\bigcup_{j=1}^{\infty} B_j\right) 
+      + \phi\left(T\cap \left(X\setminus \bigcup_{j=1}^{\infty}B_j\right)\right)
+      \notag \\
+    &= \phi|_T \left(\bigcup_{j=1}^{\infty} B_j\right) 
+      + \phi|_T \left( X\setminus \bigcup_{j=1}^{\infty} B_j \right)
+      \qquad \text{(Lemma \ref{L:meas_proj})}   \notag \\
+    &= \lim_{j\to\infty} \phi|_T(B_j) + \lim_{j\to\infty}\phi|_T(X\setminus B_j) 
+       \qquad \text{(properties (3) and (4))}   \notag \\
+    &= \phi|_T(X) 
+       \qquad \text{(Lemma \ref{L:meas_proj} and property (2))} \notag \\
+    &= \phi(T),  \notag \\
+  \end{align*}
+  i.e. $\cup F$ is $\phi$-measurable.
+  \item Since $\phi(A)=0$, we have 
+    $\forall T\subset X, \phi(T\cap A)\le \phi(A)=0$. Thus
+    \[
+      \phi(T\cap A)+\phi(T\setminus A)=\phi(T\setminus A)\le \phi(T).
+    \]
+    According to Remark \ref{R:meas}, this shows that $A$ is $\phi$-measurable.
+  \item From the defintion of measurable set, we have
+    \[
+      \phi(A)+\phi(B)=\phi(A)+\phi(B\cap A)+\phi(B\setminus A),
+    \]
+    and 
+    \begin{align*}
+      \phi(A\cap B)+\phi(A\cup B)
+      &=\phi(A\cap B)+\phi((A\cup B)\cap A)+\phi((A\cup B)\setminus A) \notag \\
+      &=\phi(A\cap B)+\phi(A)+\phi(B\setminus A),  \notag \\
+    \end{align*}
+    hence
+    \[
+      \phi(A)+\phi(B)=\phi(A\cap B)+\phi(A\cup B).
+    \]
+\end{enumerate}
+\end{proof}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         Federer 2.1.4-5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Measure Hulls and Regular Measure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   measure hull
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition}
+Assuming that $\phi$ measures $X$, we say that B is a $\phi$-hull of $A$ iff
+$A\subset B\subset X$, $B$ is $\phi$-measurable and
+\footnote{Federer 2.1.4}
+\[
+  \phi(T\cap A)=\phi(T\cap B) \quad \text{for every $\phi$-measurable set $T$}.
+\]
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proposition} \label{P:hull}
+If $A\subset B$, $B$ is $\phi$-measurable and $\phi(A)=\phi(B)<\infty$, then $B$
+is a $\phi$-hull of $A$.
+\end{proposition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+For every $\phi$-measurable set $T$,
+\[
+  \phi(T\cap B)=\phi(B)-\phi(T\setminus B) 
+    \le \phi(A)-\phi(T\setminus A)=\phi(T\cap A).
+\]
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%   regular measure
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition}
+A measure $\phi$ over $X$ is called \textbf{regular} iff for each set $A\subset
+X$ there exists a $\phi$-measurable set B such that
+\footnote{Federer 2.1.5, p.56}
+\[
+  A\subset B\quad \text{and} \quad \phi(A)=\phi(B).
+\]
+\end{definition}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                     properties of regular measure
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The following statements are true for regular measures:
+\begin{proposition}  \label{P:reg_meas}
+Let $\phi$ be a regular measure over $X$, then we have
+\footnote{Federer 2.1.5, p.56}
+\begin{enumerate}
+  \item For every increasing sequence $A_1\subset A_2\subset A_3\subset\cdots$
+    of subsets of $X$,
+  \[
+    \phi\left( \bigcup_{i=1}^{\infty} A_i\right) = \lim_{i\to\infty} \phi(A_i).
+  \]
+  \item If $\phi(A)<\infty$, then $A$ has a $\phi$-hull.
+  \item If $A\cup B$ is $\phi$-measurable and 
+    $\phi(A)+\phi(B)=\phi(A\cup B)<\infty$, then $A$ and $B$ are
+    $\phi$-measurable.
+  \item If $\phi(X)<\infty$, $f:X\to Y$ and $C$ is an $f_\#\phi$-measurable set,
+    then $f^{-1}(C)$ is $\phi$-measurable.
+  \item If $\phi(S)<\infty$, then the class of all $\phi|_S$-measurable sets
+    equals
+  \[
+    \{(B\cap S)\cup C: \text{$B$ is $\phi$-measurable}, C\subset X\setminus S\}.
+  \]
+\end{enumerate}
+\end{proposition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+\begin{enumerate}
+  \item For $i=1,2,\cdots$, let $C_i$ be a set satisfying 
+    $A_i\subset C_i$ and $\phi(C_i)=\phi(A_i)$, and let
+    $B_i=\bigcup_{j=i}^{\infty} C_j$. Hence 
+    $B_1\subset B_2\subset B_3\subset\cdots$ is an increasing sequence and
+    because $A_i\subset B_i\subset C_i$ and $\phi(A_i)=\phi(C_i)$ we have
+    $\phi(B_i)=\phi(A_i)$. Thus from Theorem \ref{T:meas_prop}, (3) we get
+    \[
+      \phi\left( \bigcup_{i=1}^{\infty} A_i \right)
+        \le \phi\left( \bigcup_{i=1}^{\infty} B_i \right)
+        = \lim_{i\to\infty} B_i
+        = \lim_{i\to\infty} A_i.
+    \]
+    From the countable subadditivity of measure we also have 
+    \[
+      \phi\left( \bigcup_{i=1}^{\infty} A_i\right) 
+        \ge \lim_{i\to\infty} \phi(A_i),
+    \]
+    hence we prove the equality.
+  \item This is a direct consquence of Proposition \ref{P:hull}.
+  \item Let $D$ be a $\phi$-measurable set satisfying $A\subset D$ and 
+    $\phi(A)=\phi(D)$. Since $\phi$ is regular such a set exists. 
+    And let $C=D\cap (A\cup B)$, then $A\subset C\subset A\cap B$. 
+    And because both $D$ and $A\cup B$ are measurable, from Theorem 
+    \ref{T:meas_prop}, (5), we have that $C$ is $\phi$-measurable.
+    And since $A\subset C\subset D$, we have 
+    $\phi(A)\le \phi(C)\le \phi(D)=\phi(A)$, thus $\phi(C)=\phi(A)$.
+    \footnote{Federer does not prove the existence of set $C$.}
+    From Theorem \ref{T:meas_prop}(7), we have
+    \[
+      \phi(B\cap C)+\phi(B\cup C)=\phi(B)+\phi(C)=\phi(B)+\phi(A)
+        =\phi(A\cup B)=\phi(B\cup C),
+    \]
+    hence $\phi(B\cap C)=0$. Since $C\setminus A\subset B\cap C$ 
+    we have $\phi(C\setminus A)=0$. From Theorem \ref{T:meas_prop}(6), set
+    $C\setminus A$ is $\phi$-measurable. And from Theorem \ref{T:meas_prop}(1)
+    set $A$ is $\phi$-measurable. 
+  \item Since $C$ is $f_\#\phi$-measurable, for every $T\subset Y$, we have
+    \[
+      (f_\#\phi)(T) = (f_\#\phi)(T\cap C) + (f_\#\phi)(T\setminus C).
+    \]
+    From Definition \ref{D:meas_map}, we have
+    \[
+      \phi(f^{-1}(T)) = \phi(f^{-1}(T\cap C)) + \phi(f^{-1}(T\setminus C))
+      = \phi(f^{-1}(T)\cap f^{-1}(C)) + \phi(f^{-1}(T)\setminus f^{-1}(C)).
+    \]
+    Since $f^{-1}(Y)=X$, we then have
+    \[
+      \phi(X)=\phi(f^{-1}(Y)) 
+      = \phi(f^{-1}(Y)\cap f^{-1}(C)) + \phi(f^{-1}(Y)\setminus f^{-1}(C))
+      = \phi(f^{-1}(C)) + \phi(X\setminus f^{-1}(C)).
+    \]
+    Applying proposition (3), we conclude that $f^{-1}(C)$ is $\phi$-measurable.
+  \item First note that for any $A\subset X$ we have 
+    $A=(A\cap S)\cup(A\setminus S)$ and that $A\setminus S$ is 
+    $\phi|_S$-measurable. Hence $A$ is $\phi|_S$-measurable iff $A\cap S$ is
+    $\phi|_S$-measurable. Thus to prove this proposition we only need to verify 
+    that for any $\phi|_S$-measurable set $A\subset S$ there exists a 
+    $\phi$-measurable set $B$ such that $A=B\cap S$. Let $A'$ and $S'$ be a
+    $\phi$-hull of $A$ and $S$ respectively and that $A'\subset S'$. We know 
+    such sets exist from proposition (2) and the fact that $A'\cap S'$ is also 
+    a $\phi$-hull of set $A$. Note that set $(A'\cap S)\setminus A$ is
+    $\phi$-measurable because
+    \begin{align*}
+      \phi(A'\cap S)\setminus A) 
+        &= \phi|_S(A'\setminus A) = \phi|_S(A') - \phi|_S(A'\cap A) \notag \\
+        &= \phi(S\cap A') - \phi(S\cap A) = \phi(S'\cap A') - \phi(A) \notag \\
+        &= \phi(A')-\phi(A)=0. \notag 
+    \end{align*}
+    Hence set $B=A'\setminus ((A'\cap S)\setminus A)$ is also $\phi$-measurable,
+    and it is easy to see $A=B\cap S$.
+\end{enumerate}
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  counterexamples of irregular measure
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{remark} 
+Simple examples show that none of the above five propositions need to hold in
+case $\phi$ is irregular. (1) and (2) fails when X is an infinite set,
+$\phi(\emptyset)=0$, $\phi(A)=1$ for each finite $A\subset X$, and $\phi(A)=2$
+for each infinite $A\subset X$. (3) and (4) fails when $|X|=3$,
+$\phi(\emptyset)=0$, $\phi(X)=2$, $\phi(A)=1$ for every nonempty proper subset
+$A$ of $X$.  (5) fails when $|X|=3$, $|S|=2$, $\phi(\emptyset)=0$, $\phi(X)=3$, 
+$\phi(A)=|A|$ for $A\subset S$, $\phi(A)=2$ for $A\not\subset S$.
+\footnote{Note the difference from the book, p. 57.}
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+\begin{enumerate}
+  \item It is easy to see that $\phi$ for case (1) and (2) are
+    countable-subadditive hence is a measure on $X$. Next we verify that $\phi$
+    is irregular. First note that $\emptyset$ and $X$ are the only
+    $\phi$-measurable sets. Any nonempty finite $A\subset X$ is not
+    $\phi$-measurable because there exists an infinte $T\subset X$ such that 
+    $T\cap A\neq \emptyset$ and $T\setminus A\neq \emptyset$, thus 
+    \[
+      \phi(T)=2\neq \phi(T\cap A)+\phi(T\setminus A)=1+2.
+    \]
+    Similarly any infinite proper $A\subset X$ is not $\phi$-measurable because
+    there exists a finite $T\subset X$ such that
+    $T\cap A\neq \emptyset$ and $T\setminus A\neq \emptyset$, thus 
+    \[
+      \phi(T)=1\neq \phi(T\cap A)+\phi(T\setminus A)=1+1.
+    \]
+    Thus for any nonempty finite $A \subset X$ there does not exist a 
+    $\phi$-measurable $B$ such that $\phi(A)=\phi(B)$, hence $\phi$ is not 
+    regular.
+    An example for Proposition \ref{P:reg_meas}(1) to be invalid is that for any 
+    infinite $B\subset X$, let $A_1\subset A_2\subset A_3\subset\cdots$ be an
+    increasing sequence of finite sets such that $\bigcup_{i=1}^{\infty}A_i=B$.
+    \footnote{How do we prove such sequence exist?}
+    Then it is easy to see that
+    \[
+      \phi(\bigcup_{i=1}^{\infty}A_i)=\phi(B)=2
+        \neq \lim_{i\to\infty}\phi(A_i)=1.
+    \]
+  \item The measure $\phi$ is the same as in case (1) so it is irregular.
+    Proposition \ref{P:reg_meas}(2) does not hold in this case because for any 
+    finite set $A$ it does not have a $\phi$-hull (the only $\phi$-measurable 
+    sets are empty set and $X$ itself and $\phi(A\cap X)=1\neq\phi(X\cap X)=2$).
+  \item It is easy to see that $\phi$ for case (3) and (4) are
+    countable-subadditive hence is a measure on $X$. It is easy to check
+    that the only $\phi$-measurable sets are $\emptyset$ and $X$. Thus $\phi$ is
+    irregular because for any $A\subset X$ with $|A|=1$, there does not exist a
+    $\phi$-measuable set $B$ such that $\phi(A)=\phi(B)$.
+    Now Proposition \ref{P:reg_meas}(3) does not hold for any $A\subset X$ and
+    $|A|=1$ and $B=X\setminus A$.
+  \item The measure $\phi$ is the same as in case (3) so it is irregular.
+    Without losing generality, let $X=\{a,b,c\}$, $Y=\{d,e\}$, and
+    $f(a)=f(b)=d$, and $f(c)=d$. It is easy to see that both $\{d\}$ and
+    $\{e\}$ are $f_\#\phi$-measurable, but neither $\{a,b\}$ nor $\{c\}$ are
+    $\phi$-measurable. Hence Proposition \ref{P:reg_meas}(4) is invalid in this
+    case.
+  \item Without losing generality, let $X=\{a,b,c\}$ and $S=\{a,b\}$. Hence
+    \begin{equation*}
+      \phi(A) =
+      \begin{cases}
+        0 & A=\emptyset,  \\
+        1 & A=\{a\},\{b\},  \\
+        2 & A=\{a,b\},\{c\},\{a,c\},\{b,c\},  \\
+        3 & A=X.
+      \end{cases}
+    \end{equation*}
+    It is easy to see that $\phi$ is a measure and the only $\phi$-measurable
+    sets are $\emptyset$ and $X$. And $\phi$ is irregular because there does 
+    not exist any $\phi$-measurable sets with measure $1$ or $2$. And we have
+    \begin{equation*}
+      \phi|_S(A) =
+      \begin{cases}
+        0 & A=\emptyset,\{c\}  \\
+        1 & A=\{a\},\{b\},\{a,c\},\{b,c\},  \\
+        2 & A=\{a,b\},\{a,b,c\}.
+      \end{cases}
+    \end{equation*}
+    Hence $\{a\}$ is $\phi|_S$ measurable, but there does not exist a
+    $\phi$-measurable set $B$ such that $\{a\}=B\cap S$.
+    Thus Proposition \ref{P:reg_meas}(5) is invalid in this case.
+\end{enumerate}
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%     regulization of measure
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{L:regul}
+Given any measure $\phi$ over $X$ one associates a regular measure $\gamma$ by
+the formula
+\[
+  \gamma(A)=\inf \{\phi(B): \text{$A\subset B$ and $B$ is $\phi$-measurable } \}
+\]
+for any $A\subset X$. If $A$ is $\phi$-measurable, then $A$ is
+$\gamma$-measurable and $\phi(A)=\gamma(A)$; if $A$ is $\gamma$-measurable and
+$\gamma(A)<\infty$, then $A$ is $\phi$-measurable.
+\footnote{Federer 2.1.5, p. 57}
+\end{lemma}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+First we verify that $\gamma$ is a measure over $X$. From the definition and the 
+property of infimum it is easy to see that if $A\subset B\subset X$ we have
+$\gamma(A)\le\gamma(B)$. Now $\gamma$ is countably subadditive because
+\begin{align*}
+  \sum_{i=1}^{\infty} \gamma(A_i)
+    &= \sum_{i=1}^{\infty} 
+      \inf\{\phi(B_i): \text{$A_i\subset B_i$ and $B_i$ is $\phi$-measurable} \}
+      \notag \\
+    &\ge \inf \{ 
+         \sum_{i=1}^{\infty} 
+         \phi(B_i): \text{$A_i\subset B_i$ and $B_i$ is $\phi$-measurable} \}
+       \qquad \text{(Lemma \ref{L:sum_inf})}    \notag \\
+    &\ge \inf \{ 
+         \phi(\bigcup_{i=1}^{\infty} B_i): 
+             \text{$A_i\subset B_i$ and $B_i$ is $\phi$-measurable} \}
+       \qquad \text{(Lemma \ref{L:infsup} (1))}    \notag \\
+    &\ge 
+      \inf \{ \phi(C):
+      \text{$\bigcup_{i=1}^{\infty} A_i\subset C$ and $C$ is $\phi$-measurable} 
+      \}       \qquad \text{(Lemma \ref{L:infsup} (2))}    \notag \\
+    &= \gamma\left( \bigcup_{i=1}^{\infty} A_i \right),  \notag
+\end{align*}
+and thus $\gamma$ is a measure.
+
+To verify that $\gamma$ is regular, 
+\footnote{Proof inspired by Royden, Real Analysis, 3rd ed., 12.2.6, p.294}
+note that from the defintion we have 
+$\forall\epsilon>0$, there exists a $\phi$-measurable set $B$ such that
+$A\subset B$ and 
+\[
+  \phi(B)\le \gamma(A)+\epsilon,
+\]
+it is easy to see that $\gamma(B)=\phi(B)$. Thus from this and monotonity we get
+\[
+  \gamma(A)\le \gamma(B) \le \gamma(A)+\epsilon.
+\]
+And because $\epsilon$ is arbitrary, we conclude that there exists a
+$\phi$-measurable set $B$ such that $A\subset B$ and $\gamma(A)=\gamma(B)$.
+
+Next we verify that if $A$ is $\phi$-measuarable then it is also
+$\gamma$-measuarable. We only need to verify that 
+\[
+  \forall T\subset X, \gamma(T)\ge\gamma(T\cap A)+\gamma(T\setminus A).
+\]
+Since $A$ is $\phi$-measurable, we have 
+$\phi(T)=\phi(T\cap A)+\phi(T\setminus A)$. Using Lemma \ref{L:infsup} (2) and
+(5) we get
+\begin{align*}
+  \gamma(&T\cap A)+\gamma(T\setminus A) \notag \\
+    &= \inf\{\phi(B): \text{$T\cap A\subset B$, $B$ is $\phi$-measurable} \}
+     + \inf\{\phi(C):\text{$T\setminus A\subset C$, $C$ is $\phi$-measurable} \}
+     \notag \\
+    &\le \inf\{\phi(B\cap A): \text{$T\subset B$, $B$ is $\phi$-measurable} \}
+    + \inf\{\phi(B\setminus A): \text{$T\subset B$, $B$ is $\phi$-measurable}\}
+     \notag \\
+    &\le \inf\{\phi(B\cap A)+\phi(B\setminus A): 
+            \text{$T\subset B$, $B$ is $\phi$-measurable} \} \notag \\
+    &= \inf\{\phi(B): \text{$T\subset B$, $B$ is $\phi$-measurable} \} \notag \\
+    &= \gamma(T).
+\end{align*}
+And it is easy to see that $\gamma(A)=\phi(A)$ if $A$ is $\phi$-measurable.
+
+Finally we verify that if $A$ is $\gamma$-measurable and $\gamma(A)<\infty$ then
+$A$ is $\phi$-measurable.
+\footnote{Proof inspired by Royden, Real Analysis, 3rd ed., 12.2.7, p.294}
+From the definition of $\gamma$, we have that for any $\epsilon>0$, there exists
+a $\phi$-measurable set $B$ such that $A\subset B$ and that
+\[
+  \gamma(B)=\phi(B)\le \gamma(A)+\epsilon.
+\]
+Since $A$ is $\gamma$-measurable, we have
+\[
+  \gamma(B)=\gamma(B\cap A) + \gamma(B\setminus A)
+    = \gamma(A)+\gamma(B\setminus A),
+\]
+and since $\gamma(A)<\infty$, we have
+\[
+  \gamma(B\setminus A)=\gamma(B)-\gamma(A) \le \epsilon.
+\]
+And because $\epsilon$ is arbitrary, we conclude that there exists
+a $\phi$-measurable set $B$ such that $A\subset B$ and that 
+$\gamma(B\setminus A)=0$. And because 
+$0\le\phi(B\setminus A)\le\gamma(B\setminus A)$, we get that
+$\phi(B\setminus A)=0$. Hence from Theorem \ref{T:meas_prop}(6) we conclude 
+that $B\setminus A$ is $\phi$-measurable, and 
+thus $A$ is $\phi$-measurable from Theorem \ref{T:meas_prop}(1).
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         Federer 2.1.6
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ulam Numbers}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition}
+By an \textbf{Ulam number} we mean a cardinal $\alpha$ with the following 
+property:
+\footnote{Federer, 2.1.6}
+
+If $\phi$ measures $X$, $\phi(X)<\infty$, every subset of $X$ is
+$\phi$-measurable, $\phi(\{x\})=0$ for each $x\in X$, and $|X|\le \alpha$, then
+$\phi(X)=0$.
+
+This property is equivalent with the following:
+
+If $\psi$ is a measure, $F$ is disjoined, $\psi(\cup F)<\infty$, the union of
+every sub-family of $F$ is $\psi$-measurable, $\psi(A)=0$ for each $A\in F$, and
+$|F|\le\alpha$, then $\psi(\cup F)=0$.
+\end{definition}
+
+One deduce the first property from the second by taking
+\[
+  F=\{\{x\}: x\in X\} \qquad \text{and} \qquad \psi=\phi;
+\]
+the second from the first by taking
+\[
+  X=F, \qquad \forall G\subset F,\, \phi(G)=\psi(\cup G).
+\]
+Clearly $\aleph_0$ (set of all nature numbers) is an Ulam number.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proposition}
+\begin{enumerate}
+  \item If $S$ is a set of Ulam numbers and $|S|$ is an Ulam number, then the
+  least upper bound of $S$ is an Ulam number.
+  \item If a cardinal $\beta$ is the successor of an Ulam number $\alpha$, then
+  $\beta$ is an Ulam number.
+\end{enumerate}
+\end{proposition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+\end{proof}
