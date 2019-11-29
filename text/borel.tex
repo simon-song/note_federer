@@ -461,10 +461,12 @@ and thus we can exchange the function and the limit and get
 
 %%%%%%%%%%%%%%%%%%
 \begin{corollary} \label{C:g_delta}
-Every closed subset of a metrizable space is a $G_{\delta}$ set, i.e. countable
-intersection of open sets.
-Every open subset of a metrizable space is a $F_{\sigma}$ set, i.e. countable
-union of closed sets.
+Every closed subset of a metrizable space is a \textbf{$G_{\delta}$ set}, 
+\index{$G_{\delta}$ set}
+i.e. countable intersection of open sets.
+Every open subset of a metrizable space is a \textbf{$F_{\sigma}$ set}, 
+\index{$F_{\sigma}$ set}
+i.e. countable union of closed sets.
 \footnote{Engelking, General Topology, 4.1.12, p.254}
 \end{corollary}
 \begin{proof}
@@ -1042,7 +1044,10 @@ Let $\mathcal{P}$ be the set of all positive integers. The set
 \[
   \mathcal{N} = \mathcal{P}^{\mathcal{P}}
 \]
-of all infinite sequences of positive integers is a cartesian product with all
+of all infinite sequences of positive integers 
+(also called Baire space)
+\index{Baire space}
+is a cartesian product with all
 factors equal to $\mathcal{P}$. Using the discrete topology
 \footnote{the topology of all subsets}
 on each factor $\mathcal{P}$ we put the cartesian product topology on
@@ -2090,8 +2095,9 @@ nonempty open subset $U$ of $X$ is uncountable.
 \begin{proof}
 Define a Cantor scheme $(U_s)_{s\in 2^{<N}}$ on $U$ by induction on $|s|$ such
 that:
-\footnote{cf. Tserunyan, Introduction to Descriptive Set Theory, Theorem 4.3, 
-  p.14; Srivastava, A Course on Borel Sets, Proposition 2.6.1, pp.75-76}
+\footnote{cf. Tserunyan, Introduction to Descriptive Set Theory (version Nov.
+  12, 2019), Theorem 4.2, p.15; 
+  Srivastava, A Course on Borel Sets, Proposition 2.6.1, pp.75-76}
 \begin{enumerate}
   \item[(i)] $U_s$ is nonempty open;
   \item[(ii)] $\diam(U_s)<1/|s|$;
@@ -2154,7 +2160,8 @@ hence $U$ is uncountable too.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{lemma}
-\footnote{Tserunyan, Introduction to Descriptive Set Theory, Lemma 1.6, p.5}
+\footnote{Tserunyan, Introduction to Descriptive Set Theory (version Nov. 12,
+2019), Lemma 1.8, p.5}
 If $(X,d)$ is a metric space, then any nonempty open set $U$ is a $F_{\sigma}$
 set, i.e. countable union of closed sets.
 \end{lemma}
@@ -2168,12 +2175,204 @@ Now $F_n$ is closed, and $U=\bigcup_{n\in\Bbb N} F_n$. Thus, $U$ is a
 $F_{\sigma}$ set.
 \end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition}
+A topological space $X$ is \textbf{completely metrizable} if it admits a compatiable
+metric $d$ such that $(X,d)$ is complete. A separble completely metrizable space
+is called \textbf{Polish}.
+\index{Polish space}
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition}
+A \textbf{Lusin scheme}
+\footnote{
+  Tserunyan, Introduction to Descriptive Set Theory (version Nov. 12, 2019), 
+  Definition 2.11, p.9;
+  Kechris, Classical Descriptive Set Theory, Definition 7.5, p.36;
+}
+on a set $X$ is a family 
+$(A_s)_{s\in \mathcal{P}^{<\mathcal{P}}}$ of subsets of $X$ such that
+\index{Lusin scheme}
+\begin{enumerate}
+  \item[(i)] $A_{s^\wedge i}\bigcap A_{s^\wedge j}=\emptyset$, 
+             $\forall s\in \mathcal{P}^{<\mathcal{P}}, i\neq j$;
+  \item[(ii)] $A_{s^\wedge i}\subset A_s$, 
+              $\forall s\in \mathcal{P}^{<\mathcal{P}}, i\in \mathcal{P}$.
+
+If $(X,d)$ is a metric space and we additionally have
+
+  \item[(iii)] $\lim_{n\to\infty} \diam(A_{x|n})=0$, $\forall x\in\mathcal{N}$,
+\end{enumerate}
+we say that $(A_s)_{s\in \mathcal{P}^{<\mathcal{P}}}$ has \textbf{vanishing
+diameter}. In this case, we let
+\[
+  D=\left\{
+      x\in\mathcal{N}: \bigcap_{n\in\mathcal{P}} A_{x|n}\neq\emptyset
+    \right\}
+\]
+and define $f:D\to X$ by $\{f(x)\}=\bigcap_n A_{x|n}$. This $f$ is called the 
+\textbf{associated map}.
+\index{associated map}
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proposition}  \label{P:Lusin_sche}
+\footnote{
+  Tserunyan, Introduction to Descriptive Set Theory (version Nov. 12, 2019), 
+  Proposition 2.12, p.10.
+}
+Let $(A_s)_{s\in \mathcal{P}^{<\mathcal{P}}}$ be a Lusin scheme on a metric
+space $(X,d)$ that has vanishing diameter and let $f:D\to X$ be the associated
+map. 
+\begin{enumerate}
+  \item[(a)] $f$ is injective and continuous.
+  \item[(b)] If $A_{\emptyset}=X$ and $A_s=\bigcup_i A_{s\wedge i}$
+             for each $s\in \mathcal{P}^{<\mathcal{P}}$, then $f$ is surjective.
+  \item[(c)] If $(X,d)$ is complete and $\overline{A_{s\wedge i}}\subset A_s$ 
+             for each $s\in \mathcal{P}^{<\mathcal{P}}, i\in\mathcal{P}$, then 
+             for all $x\in \mathcal{N}$
+\[
+  x\notin D \iff \exists n\in\mathcal{P}, A_{x|n}=\emptyset.
+\]
+Thus $D$ is closed, and moreover, if each $A_s$ is nonempty, then
+$D=\mathcal{N}$.
+\end{enumerate}
+\end{proposition}
+%%%%%%%%%%%%%%%%%%
+\begin{proof}
+In part (a), to verify the injectivity (or $f$ is one-to-one) we note that for 
+any two elements of $x$ and $p$ in $\mathcal{N}$, $x\neq p$, there exists
+one positive integer $n$ such that $x_n\neq p_n$. 
+By (i) of the definition of Lusin scheme, we have $A_{x|n}\neq A_{p|n}$, hence
+$f(x)\neq f(p)$.
+
+To verify the continuouness, note that since the Lusin scheme has vanishing
+diameter, then for any $x\in\mathcal{N}$ and any $\epsilon>0$, there exist a 
+positive integer $n$ such that $A_{x|n}<\epsilon$. It is easy to see that for
+any $p\in\mathcal{N}$ which has the property $p|n=x|n$ (i.e. 
+$p_1=x_1, p_2=x_2, \dots, p_n=x_n$), then $d(f(p),f(x))<\epsilon$.
+We may use for $\mathcal{N}$ the metric defined in Eq. \ref{E:dist_seq}:
+\[
+	d_{\mathcal{N}}(m,n) 
+	  = \sum_{i=1}^{\infty} 2^{-i} \frac{|m_i-n_i|}{1+|m_i-n_i|}.
+\]
+and note that $d_{\mathcal{N}}(p,x)<1-\frac{1}{2^n}$. Thus we conclude that $f$
+is continuous.
+
+To verify (b), note that for any $y\in X$, there is some $x_1$ such that 
+$y\in A_{x_1}$, then there is some $x_2$ such that 
+$y\in A_{x_1,x_2}$, etc. Thus there exists one $x\in \mathcal{N}$ such that
+$f(x)=y$, i.e. $f$ is surjective.
+
+To verify (c), first we note that
+\[
+  \bigcap_n A_{x|n} = \bigcap_n \overline{A_{x|n}}
+\]
+since $\overline{A_{x|n+1}}\subset A_{x|n}$. If $A_{x|n}$ is nonempty for all
+$n\in\mathcal{P}$, then by the Cantor Intersection Theorem \ref{T:cantor_int}, 
+$\bigcap_n A_{x|n}$ is nonempty, hence $x\in D$. 
+Thus it is easy to see that
+\[
+  x\in D^c \iff \exists n\in\mathcal{P}, A_{x|n}=\emptyset.
+\]
+
+To verify that $D$ is closed, note that for any $x\in D^c$, there exists some
+$n$ such that $A_{x|n}=\emptyset$. Again we use 
+the metric defined in Eq. \ref{E:dist_seq} for $\mathcal{N}$, and it is easy to
+see that open ball $B_{1-\frac{1}{2^n}}(x)\subset D^c$, hence $D^c$ is open, we thus 
+conclude that $D$ is closed.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{L:sep_fsigma}
+Let $X$ be a separable metric space, if $A$ is an $F_{\sigma}$-set in $X$ and
+$\epsilon>0$, then $A$ is the union of a sequence $\{B_n\}$ of pairwise disjoint
+$F_{\sigma}$-sets, each having diameter no more than $\epsilon$, and such that
+$\overline{B_n}\subset A$ for each $n$.
+\end{lemma}
+%%%%%%%%%%%%%%%%
+\begin{proof}
+We first claim that $A$ is the union of a sequence of nonempty closed sets, each
+having diameter no more than $\epsilon$. To see this, let 
+$A=\bigcup_{n\in\mathcal{P}} F_n$, where each $F_n$ is closed. Since $X$ is
+separable, by definition there is a countable dense subset 
+$\{x_1,x_2,\dots\}$ of $X$. Let $C_m$ be the close ball of radius $\epsilon/2$
+around $x_m$. Hence $X=\bigcup_{m\in\mathcal{P}} C_m$, and
+\[
+  A = \bigcup_{n\in\mathcal{P}} F_n
+    = \bigcup_{n\in\mathcal{P}} ( F_n \bigcap (\bigcup_{m\in\mathcal{P}} C_m) )
+    = \bigcup_{n\in\mathcal{P}} \bigcup_{m\in\mathcal{P}} D_{n,m},
+\]
+where $D_{n,m}=F_n\bigcap C_m$. It is easy to see that each $D_{n,m}$ is closed 
+and has diameter no more than $\epsilon$.
+
+Next we write $A=\bigcup_{n\in\mathcal{P}} C_n$, where $C_n$ is closed with
+diameter no more than $\epsilon$. Now let $B_1=C_1$ and 
+$B_{n+1}=C_{n+1}\setminus\bigcup_{m=1}^n C_m$ for $n\geq 1$. Since 
+$B_n\subset C_n$ we have $\diam B_n\leq\epsilon$ and 
+$\overline{B_n}\subset C_n\subset A$. Now observe that the set 
+$D=\bigcup_{m=1}^n C_m$ is closed so its complement, being open, is an
+$F_{\sigma}$. Therefore each $B_n$ is also an $F_{\sigma}$. Furthermore the sets
+$B_n$ are pairwise disjoint and $A=\bigcup_{n\in\mathcal{P}} B_n$.
+\end{proof}
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{theorem}
-\footnote{Federer, 2.2.9, p.65}
-If $X$ is a complete, nonempty metric space without isolated points, then $X$
-has a Borel subset $\Gamma$ which is homeomorphic to $\mathcal{N}$.
+Let $X$ be a Polish space. Then there is a close set $D\subset \mathcal{N}$ and a
+continuous bijection $f: D\to X$.
+\footnote{
+  Tserunyan, Introduction to Descriptive Set Theory (version Nov. 12, 2019), 
+  Theorem 5.7, pp.18-19;
+  Kechris, Classical Descriptive Set Theory, Theorem 7.9, pp.38-39;
+  Aliprantis and Border, Infinite Dimensional Analysis: A 
+  Hitchhiker's Guide, Theorem 3.66, pp.104-105;
+}
+\end{theorem}
+%%%%%%%%%%%%%%%
+\begin{proof}
+We fix a complete compatible metrix $d$ on $X$ and define a Lusin scheme 
+$(F_s)_{s\in \mathcal{P}^{<\mathcal{P}}}$ on $X$ by induction such that:
+% \begin{enumerate}
+%   \item[(i)] $F_{\emptyset}=X$;
+%   \item[(ii)] $F_s$ is an $F_{\sigma}$ set;
+%   \item[(iii)] $F_s=\bigcup_{i\in\mathcal{P}} F_{s^\wedge i} = \bigcup_{i\in\mathcal{P}} \overline{F_{s^\wedge i}}$;
+%   \item[(iv)] $\diam(F_s)<2^{-|s|}$;
+% \end{enumerate}
+\begin{enumerate}
+   \item[(i)] $F_{\emptyset}=X$ and 
+              $F_s=\bigcup_{i\in\mathcal{P}} F_{s^\wedge i}$;
+   \item[(ii)] $\overline{F_{s^\wedge i}}\subset F_s$, for $i\in\mathcal{P}$;
+   \item[(iii)] $F_s$ is an $F_{\sigma}$ set;
+   \item[(iv)] $\diam(F_s)<2^{-|s|}$.
+\end{enumerate}
+The existence of this Lusin scheme is guaranteed by Lemma \ref{L:sep_fsigma},
+and the theorem follows from Proposition \ref{P:Lusin_sche}.
+
+\end{proof}
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{theorem}
+If $X$ is a complete, nonempty metric space without isolated points, then 
+$X$ has a Borel subset $\Gamma$ which is homeomorphic to 
+$\mathcal{N}$. \footnote{Federer, 2.2.9, p.65}
+% \begin{enumerate}
+%   \item[(1)] $X$ has a Borel subset $\Gamma$ which is homeomorphic to 
+%              $\mathcal{N}$, \footnote{Federer, 2.2.9, p.65}
+%   \item[(2)] $\mathcal{N}$ has a closed subset $D$ which is homeomorphic to $X$.
+% \end{enumerate}
 \end{theorem}
 %%%%%%%%%%%%
 \begin{proof}
@@ -2197,10 +2396,12 @@ all sequences $s\in\mathcal{P}^k$; in passing from $k$ to $k+1$ we require that
 % \ref{C:comp_uncount} we have that $E(s_1,\dots,s_k)$ is uncountable.
 
 Define a Lusin scheme 
+\index{Lusin scheme}
 \footnote{cf. Aliprantis and Border, Infinite Dimensional Analysis: A 
   Hitchhiker's Guide, Theorem 3.66, pp.104-105;
-  Kechris, Classical Descriptive Set Theory, Theorem 7.9, pp.38-39
-  Tserunyan, Introduction to Descriptive Set Theory, Theorem 5.9, p.18
+  Kechris, Classical Descriptive Set Theory, Theorem 7.9, pp.38-39;
+  Tserunyan, Introduction to Descriptive Set Theory (version Nov. 12, 2019), 
+  Theorem 5.7, pp.18-19
 }
 $(U_s)_{s\in \mathcal{P}^{<\mathcal{P}}}$ on $X$ by 
 induction such that:
@@ -2323,7 +2524,6 @@ iff $g(x),g(p)\in U_{p|k}$. Note also that if the first $k$ terms of $p$ and $x$
 match, then $d_{\mathcal{N}}(p,x) < 1-\frac{1}{2^k}$. Also if 
 $g(x),g(p)\in U_{p|k}$, then $d_{\Gamma}(g(x),g(p)) < 2^{-k-2}$. And the
 continuity of $g$ and $g^{-1}$ follows.
-\end{proof}
 % First we verify $g$ is continuous. For any $\epsilon>0$, choose
 % $k_{\epsilon}\in\mathcal{P}$ such that $2^{-k_{\epsilon}-2}<\epsilon$. 
 % Then for any $p\in\mathcal{N}$ we know
@@ -2344,6 +2544,30 @@ continuity of $g$ and $g^{-1}$ follows.
 % Next we verify that $g^{-1}$ is continuouse. For any $\epsilon>0$, we choose
 % $k_{\epsilon}\in\mathcal{P}$ such that $1-\frac{1}{2^{k_{\epsilon}}} <\epsilon$,
 
+
+% Next we verify that $g$ maps a closed subset $D$ of $\mathcal{N}$ 
+% homeomorphically to $X$ 
+% \footnote{cf. Aliprantis and Border, Infinite Dimensional Analysis: A 
+%   Hitchhiker's Guide, Theorem 3.66, pp.104-105}
+% where
+% \[
+% 	D = \{ 
+%           n\in\mathcal{N} : U_{n|k}\neq\emptyset, \forall k\in\mathcal{P}
+%         \}
+% \]
+% 
+% First we verify that $D$ is closed in $X$. For any $n\in D^C$, there is some $k$
+% for which $U_{n|k}=\emptyset$. Now if 
+% $d_{\mathcal{N}}(n,m)\leq 1-\frac{1}{2^k}$, then $m|k=n|k$, hence 
+% $U_{m|k}=U_{n|k}=\emptyset$, thus $m\in D^C$. This means that 
+% $B_{1-\frac{1}{2^k}}(n)\subset D^C$, i.e. $D^C$ is open, thus $D$ is closed.
+% 
+% To verify that $g:D\to X$ is homeomorphic we need to verify that $g$ is 
+% one-to-one and onto and both $g$ and $g^{-1}$ are continuous. 
+% First note that $X=\cup_{n\in\mathcal{P}} U_n$, hence each point of $X$ belongs
+% to some $U_{n_1}$, and inductively belongs to some $U_{n_1,n_2}, etc., 
+
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%         Federer 2.2.10
@@ -2528,6 +2752,7 @@ Let
 For any $(x,t)\in (X\times R)\setminus A$, there exists $\epsilon,\delta>0$ such
 that open set $B(x,\epsilon)\times (t-\delta,t+\delta)$
 does not contain any point of $A$.
+%\footnote{e.g. $\delta>t$, and $\epsilon>\frac{\delta}{t(\delta-t)}$.}
 %$(x-\epsilon,x+\epsilon)\times (t-\delta,t+\delta)$ (of 
 %$X\times R$) does not contain point $(x,t)$. 
 Hence $(x\times R)\setminus A$ is open in $X\times R$, thus $A$ is closed 
