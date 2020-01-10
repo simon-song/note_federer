@@ -2317,12 +2317,8 @@ $F_{\sigma}$. Therefore each $B_n$ is also an $F_{\sigma}$. Furthermore the sets
 $B_n$ are pairwise disjoint and $A=\bigcup_{n\in\mathcal{P}} B_n$.
 \end{proof}
 
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{theorem}
+\begin{theorem} \label{T:pol_bij}
 Let $X$ be a Polish space. Then there is a close set $D\subset \mathcal{N}$ and a
 continuous bijection $f: D\to X$.
 \footnote{
@@ -2757,6 +2753,12 @@ does not contain any point of $A$.
 %$X\times R$) does not contain point $(x,t)$. 
 Hence $(x\times R)\setminus A$ is open in $X\times R$, thus $A$ is closed 
 in $X\times R$.
+
+Since $R$ is a Polish space, by Theorem \ref{T:pol_bij}, there is a closed set
+$B\subset\mathcal{N}$ and a continuous bijection $\psi:B\to R$. Let
+\[
+  C = \{ (x,n)\in (X\times\mathcal{N}) : n\in B, (x,\psi(n))\in A \},
+\]
 
 \end{proof}
 
