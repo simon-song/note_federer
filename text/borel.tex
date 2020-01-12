@@ -311,7 +311,7 @@ $\sigma(f(x),f(x'))<\epsilon$ whenever $\rho(x,x')<\delta$.
 \footnote{Engelking, General Topology, 4.1.8, p.253}
 \end{proposition}
 \begin{proof}
-Directly from the equilvalence of (i) and (iii) in Proposition \ref{P:cont}.
+Directly from the equivalence of (i) and (iii) in Proposition \ref{P:cont}.
 \end{proof}
 
 
@@ -2030,12 +2030,13 @@ countable singletons, hence it is uncountable.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{definition}
+\begin{definition} \label{D:cont_metr}
 A function $f:X\to Y$ between two metric spaces $(X,d_X)$ and $(Y,d_Y)$ is
 called \textbf{continuous}
-	\index{continuous function between metric spaces} 
-	\footnote{Royden, Real Analysis, 4th ed., section 9.3, p.191, Rudin,
-	  Principles of Mathematical Analysis, Definiton 4.5, p.85}
+  \index{continuous function between metric spaces} 
+  \footnote{Royden, Real Analysis, 4th ed., section 9.3, p.191, Rudin,
+     Principles of Mathematical Analysis, Definiton 4.5, p.85,
+     see also Proposition \ref{P:cont2}.}
 at $p\in X$ if for every $\epsilon>0$ there exists a $\delta>0$ such that
 \[
 	d_Y (f(x), f(p)) < \epsilon
@@ -2759,7 +2760,30 @@ $B\subset\mathcal{N}$ and a continuous bijection $\psi:B\to R$. Let
 \[
   C = \{ (x,n)\in (X\times\mathcal{N}) : n\in B, (x,\psi(n))\in A \},
 \]
+we verify that $C$ is a closed set in $X\times\mathcal{N}$.
+Note that for any $(x,n)\in (X\times\mathcal{N})\setminus C$, we have
+$(x,\psi(n))\in (X\times R)\setminus A$, 
+there exists $\epsilon,\delta>0$ such that open set 
+$B_X(x,\epsilon)\times B_R(\psi(n),\delta)\subset (X\times R)\setminus A$.
+Using the defintion \ref{D:cont_metr} of continuous function, we get that there
+exist $\delta'>0$ such that 
+$\psi(B_{\mathcal{N}}(n,\delta'))\subset B_R(\psi(n),\delta)$. Hence the open
+set
+$B_X(x,\epsilon)\times B_{\mathcal{N}}(n,\delta')\subset
+(X\times\mathcal{N})\setminus C$,
+i.e., $(X\times\mathcal{N})\setminus C$ is open, thus $C$ is closed
+in $X\times\mathcal{N}$.
 
+Next we verify that $p|_C$ is univalent. Suppose that $(x,n),(x,m)\in C$ such
+that $p((x,n))=x$ and $p((x,m))=x$, then $(x,\psi(n))\in A$ and 
+$(x,\psi(m))\in A$. It is easy to see that $\psi(n)=\psi(m)$, and because $\psi$
+is a bijection, we have $n=m$, thus $p|_C$ is univalent.
+
+Finally, for any $(x,n)\in C$, we have $p((x,n))=x$ and $(x,\psi(n))\in A$, 
+hence $\psi(n) \cdot \dist(x,X\setminus S)=1$, we conclude that $x\in S$. Thus 
+$p(C)=S$.
+
+Hence $S\in F$.
 \end{proof}
 
 
