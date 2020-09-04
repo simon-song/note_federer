@@ -1333,6 +1333,39 @@ $B\cap \prod_i W_i\neq \emptyset$. Indeed, let $n=\max\{i: W_i\neq X_i\}$, then
 hence $B\cap \prod_i W_i\neq\emptyset$.
 \end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{P:prod_sep}
+The space $\mathcal{N}$ is the union of the sets
+\begin{equation}
+  \mathcal{N}_j = \{ n\in\mathcal{N}: n_1=j \},
+\end{equation}
+corresponding to $j\in\mathcal{P}$. Each set $\mathcal{N}_j$ is open and closed
+in $\mathcal{N}$, and homeomorphic with $\mathcal{N}$.
+\footnote{Federer 2.2.6, p.63}
+\end{lemma}
+%%%%%%%%%%%%%%%%%%
+\begin{proof}
+We may use for $\mathcal{N}$ the metric defined in Eq. \ref{E:dist_seq}:
+\[
+	d_{\mathcal{N}}(m,n) 
+	  = \sum_{i=1}^{\infty} 2^{-i} \frac{|m_i-n_i|}{1+|m_i-n_i|}.
+\]
+For any $n\in\mathcal{N}_j$, there exist an open ball $B(n,1/4)$ such that
+$B(n,1/4)\subset\mathcal{N}_j$, hence $\mathcal{N}_j$ is open in $\mathcal{N}$.
+
+Again, for any $n\in\mathcal{N}^C_j$, there exist an open ball $B(n,1/4)$ such that
+$B(n,1/4)\subset\mathcal{N}^C_j$, hence $\mathcal{N}^C_j$ is open in
+$\mathcal{N}$, i.e. $\mathcal{N}_j$ is closed in $\mathcal{N}$.
+\end{proof}
+
+Define a function $f: \mathcal{N}_j \to \mathcal{N}$ such that for any 
+$n=(j,n_2,n_3,\dots)\in\mathcal{N}_j$
+\[
+  f(n)=(n_2,n_3,\dots),
+\]
+it is easy to see that $f$ is one-to-one and onto, and both $f$ and 
+$f^{-1}$ are continuous, hence $f$ is homeomorphic.
+
 
 
 
