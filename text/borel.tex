@@ -1356,7 +1356,6 @@ $B(n,1/4)\subset\mathcal{N}_j$, hence $\mathcal{N}_j$ is open in $\mathcal{N}$.
 Again, for any $n\in\mathcal{N}^C_j$, there exist an open ball $B(n,1/4)$ such that
 $B(n,1/4)\subset\mathcal{N}^C_j$, hence $\mathcal{N}^C_j$ is open in
 $\mathcal{N}$, i.e. $\mathcal{N}_j$ is closed in $\mathcal{N}$.
-\end{proof}
 
 Define a function $f: \mathcal{N}_j \to \mathcal{N}$ such that for any 
 $n=(j,n_2,n_3,\dots)\in\mathcal{N}_j$
@@ -1365,7 +1364,48 @@ $n=(j,n_2,n_3,\dots)\in\mathcal{N}_j$
 \]
 it is easy to see that $f$ is one-to-one and onto, and both $f$ and 
 $f^{-1}$ are continuous, hence $f$ is homeomorphic.
+\end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{P:prod_baire}
+The cartesian product of countably many factors all equal to $\mathcal{N}$ 
+\[
+  \mathcal{N}^{\mathcal{P}} = (\mathcal{P}^{\mathcal{P}})^{\mathcal{P}}
+\]
+is homeomorphic with $\mathcal{N}$.
+\footnote{Federer 2.2.6, p.63}
+\end{lemma}
+%%%%%%%%%%%%%%%%%%
+\begin{proof}
+First we define $u:\mathcal{P}\times\mathcal{P} \to\mathcal{P}$ as
+\[
+  u(m,n) = 2^{m-1} (2n-1),
+\]
+it is easy to see that $u$ is both one-to-one and onto. For any $k$, we define
+$l(k)$ and $u(k)$ as satisfying
+\[
+  u(l(k),r(k)) = k.
+\]
+
+Now let $f:\mathcal{N}^{\mathcal{P}}\to \mathcal{N}$, defined by 
+$f(n_1,n_2,\cdots)=m$, where
+\[
+  m(k) = n_{l(k)}(r(k)),
+\]
+It is easy to see that $f$ is one-to-one and onto.
+We may use for $\mathcal{N}$ the metric defined in Eq. \ref{E:dist_seq}:
+\[
+	d_{\mathcal{N}}(m,n) 
+	  = \sum_{i=1}^{\infty} 2^{-i} \frac{|m_i-n_i|}{1+|m_i-n_i|}.
+\]
+Combine this metric with the product metric:
+\[
+	d(x,y) 
+	  = \sum_{i=1}^{\infty} 2^{-i} \frac{d_i(x_i,y_i)}{1+d_i(x_i,y_i)},
+\]
+
+
+\end{proof}
 
 
 
@@ -2847,7 +2887,6 @@ List of important results:
   \item Every metric space $(X,d)$ is a $T_2$-space (Hausdorff space). 
         \ref{C:metric_T2}
 \end{enumerate}
-
 
 
 
