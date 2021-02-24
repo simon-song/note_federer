@@ -1333,6 +1333,30 @@ $B\cap \prod_i W_i\neq \emptyset$. Indeed, let $n=\max\{i: W_i\neq X_i\}$, then
 hence $B\cap \prod_i W_i\neq\emptyset$.
 \end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition} \label{D:cont_metr}
+A function $f:X\to Y$ between two metric spaces $(X,d_X)$ and $(Y,d_Y)$ is
+called \textbf{continuous}
+  \index{continuous function between metric spaces} 
+  \footnote{Royden, Real Analysis, 4th ed., section 9.3, p.191, Rudin,
+     Principles of Mathematical Analysis, Definiton 4.5, p.85,
+     see also Proposition \ref{P:cont2}.}
+at $p\in X$ if for every $\epsilon>0$ there exists a $\delta>0$ such that
+\[
+	d_Y (f(x), f(p)) < \epsilon
+\]
+for all points $x\in X$ for which $d_X(x,p)<\delta$.
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition}
+A mapping $f$ from a topological space $X$ to a topological space $Y$ is
+said to be a \textbf{homeomorphism}
+	\index{homeomorphism} 
+	\footnote{Royden, Real Analysis, 4th ed., section 11.4, p.231}
+provide it is one-to-one and onto, and both $f$ and $f^{-1}$ are continuous.
+\end{definition}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{lemma} \label{P:prod_sep}
 The space $\mathcal{N}$ is the union of the sets
@@ -1393,15 +1417,26 @@ $f(n_1,n_2,\cdots)=m$, where
   m(k) = n_{l(k)}(r(k)),
 \]
 It is easy to see that $f$ is one-to-one and onto.
-We may use for $\mathcal{N}$ the metric defined in Eq. \ref{E:dist_seq}:
+
+%We may use for $\mathcal{N}$ the metric defined in Eq. \ref{E:dist_seq}:
+%\[
+%	d_{\mathcal{N}}(m,n) 
+%	  = \sum_{i=1}^{\infty} 2^{-i} \frac{|m_i-n_i|}{1+|m_i-n_i|}.
+%\]
+%
+%TODO: use a different metric? e.g.
+We may use for $\mathcal{N}$ the following metric:
 \[
 	d_{\mathcal{N}}(m,n) 
-	  = \sum_{i=1}^{\infty} 2^{-i} \frac{|m_i-n_i|}{1+|m_i-n_i|}.
+	  = \frac{1}{1+ \min\{k:m(k)=n(k)\} },
 \]
+it is easy to see that $0\le d_{\mathcal{N}}(m,n) \le \frac{1}{2}$.
+
 Combine this metric with the product metric:
 \[
 	d(x,y) 
-	  = \sum_{i=1}^{\infty} 2^{-i} \frac{d_i(x_i,y_i)}{1+d_i(x_i,y_i)},
+	  = \sum_{i=1}^{\infty} 2^{-i} 
+        \frac{d_{\mathcal{N}}(x_i,y_i)}{1+d_{\mathcal{N}}(x_i,y_i)},
 \]
 
 
@@ -2102,29 +2137,6 @@ Thus by Baire Categrory Theorem \ref{T:baire} $X$ can not be the union of
 countable singletons, hence it is uncountable.
 \end{proof}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{definition} \label{D:cont_metr}
-A function $f:X\to Y$ between two metric spaces $(X,d_X)$ and $(Y,d_Y)$ is
-called \textbf{continuous}
-  \index{continuous function between metric spaces} 
-  \footnote{Royden, Real Analysis, 4th ed., section 9.3, p.191, Rudin,
-     Principles of Mathematical Analysis, Definiton 4.5, p.85,
-     see also Proposition \ref{P:cont2}.}
-at $p\in X$ if for every $\epsilon>0$ there exists a $\delta>0$ such that
-\[
-	d_Y (f(x), f(p)) < \epsilon
-\]
-for all points $x\in X$ for which $d_X(x,p)<\delta$.
-\end{definition}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{definition}
-A mapping $f$ from a topological space $X$ to a topological space $Y$ is
-said to be a \textbf{homeomorphism}
-	\index{homeomorphism} 
-	\footnote{Royden, Real Analysis, 4th ed., section 11.4, p.231}
-provide it is one-to-one and onto, and both $f$ and $f^{-1}$ are continuous.
-\end{definition}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{proposition} \label{P:closed_complete}
