@@ -1428,7 +1428,7 @@ It is easy to see that $f$ is one-to-one and onto.
 We may use for $\mathcal{N}$ the following metric:
 \[
 	d_{\mathcal{N}}(m,n) 
-	  = \frac{1}{1+ \min\{k:m(k)=n(k)\} },
+	  = \frac{1}{1+ \min\{k:m(k)\ne n(k)\} },
 \]
 it is easy to see that $0\le d_{\mathcal{N}}(m,n) \le \frac{1}{2}$.
 
@@ -1439,6 +1439,7 @@ Combine this metric with the product metric:
         \frac{d_{\mathcal{N}}(x_i,y_i)}{1+d_{\mathcal{N}}(x_i,y_i)},
 \]
 
+TODO: prove both $f$ and $f^{-1}$ are continuous.
 
 \end{proof}
 
