@@ -3011,14 +3011,127 @@ Hence $S\in F$.
 \end{proof}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition}
+Let $(P_s)_{s\in\mathcal{P}^{<\mathcal{P}}}$ be a \textbf{Souslin scheme}
+\index{Souslin scheme}
+on a set $X$, i.e., a family of subsets of $X$ indexed by
+$\mathcal{P}^{<\mathcal{P}}$. The \textbf{Souslin operation}
+\index{Souslin operation}
+\footnote{Kechris, Classical Descriptive Set Theory, Definition 25.4, p.198}
+$\mathcal{A}$ applied to such a scheme produces the set
+\[
+  \mathcal{A} P_s 
+    = \bigcup_{x\in\mathcal{N}} \bigcap_{n\in\mathcal{P}} P_{x|n}.
+\]
+\end{definition}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proposition}
+Let $X$ be a set and $\Gamma\subset 2^X$. Then 
+$\mathcal{A}\mathcal{A}\Gamma=\mathcal{A}\Gamma$.
+  \footnote{Kechris, Classical Descriptive Set Theory, Proposition 25.6, 
+    pp. 198-199; Srivastava, A Course on Borel Sets, Theorem 1.13.1, pp.35-36}
+\end{proposition}
+%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+It is trivial that for any $\Gamma$, $\Gamma\subset\mathcal{A}\Gamma$. So it is
+enough to show that 
+$\mathcal{A}\mathcal{A}\Gamma\subset \mathcal{A}\Gamma$.
+Let $A=\mathcal{A}P_s$, with $P_s\in\mathcal{A}\Gamma$, so that 
+$P_s=\mathcal{A}Q_{s,t}$, with $Q_{s,t}\in\Gamma$. Then
+\begin{align*}
+  x\in A 
+    & \iff \exists y\in\mathcal{N} \forall m (x\in P_{y|m}) \\
+    & \iff \exists y\in\mathcal{N} \forall m 
+        \exists z\in\mathcal{N} \forall n (x\in Q_{y|m, z|n}) \\
+    & \iff \exists y\in\mathcal{N} \exists(z_m)\in\mathcal{N}^{\mathcal{P}}
+        \forall m \forall n (x\in Q_{y|m, z_m|n}).
+\end{align*}
+Fix now a bijection $\langle m,n\rangle$ of $\mathcal{P}\times \mathcal{P}$ 
+with $\mathcal{P}$, so that $m\le\langle m,n \rangle$ and 
+($p<n \Rightarrow \langle m,p \rangle < \langle m,n \rangle$)
+(e.g. $\langle m,n \rangle = 2^m (2n+1) - 1$). Let also for $k\in \mathcal{P}$,
+$(k)_0$, $(k)_1$ be such that $\langle (k)_0,(k)_1 \rangle=k$. Then encode
+$(y,(z_m))\in \mathcal{N}\times\mathcal{N}^{\mathcal{P}}$ by $w\in\mathcal{N}$
+given by $w(k)=\langle y(k), z_{(k)_0}((k)_1)\rangle$. This gives a bijection of 
+$\mathcal{N}\times\mathcal{N}^{\mathcal{P}}$ with $\mathcal{N}$. Note that
+knowing $w|\langle m,n \rangle$ determines $y|m$ and $z_m|n$, by the above
+properties of $\langle\rangle$ (i.e. there are functions 
+$\varphi,\psi: \mathcal{P}^{<\mathcal{P}} \to \mathcal{P}^{<\mathcal{P}}$ 
+such that if $w$ encodes $(y,(z_m))$ and $s=w|\langle m,n\rangle$, then
+$\varphi(s)=y|m$ and $\psi(s)=z_m|n$). 
+\footnote{
+For any $s\in \mathcal{P}^{<\mathcal{P}}$, let $m=(|s|)_0$ and $n=(|s|)_1$,
+then $\varphi(s)=((s_1)_0, (s_2)_0, \cdots, (s_m)_0)$,
+$\psi(s)=((s_{\langle m,1\rangle})_1, (s_{\langle m,2\rangle})_1,\cdots,(s_{\langle m,n\rangle})_1)$. 
+}
+It follows that
+\begin{align*}
+  x\in A 
+    & \iff \exists w\in\mathcal{N} \forall k (x\in R_{w|k}) \\
+    & \iff x\in \mathcal{A} R_s,
+\end{align*}
+where $R_s=Q_{\varphi(s),\psi(s)}$ is in $\Gamma$.
+\end{proof}
+
+Next we prove the equivalence between Souslin operation and projection operator.
+For any $s\in\mathcal{P}^{<\mathcal{P}}$, let
+\[
+  I_s = \{ t\in\mathcal{N}: s\prec t \}.
+\]
+
+%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+  \footnote{Fremlin, Measure Theory, vol.4, 421Ce;
+    Srivastava, A Course on Borel Sets, Proposition 1.12.1, p.33.}
+Let $(P_s)_{s\in\mathcal{P}^{<\mathcal{P}}}$ be a Souslin scheme of set $X$, 
+and let
+\[
+  B = \bigcap_{n\in\mathcal{P}} \bigcup_{s\in\mathcal{P}^n}
+      P_s \times I_s,
+\]
+then $\mathcal{A} P_s = \pi_X(B)$, where $\pi_X: X\times\mathcal{N}\to X$ is the
+projection map.
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+TODO
+\end{proof}
+
+There is a particularly simple description of sets obtainable by Souslin
+operation from closed sets in a topological space.
+%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+\footnote{Fremlin, Measure Theory, vol.4, 421I.}
+Let $X$ be a topological space and $C\subset X\times\mathcal{N}$ a close set.
+Then for any $A\subset\mathcal{N}$,
+\[
+  \pi_A(C) = \bigcup_{s\in A} \bigcap_{n\in\mathcal{P}}
+             \overline{ \pi_{I_{s|n}}(C) }.
+\]
 
 
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+TODO
+\end{proof}
 
 
-
-
+%%%%%%%%%%%%%%%%%%%
+\begin{proposition}
+\footnote{Fremlin, Measure Theory, vol.4, Proposition 421J.}
+Let $X$ be a topological space, and $\mathcal{F}$ the family of closed subsets
+of $X$. Then a set $A\subset X$ belongs to the kernel of Souslin operation 
+$\mathcal{AF}$ iff there is a closed set $C\in X\times\mathcal{N}$ such that $A$
+is the projection of $C$ on $X$.
+\end{proposition}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+TODO
+\end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
