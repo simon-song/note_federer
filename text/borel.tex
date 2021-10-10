@@ -3083,7 +3083,7 @@ For any $s\in\mathcal{P}^{<\mathcal{P}}$, let
 \]
 
 %%%%%%%%%%%%%%%%%%%
-\begin{lemma}
+\begin{lemma} \label{L:souslin_prop},
   \footnote{Fremlin, Measure Theory, vol.4, 421Ce;
     Srivastava, A Course on Borel Sets, Proposition 1.12.1, p.33.}
 Let $(P_s)_{s\in\mathcal{P}^{<\mathcal{P}}}$ be a Souslin scheme of set $X$, 
@@ -3097,26 +3097,68 @@ projection map.
 \end{lemma}
 %%%%%%%%%%%%%%%%%%%
 \begin{proof}
-TODO
+We have
+\begin{align*}
+  (x,t)\in B 
+    & \iff \forall n \exists s\in\mathcal{P}^n (x\in P_s, t\in I_s) \\
+    & \iff \forall n (x\in P_{t|n}),
+\end{align*}
+thus
+\begin{align*}
+  x\in \pi_x(B)
+	& \iff \exists t\in\mathcal{N} ((x,t)\in B) \\
+	& \iff \exists t\in\mathcal{N} \forall n\in\mathcal{P} (x\in P_{t|n}) \\
+	& \iff x\in \mathcal{A} P_s.
+\end{align*}
+  
 \end{proof}
 
 There is a particularly simple description of sets obtainable by Souslin
 operation from closed sets in a topological space.
 %%%%%%%%%%%%%%%%%%%
-\begin{lemma}
+\begin{lemma} \label{souslin_close}
 \footnote{Fremlin, Measure Theory, vol.4, 421I.}
 Let $X$ be a topological space and $C\subset X\times\mathcal{N}$ a close set.
 Then for any $A\subset\mathcal{N}$,
 \[
-  \pi_A(C) = \bigcup_{s\in A} \bigcap_{n\in\mathcal{P}}
-             \overline{ \pi_{I_{s|n}}(C) }.
+  \pi_{X,A}(C) = \bigcup_{s\in A} \bigcap_{n\in\mathcal{P}}
+             \overline{ \pi_{X,I_{s|n}}(C) }.
 \]
-
-
+where the projection map $\pi_{X,A}:X\times \mathcal{N}\to X$ satisfies
+\[
+  \pi_{X,A}(C) = \{ x\in X: \exists t\in A ((x,t)\in C)  \}
+\]
 \end{lemma}
 %%%%%%%%%%%%%%%%%%%
 \begin{proof}
-TODO
+Let 
+\[
+  B = \bigcup_{s\in A} \bigcap_{n\in\mathcal{P}} \overline{ \pi_{X,I_{s|n}}(C) }.
+\]
+
+(i) We verify that $\pi_{X,A}(C)\subset B$. Note that $t\in I_{t|n}$ for any
+$t\in\mathcal{N}$ and $n\in\mathcal{P}$, hence
+\begin{align*}
+  x\in\pi_{X,A}(C)
+    & \iff \exists t\in A ((x,t)\in C)  \\
+    & \iff \exists t\in A \forall n\in\mathcal{P} \exists s\in I_{t|n} ((x,s)\in C)  \\
+    & \iff \exists t\in A \forall n\in\mathcal{P} (x\in \pi_{X,I_{t|n}}(C))  \\
+    & \iff x\in \bigcup_{t\in A} \bigcap_{n\in\mathcal{P}} \pi_{X,I_{t|n}}(C)
+	  \subset B.
+\end{align*}
+
+(ii) We verify that $B\subset\pi_{X,A}(C)$. Note that
+\[
+  x\in B \iff \exists s\in A \forall n\in\mathcal{P} ( x\in \overline{\pi_{X,I_{s|n}}(C)} ).
+\]
+Now if $(x,s)\notin C$, then (because $C$ is closed in $X\times \mathcal{N}$)
+there exists an open set $G\subset X$, and $t\in \mathcal{P}$ such that 
+$s\in I_t$, $x\in G$, and $(I_t\times G)\cap C=\emptyset$.
+But this means that $G\cap \pi_{X,I_t}(C)=\emptyset$, 
+so $G\cap \overline{\pi_{X,I_t}(C)} =\emptyset$, and $x\notin \overline{\pi_{X,I_t}(C)}$.
+However this contradicts with the fact that $s\in I_t$ and that 
+$x\in \overline{\pi_{X,I_{s|n}}(C)}$ for any $n\in\mathcal{P}$.
+Hence $(x,s)\in C$, and so $x\in \pi_{X,A}(C)$.
 \end{proof}
 
 
@@ -3124,13 +3166,24 @@ TODO
 \begin{proposition}
 \footnote{Fremlin, Measure Theory, vol.4, Proposition 421J.}
 Let $X$ be a topological space, and $\mathcal{F}$ the family of closed subsets
-of $X$. Then a set $A\subset X$ belongs to the kernel of Souslin operation 
-$\mathcal{AF}$ iff there is a closed set $C\in X\times\mathcal{N}$ such that $A$
+of $X$. Then a set $A\subset X$ is the kernel of a Souslin scheme in  
+$\mathcal{F}$ iff there is a closed set $C\in X\times\mathcal{N}$ such that $A$
 is the projection of $C$ on $X$.
 \end{proposition}
 %%%%%%%%%%%%%%%%%%%
 \begin{proof}
-TODO
+Let $(F_s)_{s\in\mathcal{P}^{<\mathcal{P}}}$ be a Souslin scheme in
+$\mathcal{F}$, and let $A=\mathcal{A} F_s$ be the kernel of Souslin operation 
+on it. Set
+\[
+  C = \bigcap_{n\in\mathcal{P}} \bigcup_{s\in\mathcal{P}^n} F_s \times I_s,
+\]
+now $C$ is closed in $X\times\mathcal{N}$, and from Lemma \ref{L:souslin_prop},
+$A=\pi_X(C)$.
+
+Conversely, suppose that $C\in X\times\mathcal{N}$ is a closed set such that
+$A=\pi_X(C)$. Using Lemma \ref{souslin_close}, $A$ is the kernel of Souslin
+scheme $(\overline{\pi_{X,I_s}(C)})_{s\in\mathcal{P}^{<\mathcal{P}}}$.
 \end{proof}
 
 
