@@ -3028,7 +3028,7 @@ $\mathcal{A}$ applied to such a scheme produces the set
 
 
 %%%%%%%%%%%%%%%%%%%%%%%
-\begin{proposition}
+\begin{proposition} \label{P:souslin_idem}
 Let $X$ be a set and $\Gamma\subset 2^X$. Then 
 $\mathcal{A}\mathcal{A}\Gamma=\mathcal{A}\Gamma$.
   \footnote{Kechris, Classical Descriptive Set Theory, Proposition 25.6, 
@@ -3161,6 +3161,8 @@ $x\in \overline{\pi_{X,I_{s|n}}(C)}$ for any $n\in\mathcal{P}$.
 Hence $(x,s)\in C$, and so $x\in \pi_{X,A}(C)$.
 \end{proof}
 
+We can now establish the equivalence of Souslin sets and Souslin operation on
+family of closed sets:
 
 %%%%%%%%%%%%%%%%%%%
 \begin{proposition}
@@ -3185,6 +3187,25 @@ Conversely, suppose that $C\in X\times\mathcal{N}$ is a closed set such that
 $A=\pi_X(C)$. Using Lemma \ref{souslin_close}, $A$ is the kernel of Souslin
 scheme $(\overline{\pi_{X,I_s}(C)})_{s\in\mathcal{P}^{<\mathcal{P}}}$.
 \end{proof}
+
+%%%%%%%%%%%%%%%%%%%
+\begin{proposition}
+The set of all Souslin sets is close under Souslin operation.
+  \footnote{
+    Kechris, Classical Descriptive Set Theory, Corrollary 25.8, p.199;
+    Srivastava, A Course on Borel Sets, Proposition 4.1.14, p.133.}
+\end{proposition}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+By Proposition \ref{P:souslin_idem}, the Souslin operation is idempotent; i.e.,
+for any family $\mathcal{F}$ of sets, 
+$\mathcal{A}(\mathcal{A}(\mathcal{F})) =\mathcal{A}(\mathcal{F})$. Since the set
+of all Souslin sets $\Sigma_1^1=\mathcal{A}(\mathcal{F})$, where $\mathcal{F}$
+is the family of closed sets, the result follows.
+\end{proof}
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
