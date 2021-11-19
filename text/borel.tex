@@ -2541,7 +2541,7 @@ $B_n$ are pairwise disjoint and $A=\bigcup_{n\in\mathcal{P}} B_n$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{theorem} \label{T:pol_bij}
-Let $X$ be a Polish space. Then there is a close set $D\subset \mathcal{N}$ and a
+Let $X$ be a Polish space. Then there is a closed set $D\subset \mathcal{N}$ and a
 continuous bijection $f: D\to X$.
 \footnote{
   Tserunyan, Introduction to Descriptive Set Theory (version Nov. 12, 2019), 
@@ -3118,7 +3118,7 @@ operation from closed sets in a topological space.
 %%%%%%%%%%%%%%%%%%%
 \begin{lemma} \label{souslin_close}
 \footnote{Fremlin, Measure Theory, vol.4, 421I.}
-Let $X$ be a topological space and $C\subset X\times\mathcal{N}$ a close set.
+Let $X$ be a topological space and $C\subset X\times\mathcal{N}$ a closed set.
 Then for any $A\subset\mathcal{N}$,
 \[
   \pi_{X,A}(C) = \bigcup_{s\in A} \bigcap_{n\in\mathcal{P}}
@@ -3190,7 +3190,7 @@ scheme $(\overline{\pi_{X,I_s}(C)})_{s\in\mathcal{P}^{<\mathcal{P}}}$.
 
 %%%%%%%%%%%%%%%%%%%
 \begin{proposition}
-The set of all Souslin sets is close under Souslin operation.
+The set of all Souslin sets is closed under Souslin operation.
   \footnote{
     Kechris, Classical Descriptive Set Theory, Corrollary 25.8, p.199;
     Srivastava, A Course on Borel Sets, Proposition 4.1.14, p.133.}
@@ -3202,6 +3202,16 @@ for any family $\mathcal{F}$ of sets,
 $\mathcal{A}(\mathcal{A}(\mathcal{F})) =\mathcal{A}(\mathcal{F})$. Since the set
 of all Souslin sets $\Sigma_1^1=\mathcal{A}(\mathcal{F})$, where $\mathcal{F}$
 is the family of closed sets, the result follows.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%
+\begin{proposition}
+In a metric space, every Borel set is a Souslin set.
+  \footnote{cf. Krantz, Geometric Integration Theory, Theorem 1.7.9, p.46}
+\end{proposition}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+TODO
 \end{proof}
 
 
