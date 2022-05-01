@@ -462,9 +462,7 @@ and thus we can exchange the function and the limit and get
 \end{proof}
 
 
-
-
-%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{corollary} \label{C:g_delta}
 Every closed subset of a metrizable space is a \textbf{$G_{\delta}$ set}, 
 \index{$G_{\delta}$ set}
@@ -2380,22 +2378,23 @@ hence $U$ is uncountable too.
 
 \end{proof}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{lemma}
-\footnote{Tserunyan, Introduction to Descriptive Set Theory (version Nov. 12,
-2019), Lemma 1.8, p.5}
-If $(X,d)$ is a metric space, then any nonempty open set $U$ is a $F_{\sigma}$
-set, i.e. countable union of closed sets.
-\end{lemma}
-%%%%%%%%%%%%
-\begin{proof}
-For any $n\in\mathbb{N}$ let
-\[
-  F_n = \{ x\in U: d(x,X\setminus U)\ge 2^{-n} \};
-\]
-Now $F_n$ is closed, and $U=\bigcup_{n\in\Bbb N} F_n$. Thus, $U$ is a
-$F_{\sigma}$ set.
-\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Simon says: already proved in Corollary \label{C:g_delta}
+% \begin{lemma}
+% \footnote{Tserunyan, Introduction to Descriptive Set Theory (version Nov. 12,
+% 2019), Lemma 1.8, p.5}
+% If $(X,d)$ is a metric space, then any nonempty open set $U$ is a $F_{\sigma}$
+% set, i.e. countable union of closed sets.
+% \end{lemma}
+% %%%%%%%%%%%%
+% \begin{proof}
+% For any $n\in\mathbb{N}$ let
+% \[
+%   F_n = \{ x\in U: d(x,X\setminus U)\ge 2^{-n} \};
+% \]
+% Now $F_n$ is closed, and $U=\bigcup_{n\in\Bbb N} F_n$. Thus, $U$ is a
+% $F_{\sigma}$ set.
+% \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{definition}
@@ -3204,6 +3203,173 @@ of all Souslin sets $\Sigma_1^1=\mathcal{A}(\mathcal{F})$, where $\mathcal{F}$
 is the family of closed sets, the result follows.
 \end{proof}
 
+Let $X$ be a set and $\mathcal{F}$ a family of subset of X, and
+\[
+	\mathcal{F}_{\sigma} 
+	= \{  
+	  \bigcup_{n\in\mathcal{P}} A_n: A_n\in\mathcal{F}
+	\}
+\]
+the family of countable unions of sets in $\mathcal{F}$,
+\[
+	\mathcal{F}_{\delta} 
+	= \{  
+	  \bigcap_{n\in\mathcal{P}} A_n: A_n\in\mathcal{F}
+	\}
+\]
+the family of countable intersections of sets in $\mathcal{F}$.
+
+%%%%%%%%%%%%%%%%%%%
+\begin{proposition}
+\footnote{Srivastava, A Course on Borel Sets, Proposition 1.12.2, p.33}
+For every family $\mathcal{F}$ of subsets of $X$,
+\[
+	\mathcal{F}_{\sigma}, \mathcal{F}_{\delta} \subset \mathcal{A}(\mathcal{F}).
+\]
+\end{proposition}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+Let $(A_n)$ be a sequence in $\mathcal{F}$. 
+
+(i) $\mathcal{F}_{\sigma} \subset \mathcal{A}(\mathcal{F})$. For every
+$s=(s_1,s_2,\dots,s_m)\in\mathcal{P}^{<\mathcal{P}}$, let $B_s=A_{s_1}$, we have
+\[
+  \mathcal{A} B_s 
+    = \bigcup_{x\in\mathcal{N}} \bigcap_{n\in\mathcal{P}} B_{x|n}
+    = \bigcup_{x\in\mathcal{N}} \bigcap_{n\in\mathcal{P}} A_{x_1}
+    = \bigcup_{n\in\mathcal{P}} A_n.
+\]
+
+(ii) $\mathcal{F}_{\delta} \subset \mathcal{A}(\mathcal{F})$. For every
+$s=(s_1,s_2,\dots,s_m)\in\mathcal{P}^{<\mathcal{P}}$, let $C_s=A_{|s|}$, we have
+\[
+  \mathcal{A} C_s 
+    = \bigcup_{x\in\mathcal{N}} \bigcap_{n\in\mathcal{P}} C_{x|n}
+    = \bigcup_{x\in\mathcal{N}} \bigcap_{n\in\mathcal{P}} A_n
+    = \bigcap_{n\in\mathcal{P}} A_n.
+\]
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%
+\begin{proposition} \label{P:borel_gen1}
+\footnote{Srivastava, A Course on Borel Sets, Proposition 3.1.9, p.82;
+  cf. Proposition \ref{P:borel}. }
+The Borel $\sigma$-algebra $\mathcal{B}_X$ of a metrizable space $X$ equals the
+smallest family $\mathcal{B}$ of subsets of $X$ that contains all open sets and
+that is closed under countable intersections and countable unions.
+\end{proposition}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+(i) $\mathcal{B}\subset\mathcal{B}_X$. This is obvious because 
+$\mathcal{B}_X$ contains all open sets, is closed under countable unions and 
+countable intersections, and $\mathcal{B}$ is the smallest family satisfying 
+these conditions.
+
+(ii) $\mathcal{B}_X\subset\mathcal{B}$. Let
+\[
+	\mathcal{D} = \{ A\in\mathcal{B}: X\setminus A\in\mathcal{B} \}.
+\]
+It is obvious that $\mathcal{D}\subset\mathcal{B}$.
+Since every closed set $C$ in a metrizable space is a $G_{\delta}$ set (Corollary 
+\ref{C:g_delta}), $C$ is in $\mathcal{B}$, hence every open set is in
+$\mathcal{D}$. Now suppose $A_1,A_2,\dots$ are in $\mathcal{D}$. Then
+$A_i,X\setminus A_i\in\mathcal{B}$ for all $i$. As
+\[
+	X\setminus\bigcup_i A_i = \bigcap_i (X\setminus A_i), \qquad
+	X\setminus\bigcap_i A_i = \bigcup_i (X\setminus A_i),
+\]
+$\bigcup_i A_i$ and $\bigcap_i A_i$ belong to $\mathcal{D}$. Thus 
+$\mathcal{D}$ contains all open sets, is closed under countable unions and 
+countable intersections, and $\mathcal{B}$ is the smallest family satisfying 
+these conditions, hence $\mathcal{B}\subset\mathcal{D}$, thus 
+$\mathcal{B}=\mathcal{D}$.
+Now $\mathcal{B}$ contains all open sets, is closed under complementation,
+countable unions and countable intersections, and $\mathcal{B}_X$ is the smallest 
+family satisfying these conditions, hence $\mathcal{B}_X\subset\mathcal{B}$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%
+\begin{proposition} \label{P:borel_gen2}
+\footnote{Srivastava, A Course on Borel Sets, Proposition 3.1.10, p.83}
+The Borel $\sigma$-algebra $\mathcal{B}_X$ of a metrizable space $X$ equals the
+smallest family $\mathcal{B}$ of subsets of $X$ that contains all closed sets and
+that is closed under countable intersections and countable unions.
+\end{proposition}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+Similar to the proof of Proposition \ref{P:borel_gen1}, except using the fact
+that every open set in a metrizable space is a $F_{\sigma}$ set (Corollary 
+\ref{C:g_delta}). 
+\end{proof}
+
+The condition of closure under countable unions may be reduced to countable
+disjoint union.
+%%%%%%%%%%%%%%%%%%%
+\begin{proposition} \label{P:borel_gen3}
+\footnote{Srivastava, A Course on Borel Sets, Proposition 3.1.11, p.84}
+The Borel $\sigma$-algebra $\mathcal{B}_X$ of a metrizable space $X$ equals the
+smallest family $\mathcal{B}$ of subsets of $X$ that contains all open sets and
+that is closed under countable intersections and countable disjoint unions.
+\end{proposition}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+(i) $\mathcal{B}\subset\mathcal{B}_X$. This is obvious because 
+$\mathcal{B}_X$ contains all open sets, is closed under countable disjoint unions and 
+countable intersections, and $\mathcal{B}$ is the smallest family satisfying 
+these conditions.
+
+(ii) $\mathcal{B}_X\subset\mathcal{B}$. Let
+\[
+	\mathcal{D} = \{ A\in\mathcal{B}: X\setminus A\in\mathcal{B} \}.
+\]
+It is obvious that $\mathcal{D}\subset\mathcal{B}$.
+Since every closed set $C$ in a metrizable space is a $G_{\delta}$ set (Corollary 
+\ref{C:g_delta}), $C$ is in $\mathcal{B}$, hence every open set is in
+$\mathcal{D}$. Now suppose $A_1,A_2,\dots$ are in $\mathcal{D}$. Then
+$A_i,X\setminus A_i\in\mathcal{B}$ for all $i$. It is easy to see
+$\bigcap_i A_i\in\mathcal{B}$. Let $B_1=X\setminus A_1$, 
+$B_2=(X\setminus A_2)\bigcap A_1$, 
+$B_3=(X\setminus A_3)\bigcap A_1 \bigcap A_2$, etc. It is easy to see that 
+$B_i\in\mathcal{B}$ for each $i$, $B_i\bigcap B_j=\emptyset$ for each $i\ne j$,
+and
+\[
+	X\setminus\bigcap_i A_i = \bigcup_i (X\setminus A_i)
+	  = \bigcup_i B_i \in \mathcal{B},
+\]
+hence $\bigcap_i A_i\in\mathcal{D}$.
+
+Next suppose $A_1,A_2,\dots$ are in $\mathcal{D}$, and 
+$A_i\bigcup A_j=\emptyset$ for any $i\ne j$. It is easy to see that 
+$\bigcup_i A_i\in\mathcal{B}$. And
+\[
+	X\setminus\bigcup_i A_i = \bigcap_i (X\setminus A_i) \in \mathcal{B},
+\]
+hence $\bigcup_i A_i\in\mathcal{D}$.
+Thus $\mathcal{D}$ contains all open sets, is closed under countable disjoint unions and 
+countable intersections, and $\mathcal{B}$ is the smallest family satisfying 
+these conditions, hence $\mathcal{B}\subset\mathcal{D}$, thus 
+$\mathcal{B}=\mathcal{D}$.
+Now $\mathcal{B}$ contains all open sets, is closed under complementation,
+countable disjoint unions and countable intersections, and $\mathcal{B}_X$ is the smallest 
+family satisfying these conditions, hence $\mathcal{B}_X\subset\mathcal{B}$.
+
+
+
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%
+\begin{proposition} \label{P:borel_gen4}
+\footnote{Srivastava, A Course on Borel Sets, Proposition 3.1.12, pp.84-85}
+The Borel $\sigma$-algebra $\mathcal{B}_X$ of a metrizable space $X$ equals the
+smallest family $\mathcal{B}$ of subsets of $X$ that contains all closed sets and
+that is closed under countable intersections and countable disjoint unions.
+\end{proposition}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+TODO
+\end{proof}
+
+
 %%%%%%%%%%%%%%%%%%%
 \begin{proposition}
 In a metric space, every Borel set is a Souslin set.
@@ -3222,6 +3388,9 @@ TODO
 \newpage
 List of important results:
 \begin{enumerate}
+  \item Every closed subset of a metrizable space is a $G_{\delta}$ set.
+        Every open subset of a metrizable space is a $F_{\sigma}$ set.
+    (Corollary \ref{C:g_delta}).
   \item Countable product of separable spaces is separable (Proposition
 	\ref{P:prod_sep}) .
   \item	Countable product of complete metric spaces is complete (Theorem 
@@ -3230,10 +3399,10 @@ List of important results:
 	\ref{P:metric_sep}).
   \item Every closed subset of a complete space is complete (Proposition
 	\ref{P:closed_complete}).
-  \item Every metric space $(X,d)$ is a $T_1$-space. 
-        \ref{C:metric_T1}
-  \item Every metric space $(X,d)$ is a $T_2$-space (Hausdorff space). 
-        \ref{C:metric_T2}
+  \item Every metric space $(X,d)$ is a $T_1$-space (Corollary
+        \ref{C:metric_T1}).
+  \item Every metric space $(X,d)$ is a $T_2$-space (Hausdorff space) (Corollary
+        \ref{C:metric_T2}).
 \end{enumerate}
 
 
