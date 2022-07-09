@@ -3023,6 +3023,8 @@ $\mathcal{A}$ applied to such a scheme produces the set
   \mathcal{A} P_s 
     = \bigcup_{x\in\mathcal{N}} \bigcap_{n\in\mathcal{P}} P_{x|n}.
 \]
+which is called the \textbf{kernel of the Souslin operation}
+\index{kernel of the Souslin operation}.
 \end{definition}
 
 
@@ -3082,7 +3084,7 @@ For any $s\in\mathcal{P}^{<\mathcal{P}}$, let
 \]
 
 %%%%%%%%%%%%%%%%%%%
-\begin{lemma} \label{L:souslin_prop},
+\begin{lemma} \label{L:souslin_proj},
   \footnote{Fremlin, Measure Theory, vol.4, 421Ce;
     Srivastava, A Course on Borel Sets, Proposition 1.12.1, p.33.}
 Let $(P_s)_{s\in\mathcal{P}^{<\mathcal{P}}}$ be a Souslin scheme of set $X$, 
@@ -3115,7 +3117,7 @@ thus
 There is a particularly simple description of sets obtainable by Souslin
 operation from closed sets in a topological space.
 %%%%%%%%%%%%%%%%%%%
-\begin{lemma} \label{souslin_close}
+\begin{lemma} \label{L:souslin_close}
 \footnote{Fremlin, Measure Theory, vol.4, 421I.}
 Let $X$ be a topological space and $C\subset X\times\mathcal{N}$ a closed set.
 Then for any $A\subset\mathcal{N}$,
@@ -3164,7 +3166,7 @@ We can now establish the equivalence of Souslin sets and Souslin operation on
 family of closed sets:
 
 %%%%%%%%%%%%%%%%%%%
-\begin{proposition}
+\begin{proposition} \label{P:souslin_equiv}
 \footnote{Fremlin, Measure Theory, vol.4, Proposition 421J.}
 Let $X$ be a topological space, and $\mathcal{F}$ the family of closed subsets
 of $X$. Then a set $A\subset X$ is the kernel of a Souslin scheme in  
@@ -3179,16 +3181,16 @@ on it. Set
 \[
   C = \bigcap_{n\in\mathcal{P}} \bigcup_{s\in\mathcal{P}^n} F_s \times I_s,
 \]
-now $C$ is closed in $X\times\mathcal{N}$, and from Lemma \ref{L:souslin_prop},
+now $C$ is closed in $X\times\mathcal{N}$, and from Lemma \ref{L:souslin_proj},
 $A=\pi_X(C)$.
 
 Conversely, suppose that $C\in X\times\mathcal{N}$ is a closed set such that
-$A=\pi_X(C)$. Using Lemma \ref{souslin_close}, $A$ is the kernel of Souslin
+$A=\pi_X(C)$. Using Lemma \ref{L:souslin_close}, $A$ is the kernel of Souslin
 scheme $(\overline{\pi_{X,I_s}(C)})_{s\in\mathcal{P}^{<\mathcal{P}}}$.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%
-\begin{proposition}
+\begin{proposition} \label{P:souslin_oper}
 The set of all Souslin sets is closed under Souslin operation.
   \footnote{
     Kechris, Classical Descriptive Set Theory, Corrollary 25.8, p.199;
@@ -3220,7 +3222,7 @@ the family of countable unions of sets in $\mathcal{F}$,
 the family of countable intersections of sets in $\mathcal{F}$.
 
 %%%%%%%%%%%%%%%%%%%
-\begin{proposition}
+\begin{proposition} \label{P:souslin_fsigma}
 \footnote{Srivastava, A Course on Borel Sets, Proposition 1.12.2, p.33}
 For every family $\mathcal{F}$ of subsets of $X$,
 \[
@@ -3352,32 +3354,211 @@ $\mathcal{B}=\mathcal{D}$.
 Now $\mathcal{B}$ contains all open sets, is closed under complementation,
 countable disjoint unions and countable intersections, and $\mathcal{B}_X$ is the smallest 
 family satisfying these conditions, hence $\mathcal{B}_X\subset\mathcal{B}$.
-
-
-
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%
+\begin{definition}
+We define the \textbf{Cantor ternary set} 
+\index{Cantor ternary set} 
+in the following way:
+we start from $C_{\emptyset}=[0,1]$,
+and for any $s\in\{0,1\}^{<\mathcal{P}}$, let $C_s=[a,b]$, we define
+\[
+	C_{s^\wedge 0} = \left[ a, a+\frac{b-a}{3} \right], \quad 
+	C_{s^\wedge 1} = \left[ b-\frac{b-a}{3}, b \right],
+\]
+and for any $n\in\mathcal{P}$
+\[
+	K_n=\bigcup_{|s|=n} C_s,
+\]
+and finally the Cantor ternary set
+\[
+	C=\bigcap_{n\in\mathcal{P}} K_n
+\]
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{L:cantor_base}
+\footnote{cf
+\url{https://math.stackexchange.com/questions/2946172/the-topology-of-the-cantor-set}
+}
+$\{C\cap C_s: s\in\{0,1\}^{<\mathcal{P}} \}$ is a base of the Cantor ternary
+set $C$.
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+First note that from the definition of the Cantor ternary set, it is easy to see 
+that for any $s,t \in\{0,1\}^{<\mathcal{P}}$ and $s\neq t$, if $s\prec t$, then 
+$C_s\supset C_t$, otherwise $C_s\cap C_t=\emptyset$.
+
+Let $\mathcal{B}=\{C\cap C_s: s\in\{0,1\}^{<\mathcal{P}} \}$. It is easy to
+see that $\mathcal{B}$ satisfies condition (B1). And for any $x\in C$, we have
+$x\in K_1$, hence $x\in C\cap C_{(0)}$ or $x\in C\cap C_{(1)}$, thus
+$\mathcal{B}$ also satisfies condition (B2).
+Hence by Proposition \ref{P:top_base} we conclude that $\mathcal{B}$ is a base of
+$C$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+For any $s\in\{0,1\}^{<\mathcal{P}}$, $C\cap C_s$ is clopen.
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+By Lemma \ref{L:cantor_base}, $C\cap C_s$ is open, we only need to verify
+that it is closed. Note that
+\[
+  C\setminus (C\cap C_s) 
+	= \bigcup_{ |t|=|s|, t\neq s } (C\cap C_t),
+\]
+hence $C\setminus (C\cap C_s)$ is open, thus $C\cap C_s$ is closed.
+\end{proof}
+
+For any family $\mathcal{F}$, let $\mathcal{F}_+$ denote the family of countable
+disjoint unions of sets in $\mathcal{F}$.
+
+%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{L:cantor_fplus}
+Let $\mathcal{F}$ be the set of closed subsets of $\mathbb{R}$. For any $x\in C$, 
+$C\setminus \{x\}\in \mathcal{F}_+$.
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+By Corollary \ref{C:metric_T1}, singleton $\{x\}$ is closed, hence 
+$C\setminus \{x\}$ is open. By Lemma \ref{L:cantor_base}, 
+$\{C\cap C_s: s\in\{0,1\}^{<\mathcal{P}} \}$ is a base of $C$, hence
+there exists a $S\subset \{0,1\}^{<\mathcal{P}}$ such that 
+\[
+  C\setminus \{x\} = \bigcup_{s\in S} (C\cap C_s).
+\]
+Note that $C\cap C_s$ is clopen, and that for any 
+$s,t\in \{0,1\}^{<\mathcal{P}}$, either $C_s\cap C_t=\emptyset$, or (without
+loss of generality) $C_s\subset C_t$, hence we can safely make all
+subsets in $S$ disjoint, thus $C\setminus \{x\}\in \mathcal{F}_+$.
+\end{proof}
+%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{L:cantor_fplus2}
+\footnote{Srivastava, A Course on Borel Sets, Lemma 3.1.13, pp.84-85}
+Let $\mathcal{F}$ be the set of closed subsets of $\mathbb{R}$. 
+Then $(0,1]\in \mathcal{F}_{+\delta +}$.
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+Let $D$ be the set of all end points of the middle-third intervals removed from
+$[0,1]$ to construct the Cantor ternary set $C$. So, 
+$D=\{\frac{1}{3},\frac{2}{3},\frac{1}{9},\frac{2}{9},\frac{7}{9},\frac{8}{9},\dots
+\}$. Let $E=D\cup \{0\}$ and $P=C\setminus E$. Note that
+\[
+  (0,1]\setminus P = \left[ \frac{1}{3},\frac{2}{3} \right] \bigcup 
+                     \left[ \frac{1}{9},\frac{2}{9} \right] \bigcup
+                     \left[ \frac{7}{9},\frac{8}{9} \right] \bigcup \dots,
+\]
+i.e. $(0,1]\setminus P$ is the union of the closures of the middle-third
+intervals removed to form $C$. These intervals are, of course, disjoint.
+Therefore, the lemma will be proved if we show that $P$ is in
+$\mathcal{F}_{+\delta}$. Now
+\[
+  P=\bigcap_{x\in E} (C\setminus \{ x \}).
+\]
+By Lemma \ref{L:cantor_fplus}, $C\setminus \{ x \} \in \mathcal{F}_+$. Since $E$
+is countable, we have $P\in \mathcal{F}_{+\delta}$.
+\end{proof}
+%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%
+\begin{proposition}[Urysohn's lemma on metric space]  \label{P:uryshohn}
+\footnote{Srivastava, A Course on Borel Sets, Proposition 2.1.18, pp.44-45}
+Suppose $A,B$ are two nonempty, disjoint closed subsets of a metrizable space
+$X$. Then there is a continuous function $u:X\to [0,1]$ such that
+\[
+  u(x)=
+    \begin{cases} 
+      0     & \text{if $x\in A$}    \\
+      1     & \text{if $x\in B$}
+    \end{cases}
+\]
+\end{proposition}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+Let $d$ be a compatible metric on $X$. Take
+\[
+  u(x)=\frac{d(x,A)}{d(x,A)+d(x,B)},
+\]
+since $d(x,A)$ and $d(x,B)$ are continuous, $u$ is continuous, and it is easy to
+check that $u(x)=0$ if $x\in A$ and $u(x)=1$ if $x\in B$.
+\end{proof}
+%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%
+\begin{proposition} \label{P:metric_contin}
+\footnote{Srivastava, A Course on Borel Sets, Proposition 2.1.19, p.45}
+For every nonempty closed subset $A$ of a metrizable space $X$ there is a
+continuous function $f:X\to [0,1]$ such that $A=f^{-1}(0)$.
+\end{proposition}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+By Corollary \ref{C:g_delta}, $A$ is the countable intersection of open sets,
+i.e. $A=\bigcap_n U_n$, where $U_n$ are open. Now by Uryshohn's Lemma on metric
+space (Proposition \ref{P:uryshohn}), for each $n\in \mathcal{P}$, there is a
+continuous function $f_n:X\to [0,1]$ such that 
+\[
+  f_n(x)=
+    \begin{cases} 
+      0     & \text{if $x\in A$}    \\
+      1     & \text{if $x\in X\setminus U_n$}
+    \end{cases}
+\]
+Now take
+\[
+	f(x) = \sum_{n=0}^{\infty} \frac{1}{2^{n+1}} f_n(x).
+\]
+and $f$ is continuous. It is easy to see that $f(A)=0$, and for any 
+$x\in X\setminus A$, there is a $n$ such that $x\in X\setminus U_n$, hence
+$f_n(x)=1$, and thus $f(x)\neq 0$. Thus we conclude that $f^{-1}(0)=A$.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%
 \begin{proposition} \label{P:borel_gen4}
-\footnote{Srivastava, A Course on Borel Sets, Proposition 3.1.12, pp.84-85}
+\footnote{Srivastava, A Course on Borel Sets, Proposition 3.1.12, pp.84-85;
+	Bruckner et.al., Real Analysis, 2ed., Theorem 3.4, pp.108-109.}
 The Borel $\sigma$-algebra $\mathcal{B}_X$ of a metrizable space $X$ equals the
 smallest family $\mathcal{B}$ of subsets of $X$ that contains all closed sets and
 that is closed under countable intersections and countable disjoint unions.
 \end{proposition}
 %%%%%%%%%%%%%%%%%%%
 \begin{proof}
-TODO
+Apparently we only need to show that any open set $U$ of $X$ is in 
+$\mathcal{B}$. By Proposition \ref{P:metric_contin}, there is a continuous
+function $f:X\to [0,1]$ such that $U=f^{-1}((0,1])$. Now by Lemma
+\ref{L:cantor_fplus2}, $(0,1]\in\mathcal{F}_{+\delta +}$, where $\mathcal{F}$ is
+the set of closed subsets of $\mathbb{R}$. Hence
+\[
+  U=f^{-1}((0,1]) \in f^{-1}(\mathcal{F}_{+\delta +})
+   = f^{-1}(\mathcal{F})_{+\delta +}. 
+\]
+And because $f^{-1}(\mathcal{F})$ is a family of closed subsets of $X$, we
+conclude that $U \in \mathcal{B}$.
 \end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%
 \begin{proposition}
-In a metric space, every Borel set is a Souslin set.
+Every Borel set is Souslin.
   \footnote{cf. Krantz, Geometric Integration Theory, Theorem 1.7.9, p.46}
 \end{proposition}
 %%%%%%%%%%%%%%%%%%%
 \begin{proof}
-TODO
+First by Proposition \ref{P:souslin_equiv}, any Souslin set is the kernel of
+Souslin operation on closed sets, thus all closed sets are Souslin. And by
+Proposition \ref{P:souslin_oper}, the set of all Souslin sets is closed under 
+Souslin operation. Hence by Proposition \ref{P:souslin_fsigma}, the set of all
+Souslin sets is closed under countable union and countable intersection. Thus by
+Proposition \ref{P:borel_gen4}, it contains all Borel sets.
 \end{proof}
 
 
