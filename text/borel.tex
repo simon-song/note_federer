@@ -1822,28 +1822,28 @@ When dealing with subspace we must be careful what we mean by open balls.
 First suppose that $E$ is open in $X$, hence for any $x\in X$, there is a 
 $r_x>0$ such that
 \[
-  \{z\in X:\rho(z,x)<r_x\} \subset E.
+  \{z\in X: d(z,x)<r_x\} \subset E.
 \]
 Hence
 \[
-  E= \bigcup_{x\in E} \{ z\in X : \rho(z,x) < r_x \} 
-   = X \cap \bigcup_{x\in E} \{ z\in Y : \rho(z,x) < r_x \},
+  E= \bigcup_{x\in E} \{ z\in X : d(z,x) < r_x \} 
+   = X \cap \bigcup_{x\in E} \{ z\in Y : d(z,x) < r_x \},
 \]
-and $O= \bigcup_{x\in E} \{ z\in Y : \rho(z,x) < r_x \}$ is an open set in $Y$.
+and $O= \bigcup_{x\in E} \{ z\in Y : d(z,x) < r_x \}$ is an open set in $Y$.
 
 To prove the converse, suppose $O$ is open in $Y$, then for any $x\in O$ there
 exists a $r_x>0$ such that
 \[
-  \{z\in Y:\rho(z,x)<r_x\} \subset O.
+  \{z\in Y: d(z,x)<r_x\} \subset O.
 \]
 Hence
 \[
-  O= \bigcup_{x\in O} \{ z\in Y : \rho(z,x) < r_x \} 
+  O= \bigcup_{x\in O} \{ z\in Y : d(z,x) < r_x \} 
 \]
 and
 \[
-  X\cap O= X\cap \bigcup_{x\in O} \{ z\in Y : \rho(z,x) < r_x \} 
-    = \bigcup_{x\in O} \{ z\in X : \rho(z,x) < r_x \},
+  X\cap O= X\cap \bigcup_{x\in O} \{ z\in Y : d(z,x) < r_x \} 
+    = \bigcup_{x\in O} \{ z\in X : d(z,x) < r_x \},
 \]
 i.e. $X\cap O$ is open in $X$.
 \end{proof}
@@ -1878,18 +1878,18 @@ $r>0$, there exists a point $x\in A$ such that $d(x,y)<r$ (from Proposition
 Thus if $X$ is separable, i.e. there exists a countable $A\subset X$ such that 
 $\overline{A}=X$, then $X$ is the union of countable closed sets,
 \[
-  X = \bigcup_{x\in A} \{y\in X: \rho(y,x)\leq r \} \qquad r>0.
+  X = \bigcup_{x\in A} \{y\in X: d(y,x)\leq r \} \qquad r>0.
 \]
-Furthermore, since any subspace of a a separable metric space is separable
+Furthermore, since any subspace of a separable metric space is separable
 (Proposition \ref{P:metric_sep}), for any nonempty closed set $C\subset X$, the 
 subspace $C$ is separable, hence there exists a set $A\subset X$, 
 $\overline{A}=C$, $|A|=\aleph_0$, and 
 \begin{align*}
-  C &= \bigcup_{x\in A} \{y\in C: \rho(y,x)\leq r \} \qquad r>0, \notag \\
-    &= \bigcup_{x\in A} \left( C\bigcap \{y\in X: \rho(y,x)\leq r \} \right)  
+  C &= \bigcup_{x\in A} \{y\in C: d(y,x)\leq r \} \qquad r>0, \notag \\
+    &= \bigcup_{x\in A} \left( C\bigcap \{y\in X: d(y,x)\leq r \} \right)  
        \notag,
 \end{align*}
-it is easy to see that $C\bigcap \{y\in C: \rho(y,x)\leq r \}$ is a nonempty
+it is easy to see that $C\bigcap \{y\in C: d(y,x)\leq r \}$ is a nonempty
 closed set in $X$. 
 Using this we can then proceed by induction
 with respect to $k$ by associating every finite sequence $s_1,s_2,\cdots,s_k$
