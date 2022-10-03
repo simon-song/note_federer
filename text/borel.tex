@@ -2569,15 +2569,59 @@ $(F_s)_{s\in \mathcal{P}^{<\mathcal{P}}}$ on $X$ by induction such that:
 \end{enumerate}
 The existence of this Lusin scheme is guaranteed by Lemma \ref{L:sep_fsigma},
 and the theorem follows from Proposition \ref{P:Lusin_sche}.
-
 \end{proof}
+%%%%%%%%%%%%%%%%%%%%
 
 
+For any $z=(z_1,z_2,\cdots)\in \mathcal{N}$, we denote 
+$z|n=(z_1,z_2,\cdots,z_n)$. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{L:lusin}
+\footnote{Kuratowski and Mostowski, Set Theory with an Introduction to
+	Descriptive Set Theory, North Holland(1976), pp.409-410; 
+    Kechris, Classical Descriptive Set Theory, Exercise 25.12, pp.199-200.
+}
+Let $\{U_z\}$ be a Lusin scheme on $X$, then 
+\[
+	\bigcup_{z\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} U_{z|k}
+	  =\bigcap_{k\in\mathcal{P}} \bigcup_{z\in\mathcal{N}} U_{z|k}.
+\]
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+Note first that for any $z\in\mathcal{N}$ we have
+\[
+	\bigcap_{k\in\mathcal{P}} U_{z|k}
+	  \subset\bigcap_{k\in\mathcal{P}} \bigcup_{z\in\mathcal{N}} U_{z|k}.
+\]
+hence
+\[
+	\bigcup_{z\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} U_{z|k}
+	  \subset\bigcap_{k\in\mathcal{P}} \bigcup_{z\in\mathcal{N}} U_{z|k}.
+\]
 
-
-
-
+To verify the other direction, for any 
+$p\in\bigcap_{k\in\mathcal{P}} \bigcup_{z\in\mathcal{N}} U_{z|k}$, then
+for any $k\in\mathcal{P}$, we have $p\in\bigcup_{z\in\mathcal{N}} U_{z|k}$.
+Now by the defintion of Lusin scheme, if $z|k\neq y|k$ then 
+$U_{z|k}\cap U_{y|k}=\emptyset$, there exists
+an unique $z\in\mathcal{N}$ such that $p\in U_{z|k}$. Again by the definition
+of Lusin scheme we have
+\[
+	U_{z|1} \supset U_{z|2} \supset \cdots,
+\]
+we conclude that $p\in\bigcap_k U_{z|k}$, hence
+\[
+	p\in\bigcup_{z\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} U_{z|k},
+\]
+i.e.
+\[
+	\bigcap_{k\in\mathcal{P}} \bigcup_{z\in\mathcal{N}} U_{z|k}
+	  \subset\bigcup_{z\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} U_{z|k}.
+\]
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -2685,42 +2729,49 @@ hence we have
 	= \bigcap_{k=1}^{\infty} E(n_1,n_2,\cdots,n_k).
 \]
 
-For any $z=(z_1,z_2,\cdots)\in \mathcal{N}$, we denote 
-$z|n=(z_1,z_2,\cdots,z_n)$. We shall verify that
-\footnote{cf. Kuratowski and Mostowski, Set Theory with an Introduction to
-Descriptive Set Theory, North Holland(1976), pp.409-410. We also adopt the 
-notation in Kuratowski's book.}
+% For any $z=(z_1,z_2,\cdots)\in \mathcal{N}$, we denote 
+% $z|n=(z_1,z_2,\cdots,z_n)$. We shall verify that
+% \footnote{cf. Kuratowski and Mostowski, Set Theory with an Introduction to
+% Descriptive Set Theory, North Holland(1976), pp.409-410. We also adopt the 
+% notation in Kuratowski's book.}
+% \[
+% 	\bigcup_{z\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} U_{z|k}
+% 	  =\bigcap_{k\in\mathcal{P}} \bigcup_{z\in\mathcal{N}} U_{z|k}.
+% \]
+% Note first that for any $z\in\mathcal{N}$ we have
+% \[
+% 	\bigcap_{k\in\mathcal{P}} U_{z|k}
+% 	  \subset\bigcap_{k\in\mathcal{P}} \bigcup_{z\in\mathcal{N}} U_{z|k}.
+% \]
+% hence
+% \[
+% 	\bigcup_{z\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} U_{z|k}
+% 	  \subset\bigcap_{k\in\mathcal{P}} \bigcup_{z\in\mathcal{N}} U_{z|k}.
+% \]
+% To verify the other direction, for any 
+% $p\in\bigcap_{k\in\mathcal{P}} \bigcup_{z\in\mathcal{N}} U_{z|k}$, then
+% for any $k\in\mathcal{P}$, we have $p\in\bigcup_{z\in\mathcal{N}} U_{z|k}$.
+% Now since if $z|k\neq y|k$ then $U_{z|k}\cap U_{y|k}=\emptyset$, there exists
+% an unique $z\in\mathcal{N}$ such that $p\in U_{z|k}$. And because
+% \[
+% 	U_{z|1} \supset U_{z|2} \supset \cdots,
+% \]
+% we conclude that $p\in\bigcap_k U_{z|k}$, hence
+% \[
+% 	p\in\bigcup_{z\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} U_{z|k},
+% \]
+% i.e.
+% \[
+% 	\bigcap_{k\in\mathcal{P}} \bigcup_{z\in\mathcal{N}} U_{z|k}
+% 	  \subset\bigcup_{z\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} U_{z|k}.
+% \]
+
+Since $\{U_z\}$ is a Lusin scheme on $X$, by Lemma \ref{L:lusin} we have
 \[
 	\bigcup_{z\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} U_{z|k}
 	  =\bigcap_{k\in\mathcal{P}} \bigcup_{z\in\mathcal{N}} U_{z|k}.
 \]
-Note first that for any $z\in\mathcal{N}$ we have
-\[
-	\bigcap_{k\in\mathcal{P}} U_{z|k}
-	  \subset\bigcap_{k\in\mathcal{P}} \bigcup_{z\in\mathcal{N}} U_{z|k}.
-\]
-hence
-\[
-	\bigcup_{z\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} U_{z|k}
-	  \subset\bigcap_{k\in\mathcal{P}} \bigcup_{z\in\mathcal{N}} U_{z|k}.
-\]
-To verify the other direction, for any 
-$p\in\bigcap_{k\in\mathcal{P}} \bigcup_{z\in\mathcal{N}} U_{z|k}$, then
-for any $k\in\mathcal{P}$, we have $p\in\bigcup_{z\in\mathcal{N}} U_{z|k}$.
-Now since if $z|k\neq y|k$ then $U_{z|k}\cap U_{y|k}=\emptyset$, there exists
-an unique $z\in\mathcal{N}$ such that $p\in U_{z|k}$. And because
-\[
-	U_{z|1} \supset U_{z|2} \supset \cdots,
-\]
-we conclude that $p\in\bigcap_k U_{z|k}$, hence
-\[
-	p\in\bigcup_{z\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} U_{z|k},
-\]
-i.e.
-\[
-	\bigcap_{k\in\mathcal{P}} \bigcup_{z\in\mathcal{N}} U_{z|k}
-	  \subset\bigcup_{z\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} U_{z|k}.
-\]
+
 
 To verify that $g:\mathcal{N}\to \Gamma$ where
 \[
