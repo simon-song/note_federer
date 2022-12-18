@@ -2660,7 +2660,7 @@ all sequences $s\in\mathcal{P}^k$; in passing from $k$ to $k+1$ we require that
 % \ref{C:comp_uncount} we have that $E(s_1,\dots,s_k)$ is uncountable.
 
 Define a Lusin scheme 
-\index{Lusin scheme}
+%\index{Lusin scheme}
 \footnote{cf. Aliprantis and Border, Infinite Dimensional Analysis: A 
   Hitchhiker's Guide, Theorem 3.66, pp.104-105;
   Kechris, Classical Descriptive Set Theory, Theorem 7.9, pp.38-39;
@@ -3611,6 +3611,165 @@ Souslin operation. Hence by Proposition \ref{P:souslin_fsigma}, the set of all
 Souslin sets is closed under countable union and countable intersection. Thus by
 Proposition \ref{P:borel_gen2}, it contains all Borel sets.
 \end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition}
+Two subsets P and Q of a topological space Y are said to be 
+\textbf{Borel separated} 
+\index{Borel separated}
+\footnote{Federer 2.2.10, p.66}
+if there exist disjoint Borel sets A and B of Y with 
+$P\subset A$ and $Q\subset B$.
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+\footnote{Aliprantis and Border, Infinite Dimensional Analysis: A 
+  Hitchhiker's Guide, p.448}
+If two subsets A and B of a topological space can be written as 
+$A=\bigcup_{n\in\mathcal{P}} A_n$ and 
+$B=\bigcup_{m\in\mathcal{P}} B_m$, where each pair $A_n$ and $B_m$ are Borel
+separated, then the pair $A$ and $B$ are also Borel separated.
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+For each $n,m$, we choose disjoint Borel sets $A'_{n,m}$ and $B'_{n,m}$ such
+that $A_n\subset A'_{n,m}$ and $B_m\subset B'_{n,m}$. Let
+$A'=\bigcup_n \bigcap_m A'_{n,m}$ and $B'=\bigcup_m \bigcap_n B'_{n,m}$,
+it is easy to see that $A\subset A'$ and $B\subset B'$, since 
+$A_n\subset\bigcap_m A'_{n,m}$ and $B_m\subset\bigcap_n B'_{n,m}$.
+Also $A'\bigcap B'=\emptyset$ because 
+$(\bigcap_j A'_{n,j})\bigcap(\bigcap_k B'_{k,m})=\emptyset$.
+Thus $A$ and $B$ are Borel separated.
+\end{proof}
+%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{L:sep_lusin}
+\footnote{Federer, 2.2.10, p.67;
+  cf. Bruckner et.al., Real Analysis, 2ed., Theorem 11.14, pp.443-444}
+Assuming that X is a complete, separable metric space, Y is a Hausdorff space
+and $f:X\to Y$ is continuous, if C and D are closed subsets of X such that 
+$f(C)$ and $f(D)$ are disjoint, then $f(C)$ and $f(D)$ are Borel separated in Y. 
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+First we carve the space X according to the same method used in 
+Theorem \ref{T:lipschitz_compltSep}, $X=\bigcup_{j\in\mathcal{P}} E(j)$.
+Suppose that $f(C)$ and $f(D)$ are not Borel separated, then there exist
+$m_1,n_1\in \mathcal{P}$ such that $f(C\bigcap E(n1))$ and $f(D\bigcap E(m_1))$
+are not Borel separated. By induction for any $k\in\mathcal{P}$, there exists
+$(n_1,n_2,\dots,n_k)$ and $(m_1,m_2,\dots,m_k)$ such that 
+$f(C\bigcap E(n_1,n_2,\dots,n_k))$ and $f(D\bigcap E(m_1,m_2,\dots,m_k))$
+are not Borel separated. 
+
+Note that the intersections 
+$C\cap \bigcap_{k\in\mathcal{P}} E(n_1,n_2,\dots,n_k)$ and
+$D\cap \bigcap_{k\in\mathcal{P}} E(m_1,m_2,\dots,m_k)$ would consist of single
+points $u\in C$ and $v\in D$. And because Y is Hausdorff, there exist disjoint
+open sets $U_1$ and $U_2$ in Y such that $f(u)\in U_1$ and $f(v)\in U_2$.
+Now because $f$ is continuous, $f^{-1}(U_1)$ is open in X, and because X is a
+metric space, there exist $r>0$ such that open ball $B(u,r)\subset f^{-1}(U_1)$,
+hence there exist a $i\in\mathcal{P}$ that 
+$C\bigcap E(n_1,n_2,\dots,n_i)\subset B(u,r)\subset f^{-1}(U_1)$, and thus
+$f(C\bigcap E(n_1,n_2,\dots,n_i))\subset U_1$. Similarly there exists a 
+$j\in \mathcal{P}$ such that
+$f(D\bigcap E(m_1,m_2,\dots,m_j))\subset U_2$. Let $k=max(i,j)$, we conclude
+that $f(C\bigcap E(n_1,n_2,\dots,n_k))$ and $f(D\bigcap E(m_1,m_2,\dots,m_k))$
+are Borel separated, which is a contraditon. Hence $f(C)$ and $f(D)$ are Borel 
+separated in Y. 
+\end{proof}
+%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{corollary} \label{C:sep_souslin}
+\footnote{Federer, 2.2.10, p.67; cf. Bruckner et.al., Real Analysis, 2ed., 11.15, p.444}
+Assuming that X is a complete, separable metric space, Y is a Hausdorff space
+and $f:X\to Y$ is continuous, 
+if $S_1,S_2,\dots,$ are Souslin subsets of X such that $f(S_1),f(S_2),\dots$ are
+disjoint, then there exist disjoint Borel sets $B_1,B_2,\dots$ of Y with 
+$f(S_j)\subset B_j$ for $j=1,2,\dots$.
+\end{corollary}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+For any $j\in\mathcal{P}$, $S_j$ is Souslin, by definition, there exists a
+closed set $C_j$ of $X\times\mathcal{N}$ such that $S_j=p(C_j)$, where p is the
+projection function. It is easy to see that function 
+$f\circ p:X\times \mathcal{N}\to Y$ is continuous, and
+$f(S_j)=f(p(C_j))=f\circ p (C_j)$. Now by Lemma \ref{L:sep_lusin}, for any 
+unequal $i,j\in\mathcal{P}$, there exist disjoint Borel sets $B_{i,j}$ and
+$B_{j,i}$ such that $f(S_i)\subset B_{i,j}$ and $f(S_j)\subset B_{j,i}$.
+Now let $B_i=\bigcap_{k\in\mathcal{P}} B_{i,k}$, then $f(S_i)\subset B_i$, and
+$B_i\bigcap B_j=\emptyset$ for any $i\neq j$.
+\end{proof}
+%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+\footnote{Federer, 2.2.10, p.67;
+  cf. Bruckner et.al., Real Analysis, 2ed., Theorem 11.16, pp.444-445; 
+  Kechris, Classical Descriptive Set Theory, Theorem 15.1, p.89;
+  Tserunyan, Introduction to Descriptive Set Theory (version Sep. 12, 2022), 
+  Theorem 13.3, pp.51-52}
+Assuming that X is a complete, separable metric space, Y is a Hausdorff space
+and $f:X\to Y$ is continuous, if C is a closed subset of X and $f|C$ is 
+univalent, then $f(C)$ is a Borel subset of Y.
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+Again we use the family of closed sets as defined in 
+Theorem \ref{T:lipschitz_compltSep} with 
+$X=\bigcup_{j\in\mathcal{P}} E(j)$, and
+\[
+	E(s_1,\dots,s_k)=\bigcup_{j\in\mathcal{P}} E(s_1,\dots,s_{k-1},j),
+\]
+with $\diam(E(s_1,\dots,s_k)<2^{-k-2}$.
+We turn this into a Lusin scheme of Borel sets by letting 
+$A(s_1)=E(s_1)\setminus \bigcup_{j<s_1} E(j)$, and
+\[
+	A(s_1,\dots,s_k) = A(s_1,\dots,s_{k-1}) \bigcap E(s_1,\dots,s_{k-1})
+	  \setminus \bigcup_{j<n_k} E(s_1,\dots,s_{k-1},j),
+\]
+
+Since f is one-one, the sets $f(C\cap A(s))$ are disjoint for distinct 
+$s=(s_1,\dots,s_k)\in\mathcal{P}^k$. Consequently, using Corollary
+\ref{C:sep_souslin}, there exist disjoint Borel sets $B'(s)$ that
+$f(C\cap A(s))\subset B'(s)$. Now let
+\begin{align*}
+  B(\emptyset) &= B'(\emptyset), \\
+  B(s_1) &= B'(s_1) \bigcap \overline{f(C\cap E(s_1))}, \\
+  B(s) &= B'(s) \bigcap B(s_1,\dots,s_{k-1}) \bigcap \overline{f(C\cap E(s))},
+\end{align*}
+it is easy to see that $B(s)$ are disjoint and 
+\[
+  f(C\cap A(s))\subset B(s) \subset B(s_1,\dots,s_{k-1}) 
+    \bigcap \overline{f(C\cap E(s))}
+\]
+
+Let 
+\[
+	T=\bigcup_{n\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} B(n|k),
+\]
+since $\{B_s\}$ is a Lusin scheme on $Y$, by Lemma \ref{L:lusin} we have
+\[
+	T= \bigcap_{k\in\mathcal{P}} \bigcup_{s\in\mathcal{P}^k} B(s),
+\]
+thus $T$ is a Borel set in $Y$.
+
+It remains only to see that $T=f(C)$. Note first that 
+\[
+  f(C)\subset 
+    \bigcup_{n\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} f(C\cap A(n|k)) 
+	\subset \bigcup_{n\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} B(n|k)
+	= T.
+\]
+
+
+\end{proof}
+%%%%%%%%%%%%%%%%%%%
+
 
 
 
