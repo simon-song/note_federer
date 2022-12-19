@@ -3758,15 +3758,35 @@ since $\{B_s\}$ is a Lusin scheme on $Y$, by Lemma \ref{L:lusin} we have
 \]
 thus $T$ is a Borel set in $Y$.
 
-It remains only to see that $T=f(C)$. Note first that 
+It remains only to see that $T=f(C)$. Note first that since $\{A_s\}$ is a 
+Lusin scheme we have
+\[
+  \bigcup_{n\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} A(n|k)
+  = \bigcap_{k\in\mathcal{P}} \bigcup_{s\in\mathcal{P}^k} A(s)
+  = X,
+\]
+hence
 \[
   f(C)\subset 
     \bigcup_{n\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} f(C\cap A(n|k)) 
 	\subset \bigcup_{n\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} B(n|k)
 	= T.
 \]
-
-
+In the opposite direction, we check that
+\[
+  T\subset 
+    \bigcup_{n\in\mathcal{N}} \bigcap_{k\in\mathcal{P}} 
+	  \overline{ f(C\cap E(n|k)) }
+	\subset f(C).
+\]
+To see this let 
+$y\in\bigcup_{n\in\mathcal{N}} \bigcap_{k\in\mathcal{P}}
+\overline{f(C\cap E(n|k))}$,
+then there exists a $n\in\mathcal{N}$ such that for any $k\in\mathcal{P}$, 
+$y\in\overline{f(C\cap E(n|k))}$, which means there exists a 
+$x_k\in C\cap E(n|k)$ such that $d(f(x_k),y)<1/k$.
+Now $\{x_k\}$ is a Cauchy sequence in C so $x_k\to x$ for some point $x\in C$.
+By the continuity of $f$, then $f(x_k)\to f(x)$ so $y=f(x)\in f(C)$. 
 \end{proof}
 %%%%%%%%%%%%%%%%%%%
 
