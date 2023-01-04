@@ -2880,6 +2880,8 @@ $\lim_{\sigma\in\Sigma} x_{\sigma}$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{proposition} \label{P:haus_diag}
+\footnote{cf. a more general version is given by Kuratowski, Topology, vol.1, 
+	\S 16, IV, Theorem 2, p.153}
 A topological space $X$ is Hausdorff if and only if the diagonal of $X\times X$
 \[
 	D= \{ (x,x)\in X\times X: x\in X \}
@@ -2937,6 +2939,18 @@ $f$ is continuous, we conclude that $F$ is continuous too. By Proposition
 \ref{P:haus_diag}, $Y$ is Hausdorff iff $D=\{ (y,y):y\in Y \}$ is closed. Now $F$
 is continuous, thus $\gr f=F^{-1}(D)$ is closed too.
 \end{proof}
+
+This lemma can be easily extended to countable product of topological spaces:
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proposition}
+Let $f_t:X_t\to Y$ be a continous function for every $t\in T$, where $X_t$ is a
+topological space and $Y$ is Hausdorff, then the set
+\[
+  B=\{ (y,x_1,x_2,\dots)\in Y\times \prod_{t\in T} X_t: y=f_1(x_1)=f_2(x_2)=\dots \}
+\]
+is a closed set in product topology $Y\times \prod_{t\in T} X_t$.
+\end{proposition}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{proposition} \label{P:suslin_haus}
