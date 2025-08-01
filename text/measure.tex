@@ -838,8 +838,9 @@ Suppose $\phi$ measures $X$,
 %%   measure hull
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{definition}
-Assuming that $\phi$ measures $X$, we say that B is a $\phi$-hull of $A$ iff
-$A\subset B\subset X$, $B$ is $\phi$-measurable and
+Assuming that $\phi$ measures $X$, we say that B is a $\phi$-hull 
+\index{measure hull}
+of $A$ iff $A\subset B\subset X$, $B$ is $\phi$-measurable and
 \footnote{Federer 2.1.4}
 \[
   \phi(T\cap A)=\phi(T\cap B) \quad \text{for every $\phi$-measurable set $T$}.
@@ -856,8 +857,8 @@ is a $\phi$-hull of $A$.
 \begin{proof}
 For every $\phi$-measurable set $T$,
 \[
-  \phi(T\cap B)=\phi(B)-\phi(T\setminus B) 
-    \le \phi(A)-\phi(T\setminus A)=\phi(T\cap A).
+  \phi(T\cap B)=\phi(B)-\phi(B\setminus T) 
+    \le \phi(A)-\phi(A\setminus T)=\phi(T\cap A).
 \]
 \end{proof}
 
@@ -865,7 +866,9 @@ For every $\phi$-measurable set $T$,
 %%   regular measure
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{definition}
-A measure $\phi$ over $X$ is called \textbf{regular} iff for each set $A\subset
+A measure $\phi$ over $X$ is called \textbf{regular} 
+\index{regular measure}
+iff for each set $A\subset
 X$ there exists a $\phi$-measurable set B such that
 \footnote{Federer 2.1.5, p.56}
 \[
