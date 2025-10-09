@@ -3091,6 +3091,10 @@ $\mathcal{A}$ applied to such a scheme produces the set
 \]
 which is called the \textbf{kernel of the Souslin operation}
 \index{kernel of the Souslin operation}.
+
+Given any collection $\Gamma$ of subsets of a set $X$ we denote by
+$\mathcal{A} \Gamma$ the class of sets $\mathcal{A}_s P_s$, where
+$P_s \subset X$ are in $\Gamma$.
 \end{definition}
 
 
@@ -3103,8 +3107,13 @@ $\mathcal{A}\mathcal{A}\Gamma=\mathcal{A}\Gamma$.
 \end{proposition}
 %%%%%%%%%%%%%%%%%%%%%%%
 \begin{proof}
-It is trivial that for any $\Gamma$, $\Gamma\subset\mathcal{A}\Gamma$. So it is
-enough to show that 
+It is trivial that for any $\Gamma$, $\Gamma\subset\mathcal{A}\Gamma$. 
+\footnote{
+  For any $A\in\Gamma$, define Souslin scheme $(P_s)$ with $P_s=A$ for each
+  $s\in \mathcal{P}^{<\mathcal{P}}$, then 
+  $A=\mathcal{A}_s P_s\in\mathcal{A}\Gamma$.
+}
+So it is enough to show that 
 $\mathcal{A}\mathcal{A}\Gamma\subset \mathcal{A}\Gamma$.
 Let $A=\mathcal{A}P_s$, with $P_s\in\mathcal{A}\Gamma$, so that 
 $P_s=\mathcal{A}Q_{s,t}$, with $Q_{s,t}\in\Gamma$. Then
@@ -3116,24 +3125,64 @@ $P_s=\mathcal{A}Q_{s,t}$, with $Q_{s,t}\in\Gamma$. Then
     & \iff \exists y\in\mathcal{N} \exists(z_m)\in\mathcal{N}^{\mathcal{P}}
         \forall m \forall n (x\in Q_{y|m, z_m|n}).
 \end{align*}
+
+We aim to find some Souslin scheme $(R_s)$ such that 
+$x\in\mathcal{A}R_s$, or roughly speaking, to find some mapping
+from $(y,(z_m))$ to some $w\in\mathcal{N}$, and some mapping from
+$(m,n)$ to some $k\in\mathcal{P}$, such that $R_{w|k}=Q_{y|m,z_m|n}$.
+
 Fix now a bijection $\langle m,n\rangle$ of $\mathcal{P}\times \mathcal{P}$ 
 with $\mathcal{P}$, so that $m\le\langle m,n \rangle$ and 
 ($p<n \Rightarrow \langle m,p \rangle < \langle m,n \rangle$)
 (e.g. $\langle m,n \rangle = 2^m (2n+1) - 1$). Let also for $k\in \mathcal{P}$,
 $(k)_0$, $(k)_1$ be such that $\langle (k)_0,(k)_1 \rangle=k$. Then encode
 $(y,(z_m))\in \mathcal{N}\times\mathcal{N}^{\mathcal{P}}$ by $w\in\mathcal{N}$
-given by $w(k)=\langle y(k), z_{(k)_0}((k)_1)\rangle$. This gives a bijection of 
-$\mathcal{N}\times\mathcal{N}^{\mathcal{P}}$ with $\mathcal{N}$. Note that
-knowing $w|\langle m,n \rangle$ determines $y|m$ and $z_m|n$, by the above
-properties of $\langle\rangle$ (i.e. there are functions 
+given by 
+\[
+  w(k)=\langle y(k), z_{(k)_0}((k)_1)\rangle. 
+\]
+This gives a bijection 
+$f:\mathcal{N}\times\mathcal{N}^{\mathcal{P}}\to\mathcal{N}$. 
+To see this, take $(y,(z_m))\neq (y',(z'_m))$ and let 
+$w=f(y,(z_m))$ and $w'=f(y',(z'_m))$. Now if
+$y\neq y'$, then there exists a $k$ such that $y(k)\neq y'(k)$, thus
+$w(k)\neq w'(k)$ because $\langle\rangle$ is a bijection. On the other hand,
+if $(z_m)\neq (z'_m)$, then there exists $i,j$ that $z_i(j)\neq z'_i(j)$,
+hence $w(\langle i,j\rangle)\neq w'(\langle i,j\rangle)$.
+
+Note that knowing $w|\langle m,n \rangle$ determines $y|m$ and $z_m|n$, 
+by the above properties of $\langle\rangle$, i.e. there are functions 
 $\varphi,\psi: \mathcal{P}^{<\mathcal{P}} \to \mathcal{P}^{<\mathcal{P}}$ 
 such that if $w$ encodes $(y,(z_m))$ and $s=w|\langle m,n\rangle$, then
-$\varphi(s)=y|m$ and $\psi(s)=z_m|n$). 
-\footnote{
-For any $s\in \mathcal{P}^{<\mathcal{P}}$, let $m=(|s|)_0$ and $n=(|s|)_1$,
-then $\varphi(s)=((s_1)_0, (s_2)_0, \cdots, (s_m)_0)$,
-$\psi(s)=((s_{\langle m,1\rangle})_1, (s_{\langle m,2\rangle})_1,\cdots,(s_{\langle m,n\rangle})_1)$. 
-}
+$\varphi(s)=y|m$ and $\psi(s)=z_m|n$. 
+Actually, for any $s\in \mathcal{P}^{<\mathcal{P}}$, let $m=(|s|)_0$ and 
+$n=(|s|)_1$, we define
+\[
+  \varphi(s)=((s_1)_0, (s_2)_0, \cdots, (s_m)_0)
+\]
+and
+\[
+  \psi(s)= ((s_{\langle m,1\rangle})_1, (s_{\langle m,2\rangle})_1, \cdots,
+            (s_{\langle m,n\rangle})_1)
+\]
+it is easy to see that if $w$ encodes $(y,(z_m))$ and $s=w|\langle m,n\rangle$, 
+then
+\begin{align*}
+  y|m &= (y_1, y_2, \cdots, y_m) \\
+      &=((w_1)_0, (w_2)_0, \cdots, (w_m)_0) \\
+      &=((s_1)_0, (s_2)_0, \cdots, (s_m)_0) \\
+      &= \varphi(s)
+\end{align*}
+and
+\begin{align*}
+  z_m|n &= (z_m(1), z_m(2), \cdots, z_m(n)) \\
+        &= ((w_{\langle m,1\rangle})_1, (w_{\langle m,2\rangle})_1, \cdots,
+            (w_{\langle m,n\rangle})_1)  \\
+        &= ((s_{\langle m,1\rangle})_1, (s_{\langle m,2\rangle})_1, \cdots,
+            (s_{\langle m,n\rangle})_1)  \\
+        &= \psi(s)
+\end{align*}
+
 It follows that
 \begin{align*}
   x\in A 

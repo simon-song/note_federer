@@ -1,6 +1,9 @@
 /text/*.aux
 /*.aux
 /*.bak
+/*.bbl
+/*.blg
+/*.fls
 /*.idx
 /*.ilg
 /*.ind
@@ -8,3 +11,7 @@
 /*.out
 /*.toc
 /note_federer.pdf
+*.bak
+gp_history.txt
+*latexmk
+.DS_Store
