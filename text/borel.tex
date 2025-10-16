@@ -3971,6 +3971,71 @@ $m\in \mathcal{N}\setminus T$, then we have $m\in S_m$, and hence
 $m\in T$, again impossible. Therefore $T$ is not a Borel set.
 \end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+  \footnote{
+    Kechris, Classical Descriptive Set Theory, Exercise 25.15, p.201;
+    cf. Saks, Theory of the Integral, section II.5, pp.47-50
+  }
+  Let $(P_s)$ be a Souslin scheme. Put for any sequence $s,t\in\mathcal{P}^n$,
+  $s\le t \iff \forall i\le n (s(i)\le t(i))$. Let for $s\in\mathcal{P}^n$,
+  \[
+    Q^s = \bigcup_{x\in\mathcal{N}, x|n\le s} \bigcap_{i\in\mathcal{P}} P_{x|i}
+  \]
+  \[
+    Q_s = \bigcup_{t\in\mathcal{P}^n, t\le s} \bigcap_{i\le n} P_{t|i}
+  \]
+\end{lemma}
+then $Q^s\subset Q_s$, and $\mathcal{A}_s Q_s\subset \mathcal{A}_s P_s$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+% Let $A=\mathcal{A}_s Q_s$, then for any
+% \begin{align*}
+%   x\in A 
+%     & \iff \exists y\in\mathcal{N} \forall m (x\in Q_{y|m}) \\
+% \end{align*}
+For any $y\in\mathcal{N}$, let
+\[
+  B_y = \bigcap_{n\in\mathcal{P}} Q_{y|n}
+      = \bigcap_{n\in\mathcal{P}} 
+        \left( \bigcup_{t\in\mathcal{P}^n, t\le y|n} \bigcap_{i\le n} P_{t|i} \right)
+\]
+we will verify that $B_y\in \mathcal{A}_s P_s$. 
+  \footnote{
+    Saks, Theory of the Integral, Chap. II, Lemma 5.3, p.49
+  }
+Let $x$ be any point belonging to $B_y$. We shall show firstly that there is a 
+positive integer $z^0_1\le y_1$ such that for each $k\ge 2$, the point $x$
+belongs to a set $P_{z_1}\cap P_{z_1,z_2} \cap \cdots \cap P_{z_1,z_2,\dots,z_k}$
+for which $z_1=z_1^0$ and $z_i\le y_i$ for $i=2,3,\dots,k$. Indeed, if there were
+no such interger $z_1^0$, we could associate with each index $j\le y_1$, a 
+positive integer $k_j$, such that $x$ belongs not to set 
+$P_{j}\cap P_{j,z_2} \cap \cdots \cap P_{j,z_2,\dots,z_{k_j}}$
+for which $z_i\le y_i$ for $i=2,3,\dots,k_j$. Denote by $p_1$ the greatest of 
+the numbers $k_1,k_2,\dots,k_{y_1}$. The point $x$ thus belongs to none of the
+sets $P_{z_1}\cap P_{z_1,z_2} \cap \cdots \cap P_{z_1,z_2,\dots,z_{p_1}}$
+for which $z_i\le y_i$ for $i=1,2,\dots,p_1$, and therefore is not contained
+in $Q_s$ where $s=(y_1,y_2,\dots,y_{p_1})$. This is a contradition since by 
+hypothesis, $x$ is an element of $B_y$, hence is an element of $Q_{y|p_1}$.
+
+After the index $z_1^0$, we can determine afresh and index $z_2^0\le y_2$
+such that for each $k\ge 3$, the point $x$ belongs to a set
+$P_{z_1}\cap P_{z_1,z_2} \cap \cdots \cap P_{z_1,z_2,\dots,z_k}$
+for which $z_1=z_1^0$, $z_2=z_2^0$, and $z_i\le y_i$ for $i=3,4,\dots,k$. 
+For, if there were no such index, we could find, as previously, a positive 
+integer $p_2\ge 3$ such that $x$ belongs not to sets 
+$P_{z_1}\cap P_{z_1,z_2} \cap \cdots \cap P_{z_1,z_2,\dots,z_{p_2}}$
+for which $z_1=z_1^0$ and $z_i\le y_i$ for $i=2,3,\dots,p_2$. And this would
+contradict the definition of the index $n_1^0$.
+
+Proceeding in this way, we determine an infinite sequence of indices
+$(z_1^0,z_2^0,\dots)$ such that $z_i^0\le y_i$ when $i=1,2,\dots$ and such
+that 
+$x\in P_{z_1^0}\cap P_{z_1^0,z_2^0} \cap \cdots \cap P_{z_1^0,z_2^0,\dots,z_k^0} \cap \cdots$
+Thus $x\in \mathcal{A}_s P_s$.
+
+\end{proof}
+
 
 
 
