@@ -907,17 +907,17 @@ Let $\phi$ be a regular measure over $X$, then we have
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{proof}
 \begin{enumerate}
-  \item For $i=1,2,\cdots$, let $C_i$ be a set satisfying 
-    $A_i\subset C_i$ and $\phi(C_i)=\phi(A_i)$, and let
-    $B_i=\bigcup_{j=i}^{\infty} C_j$. Hence 
-    $B_1\subset B_2\subset B_3\subset\cdots$ is an increasing sequence and
-    because $A_i\subset B_i\subset C_i$ and $\phi(A_i)=\phi(C_i)$ we have
+  \item For $i=1,2,\cdots$, let $C_i$ be a $\phi$ measurable set satisfying 
+    $A_i\subset C_i$ and $\phi(C_i)=\phi(A_i)$. Let
+    $B_i=\bigcap_{j=i}^{\infty} C_j$, then $B_i$ is $\phi$ measurable, and 
+    $B_1\subset B_2\subset B_3\subset\cdots$ is an increasing sequence. 
+    Because $A_i\subset B_i\subset C_i$ and $\phi(A_i)=\phi(C_i)$ we have
     $\phi(B_i)=\phi(A_i)$. Thus from Theorem \ref{T:meas_prop}, (3) we get
     \[
       \phi\left( \bigcup_{i=1}^{\infty} A_i \right)
         \le \phi\left( \bigcup_{i=1}^{\infty} B_i \right)
-        = \lim_{i\to\infty} B_i
-        = \lim_{i\to\infty} A_i.
+        = \lim_{i\to\infty} \phi(B_i)
+        = \lim_{i\to\infty} \phi(A_i).
     \]
     From the countable subadditivity of measure we also have 
     \[
