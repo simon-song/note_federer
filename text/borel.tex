@@ -725,7 +725,7 @@ Hence $\phi(D\setminus B)=0$ and
 \]
 thus $\phi|_A(D)=\phi|_A(B)$, and $\phi|_A$ is Borel regular.
 
-\item[(4)] The proof is similar to Lemma \ref{L:regul}.
+\item[(4)] The proof is similar to Lemma \ref{L:reg_meas}.
 
 \end{enumerate}
 \end{proof}   %%%%%
@@ -4036,7 +4036,89 @@ Thus $x\in \mathcal{A}_s P_s$.
 
 \end{proof}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+  \footnote{
+    Kechris, Classical Descriptive Set Theory, Theorem 29.16, p.229;
+    Saks, Theory of the Integral, section II.4, Theorem 4.6, pp.46-47,
+    Theorem 4.1, pp.44-45
+  }
+  Let $X$ be a set and $\mu^*$ an outer measure on $X$. For any pairwise
+  disjoint $\mu^*$-measurable sets $(D_n)$, we have for any set $A$
+  \[
+    \mu^*(A\cap \bigcup_n D_n) = \sum_n \mu^*(A\cap D_n).
+  \]
+\end{lemma}
+%%%%%%%%%%%%%%%%%
+\begin{proof}
+Let $S_k=\bigcup_{n=1}^k D_n$. We begin by proving inductively that $S_k$ are
+$\mu^*$-measurable, and
+\begin{equation}
+    \mu^*(A) \ge \sum_{n=1}^{k} \mu^*(A\cap D_n) + \mu^*(A\setminus S_k).
+\end{equation}
+Suppose this is true for integer $k=p$, then
+\begin{align*}
+  \mu^*(A) 
+    &= \mu^*(A\cap D_{p+1}) + \mu^*(A\setminus D_{p+1}) \\
+    &= \mu^*(A\cap D_{p+1}) + \mu^*(A\setminus D_{p+1} \cap S_p) 
+       + \mu^*(A\setminus D_{p+1} \setminus S_p)  \\
+    &= \mu^*(A\cap D_{p+1}) + \mu^*(A\cap S_p) + \mu^*(A\setminus S_{p+1}) \\
+    &\ge \sum_{n=1}^{p+1} \mu^*(A\cap D_n) + \mu^*(A\setminus S_{p+1}) 
+\end{align*}
+Since $\mu^*$ is countable subadditive, we further get
+\begin{align*}
+  \mu^*(A)
+    &\ge \mu^*(\bigcup_{n=1}^{p+1} (A\cap D_n)) + \mu^*(A\setminus S_{p+1}) \\
+    &= \mu^*(A\cap S_{p+1}) + \mu^*(A\setminus S_{p+1}),
+\end{align*}
+hence $S_{p+1}$ is $\mu^*$-measurable.
 
+Now for any positive integer $k$
+\[
+  \mu^*(\bigcup_{n=1}^{\infty} (A\cap D_n)) 
+    \ge \mu^*(\bigcup_{n=1}^k (A\cap D_n))
+\]
+From the definition of infinite sum in \ref{E:sum_gen} we have
+\[
+  \sum_{n=1}^{\infty} \mu^*(A\cap D_n)
+    =\sup 
+     \left\{  
+       \mu^*\left( \bigcup_{n\in I} (A\cap D_n) \right)
+         : I\subset N, \text{$I$ is finite}
+     \right\},
+\]
+hence
+\[
+  \mu^*(\bigcup_{n=1}^{\infty} (A\cap D_n)) 
+    \ge \sum_{n=1}^{\infty} \mu^*(A\cap D_n),
+\]
+since $\mu^*$ is also countable subadditive, we conclude
+\[
+  \mu^*(\bigcup_{n=1}^{\infty} (A\cap D_n)) 
+    = \sum_{n=1}^{\infty} \mu^*(A\cap D_n).
+\]
+
+
+
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+  \footnote{
+    Kechris, Classical Descriptive Set Theory, Theorem 29.16, p.229;
+    Saks, Theory of the Integral, section II.4, Theorem 4.7, p.47}
+  Let $X$ be a set and $\mu^*$ an outer measure on $X$. For any set 
+  $A\subset X$, define for every set $B$,
+  \[
+    \mu^*_A(B)=\inf \{\mu^*(A\cap C): B\subset C, 
+                      \text{$C$ is $\mu^*$-measurable } \},
+  \]
+then for any increasing sequence $(B_n)$
+\[
+  \mu^*(A\bigcap \bigcup_n B_n)\le \mu^*_A(\bigcup_n B_n) = \lim_n \mu^*_A(B_n).
+\]
+\end{lemma}
 
 
 

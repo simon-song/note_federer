@@ -1073,7 +1073,7 @@ $\phi(A)=|A|$ for $A\subset S$, $\phi(A)=2$ for $A\not\subset S$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%     regulization of measure
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{lemma} \label{L:regul}
+\begin{lemma} \label{L:reg_meas}
 Given any measure $\phi$ over $X$ one associates a regular measure $\gamma$ by
 the formula
 \[
@@ -1090,6 +1090,7 @@ $\gamma(A)<\infty$, then $A$ is $\phi$-measurable.
 First we verify that $\gamma$ is a measure over $X$. From the definition and the 
 property of infimum it is easy to see that if $A\subset B\subset X$ we have
 $\gamma(A)\le\gamma(B)$. Now $\gamma$ is countably subadditive because
+for any sequence of sets $(A_i)$ we have
 \begin{align*}
   \sum_{i=1}^{\infty} \gamma(A_i)
     &= \sum_{i=1}^{\infty} 
@@ -1111,6 +1112,29 @@ $\gamma(A)\le\gamma(B)$. Now $\gamma$ is countably subadditive because
 \end{align*}
 and thus $\gamma$ is a measure.
 
+An alternative proof for the countable subadditivity is the following.
+\footnote{cf. Cohn, Measure Theory, 2nd ed., Proposition 1.5.4, p.33}
+% First note that for any set $A$ there exists a $\phi$-measurable 
+% set $B$ such that $A\subset B$ and $\gamma(A)=\phi(B)$. 
+% Now $\bigcup_i B_i$ is also 
+% a $\phi$-measurable set, hence $\gamma(\bigcup_i B_i)=\phi(\bigcup_i B_i)$ by 
+% defintion of $\gamma$, and
+% \[
+%   \gamma(\bigcup_i A_i) \le \gamma(\bigcup_i B_i) 
+%     = \phi(\bigcup_i B_i) \le \sum_i \phi(B_i) = \sum_i \gamma(A_i)
+% \]
+Fix $\epsilon>0$, for any set $A_i$ there exists a $\phi$-measurable set $B_i$ 
+such that $A_i\subset B_i$ and $\phi(B_i)\le \gamma(A_i)+\epsilon 2^{-i}$. 
+Now $\bigcup_i B_i$ is also a $\phi$-measurable set, hence 
+$\gamma(\bigcup_i B_i)=\phi(\bigcup_i B_i)$ by definition of $\gamma$. Thus
+\[
+  \gamma(\bigcup_i A_i) \le \gamma(\bigcup_i B_i) 
+    = \phi(\bigcup_i B_i) \le \sum_i \phi(B_i) 
+    \le \sum_i \gamma(A_i) + \epsilon.
+\]
+Since $\epsilon$ is arbitrary, we conclude that $\gamma$ is countable
+subadditive. 
+
 To verify that $\gamma$ is regular, 
 \footnote{Proof inspired by Royden, Real Analysis, 3rd ed., 12.2.6, p.294}
 note that from the defintion we have 
@@ -1125,6 +1149,8 @@ it is easy to see that $\gamma(B)=\phi(B)$. Thus from this and monotonity we get
 \]
 And because $\epsilon$ is arbitrary, we conclude that there exists a
 $\phi$-measurable set $B$ such that $A\subset B$ and $\gamma(A)=\gamma(B)$.
+\footnote{Note also that $B$ satisfies $\gamma(A)=\phi(B)$, i.e. the infimum
+in the defintion of $\gamma$ is attained.}
 
 Next we verify that if $A$ is $\phi$-measuarable then it is also
 $\gamma$-measuarable. We only need to verify that 
