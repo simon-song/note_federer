@@ -3972,21 +3972,24 @@ $m\in T$, again impossible. Therefore $T$ is not a Borel set.
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{lemma}
+\begin{lemma} \label{L:sous_op}
   \footnote{
     Kechris, Classical Descriptive Set Theory, Exercise 25.15, p.201;
     cf. Saks, Theory of the Integral, section II.5, pp.47-50
   }
   Let $(P_s)$ be a Souslin scheme. Put for any sequence $s,t\in\mathcal{P}^n$,
-  $s\le t \iff \forall i\le n (s(i)\le t(i))$. Let for $s\in\mathcal{P}^n$,
+  $s\le t \iff \forall i\le n\, (s(i)\le t(i))$. Let for $s\in\mathcal{P}^n$,
   \[
     Q^s = \bigcup_{x\in\mathcal{N}, x|n\le s} \bigcap_{i\in\mathcal{P}} P_{x|i}
   \]
+  then $Q^{\emptyset}=\mathcal{A}_s P_s = \mathcal{A}_s Q^s$,
+  $Q^s=\bigcup_n Q^{s\wedge n}$, and $Q^{s\wedge m}\subset Q^{s\wedge n}$
+  if $m\le n$. Let
   \[
     Q_s = \bigcup_{t\in\mathcal{P}^n, t\le s} \bigcap_{i\le n} P_{t|i}
   \]
-\end{lemma}
 then $Q^s\subset Q_s$, and $\mathcal{A}_s Q_s\subset \mathcal{A}_s P_s$.
+\end{lemma}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{proof}
 % Let $A=\mathcal{A}_s Q_s$, then for any
@@ -3998,9 +4001,11 @@ For any $y\in\mathcal{N}$, let
 \[
   B_y = \bigcap_{n\in\mathcal{P}} Q_{y|n}
       = \bigcap_{n\in\mathcal{P}} 
-        \left( \bigcup_{t\in\mathcal{P}^n, t\le y|n} \bigcap_{i\le n} P_{t|i} \right)
+        \left( 
+          \bigcup_{t\in\mathcal{P}^n, t\le y|n} \bigcap_{i\le n} P_{t|i} 
+        \right)
 \]
-we will verify that $B_y\in \mathcal{A}_s P_s$. 
+we will verify that $B_y\subset \mathcal{A}_s P_s$. 
   \footnote{
     Saks, Theory of the Integral, Chap. II, Lemma 5.3, p.49
   }
@@ -4036,23 +4041,33 @@ Thus $x\in \mathcal{A}_s P_s$.
 
 \end{proof}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{lemma}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  properties of measure: with intersection
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}  \label{L:meas_prop2}
   \footnote{
     Kechris, Classical Descriptive Set Theory, Theorem 29.16, p.229;
     Saks, Theory of the Integral, section II.4, Theorem 4.6, pp.46-47,
     Theorem 4.1, pp.44-45
   }
-  Let $X$ be a set and $\mu^*$ an outer measure on $X$. For any pairwise
-  disjoint $\mu^*$-measurable sets $(D_n)$, we have for any set $A$
-  \[
-    \mu^*(A\cap \bigcup_n D_n) = \sum_n \mu^*(A\cap D_n).
-  \]
+  Let $\mu^*$ be a measure on set $X$ and $A\subset X$,
+  \begin{enumerate}
+    \item[(1)] For any pairwise disjoint $\mu^*$-measurable sets $(D_n)$, 
+      \[
+        \mu^*(A\cap \bigcup_n D_n) = \sum_n \mu^*(A\cap D_n).
+      \]
+    \item[(2)] For any increasing $\mu^*$-measurable sets $(B_n)$, 
+      \[
+        \mu^*(A\cap \bigcup_n B_n) = \lim_n \mu^*(A\cap B_n).
+      \]
+  \end{enumerate}
 \end{lemma}
 %%%%%%%%%%%%%%%%%
 \begin{proof}
-Let $S_k=\bigcup_{n=1}^k D_n$. We begin by proving inductively that $S_k$ are
-$\mu^*$-measurable, and
+\begin{enumerate}
+\item[(1)]
+Let $S_k=\bigcup_{n=1}^k D_n$. 
+We begin by proving inductively that $S_k$ are $\mu^*$-measurable, and
 \begin{equation}
     \mu^*(A) \ge \sum_{n=1}^{k} \mu^*(A\cap D_n) + \mu^*(A\setminus S_k).
 \end{equation}
@@ -4098,27 +4113,179 @@ since $\mu^*$ is also countable subadditive, we conclude
     = \sum_{n=1}^{\infty} \mu^*(A\cap D_n).
 \]
 
+\item[(2)]
+Note that since $(B_n)$ is an increasing sequence, we can break down
+the union into a union of disjoint $\mu^*$-measurable sets
+\[
+  \bigcup_n B_n = B_1 + \bigcup_{n=1}^{\infty} (B_{n+1}\setminus B_{n})
+\]
+using (1), we get
+\begin{align*}
+  \mu^*(A\bigcap \bigcup_n B_n) 
+    &= \mu^*(A\cap B_1) + \sum_{n=1}^{\infty} \mu^*(A\bigcap (B_{n+1}\setminus B_{n})) \\
+    &= \lim_n \left( 
+      \mu^*(A\cap B_1) + \sum_{k=1}^{n-1} \mu^*(A\bigcap (B_{n+1}\setminus B_{n})) 
+      \right) \\
+    &= \lim_n \mu^*(A\cap B_n)
+\end{align*}
 
-
+\end{enumerate}
 \end{proof}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{lemma}
+\begin{lemma}  \label{L:reg_meas3}
   \footnote{
     Kechris, Classical Descriptive Set Theory, Theorem 29.16, p.229;
-    Saks, Theory of the Integral, section II.4, Theorem 4.7, p.47}
-  Let $X$ be a set and $\mu^*$ an outer measure on $X$. For any set 
-  $A\subset X$, define for every set $B$,
+    Saks, Theory of the Integral, section II.4, Theorem 4.7, p.47;
+    cf. Lemma \ref{L:reg_meas}.
+  }
+  Let $\mu^*$ be a measure on set $X$ and $A\subset X$,
+  for every set $B$, let
   \[
     \mu^*_A(B)=\inf \{\mu^*(A\cap C): B\subset C, 
                       \text{$C$ is $\mu^*$-measurable } \},
   \]
-then for any increasing sequence $(B_n)$
-\[
-  \mu^*(A\bigcap \bigcup_n B_n)\le \mu^*_A(\bigcup_n B_n) = \lim_n \mu^*_A(B_n).
-\]
+then 
+\begin{enumerate}
+  \item[(1)] $\mu^*_A$ is attained, i.e. there exists a $\mu^*$-measurable
+    set $B'$ satisfying $B\subset B'$ and $\mu^*_A(B)=\mu^*(A\cap B')$.
+  \item[(2)]
+    For any increasing sequence $(B_n)$
+    \[
+      \mu^*(A\cap \bigcup_n B_n)\le \mu^*_A(\bigcup_n B_n) = \lim_n \mu^*_A(B_n).
+    \]
+\end{enumerate}
+
 \end{lemma}
+%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+\begin{enumerate}
+  \item[(1)]
+  By definition, for any $\epsilon>0$, there exists a $\mu^*$-measurable set
+  $B'$ such that $B\subset B'$ and
+  \[
+    \mu^*(A\cap B')\le \mu^*_A(B) + \epsilon,
+  \]
+  it is easy to see that $\mu^*(A\cap B')= \mu^*_A(B')$. Thus from this and
+  monotonity we get
+  \[
+    \mu^*_A(B) \le \mu^*_A(B') = \mu^*(A\cap B') \le \mu^*_A(B) + \epsilon.
+  \]
+  Since $\epsilon$ is arbitrary, we conclude that 
+  $\mu^*_A(B) = \mu^*_A(B') = \mu^*(A\cap B')$.
+  \item[(2)]
+  \footnote{cf. Proposition \ref{P:reg_meas}}
+  It is easy to see from the defintion of $\mu^*_A$ that
+  $\mu^*(A\cap \bigcup_n B_n)\le \mu^*_A(\bigcup_n B_n)$.
+  And by (1), let $B'_n$ be the $\mu^*$-measurable set such that 
+  $B_n\subset B'_n$ and $\mu^*_A(B_n) = \mu^*(A\cap B'_n) = \mu^*_A(B'_n)$. 
+  Let $C_n=\bigcap_{j=n}^{\infty}B'_j$, then $C_n$ is $\mu^*$-measurable, 
+  and $(C_n)$ is increasing. 
+  Since $(B_n)$ is increasing, we have $B_n\subset C_n\subset B'_n$, thus
+  $\mu^*_A(B_n) = \mu^*_A(C_n) = \mu^*_A(B'_n)$. 
+  Using Lemma \ref{L:meas_prop2}(2), we get
+  \begin{align*}
+    \mu^*_A(\bigcup_n B_n) 
+      &\le \mu^*_A(\bigcup_n C_n) = \mu^*(A\cap \bigcup_n C_n) \\
+      &= \lim_n \mu^*(A\cap C_n) = \lim_n \mu^*_A(C_n) = \lim_n \mu^*_A(B_n)
+  \end{align*}
+  By monotonity, we have $\mu^*_A(\bigcup_n B_n) \ge \lim_n \mu^*_A(B_n)$,
+  hence $\mu^*_A(\bigcup_n B_n) = \lim_n \mu^*_A(B_n)$.
+\end{enumerate}
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{theorem}
+  \footnote{
+    Kechris, Classical Descriptive Set Theory, Theorem 29.16, p.229;
+    Saks, Theory of the Integral, Chap. II, Theorem 5.5, p.50;
+  }
+  Let $X$ be a set and $\mu^*$ a measure on $X$. Then the class of 
+  $\mu^*$-measurable sets is closed under the souslin operation
+  $\mathcal{A}$.
+\end{theorem}
+%%%%%%%%%%%%%%%%%%
+\begin{proof}
+Let $(P_s)$ be a Souslin scheme of $\mu^*$-measurable sets.
+Let $P=\mathcal{A}_s P_s$. We have to show, for every set $A\subset X$,
+that $\mu^*(A)\ge \mu^*(A\cap P) + \mu^*(A\setminus P)$. We can assume,
+of course, that $\mu^*(A)<\infty$.
+
+For every set $B$, let
+\[
+  \mu^*_A(B)=\inf \{\mu^*(A\cap C): B\subset C, 
+                    \text{$C$ is $\mu^*$-measurable } \}.
+\]
+By Lemma \ref{L:reg_meas3}, we know that for any increasing sequence $(B_n)$
+\[
+  \mu^*(A\cap \bigcup_n B_n)\le \mu^*_A(\bigcup_n B_n) = \lim_n \mu^*_A(B_n).
+\]
+
+As in Lemma \ref{L:sous_op}, for any $s\in\mathcal{P}^n$ we define $Q^s$ 
+and $Q_s$ as:
+\[
+  Q^s = \bigcup_{x\in\mathcal{N}, x|n\le s} \bigcap_{i\in\mathcal{P}} P_{x|i},
+\]
+and
+\[
+  Q_s = \bigcup_{t\in\mathcal{P}^n, t\le s} \bigcap_{i\le n} P_{t|i}.
+\]
+Let $\epsilon>0$. 
+By Lemma \ref{L:sous_op}, we have $\bigcup_n Q^n = P$, and $(Q^n)$ is 
+increasing.
+Hence $\mu^*(A\cap P)\le \lim_n \mu^*_A(Q^n)$, and we can find 
+$x_1\in\mathcal{P}$ such that
+\[
+  \mu^*_A(Q^{x_1}) \ge \mu^*(A\cap P) - \epsilon / 2,
+\]
+And for $n\ge 1$, because $(Q^{x_1,x_2,\dots,x_n,m})_m$ is increasing,
+and $Q^{x_1,x_2,\dots,x_n}=\bigcup_m Q^{x_1,x_2,\dots,x_n,m}$,
+we have
+$\mu^*_A(Q^{x_1,x_2,\dots,x_n}) = \lim_m \mu^*_A(Q^{x_1,x_2,\dots,x_n,m})$.
+Then we can find $x_{n+1}\in\mathcal{P}$ such that
+\[
+  \mu^*_A(Q^{x_1,x_2,\dots,x_n,x_{n+1}}) 
+    \ge \mu^*_A(Q^{x_1,x_2,\dots,x_n}) - \epsilon / 2^{n+1},
+\]
+Let $x=(x_1,x_2,\dots)$, for $n\ge 1$, since $Q_{x|n}$ is $\mu^*$-measurable 
+and $Q_{x|n}\supset Q^{x|n}$, we have
+\[
+  \mu^*(A\cap Q_{x|n}) = \mu^*_A(Q_{x|n})
+    \ge \mu^*_A(Q^{x|n}) \ge \mu^*(A\cap P)-\epsilon,
+\]
+and hence
+\[
+  \mu^*(A) = \mu^*(A\cap Q_{x|n}) + \mu^*(A\setminus Q_{x|n})
+    \ge \mu^*(A\cap P) + \mu^*(A\setminus Q_{x|n}) - \epsilon.
+\]
+
+Since $(Q_{x|n})_n$ is decreasing, and 
+$\bigcap_n Q_{x|n} \subset \mathcal{A}_s P_s = P$
+by Lemma \ref{L:sous_op}, we have that $(X\setminus Q_{x|n})_n$ is increasing
+and $\bigcup_n (X\setminus Q_{x|n}) \supset X\setminus P$.
+Now $X\setminus Q_{x|n}$ is $\mu^*$-measurable, by 
+Lemma \ref{L:meas_prop2}(2), we have
+\[
+  \lim_n \mu^*(A\setminus Q_{x|n}) 
+    = \mu^*(A\cap \bigcup_n X\setminus Q_{x|n}) \ge \mu^*(A\setminus P),
+\]
+hence by taking $n\to \infty$ we have
+\[
+  \mu^*(A) 
+    \ge \mu^*(A\cap P) + \lim_n \mu^*(A\setminus Q_{x|n}) - \epsilon
+    \ge \mu^*(A\cap P) + \mu^*(A\setminus P) - \epsilon,
+\]
+thus $\mu^*(A) \ge \mu^*(A\cap P) + \mu^*(A\setminus P)$ as $\epsilon$ is
+arbitrary.
+
+% $x=(x_0,x_1,\cdots)\in \mathcal{N}$ such that
+% and for $n>1$
+% \[
+%   \mu^*_A(Q^{x|(n+1)}) \ge \mu^*_A(Q^{x|n}) - \epsilon / 2^{n+1},
+% \]
+
+\end{proof}
 
 
 
@@ -4143,6 +4310,3 @@ List of important results:
   \item Every metric space $(X,d)$ is a $T_2$-space (Hausdorff space) (Corollary
         \ref{C:metric_T2}).
 \end{enumerate}
-
-
-
