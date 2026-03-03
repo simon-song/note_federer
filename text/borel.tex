@@ -57,21 +57,38 @@ $S$, we have $F\subset H$. Hence $F=H$.
 %%     topology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{definition} \label{D:topo}
-A \textbf{topological space} 
-\index{topological space} 
+A \textbf{topological space} \index{topological space} 
 \footnote{Engelking, General Topology, 1.1, p.11}
-is a pair $(X,O)$ of a set $X$ and a family $O$ of
+is a pair $(X,\mathcal{O})$ of a set $X$ and a family $O$ of
 subsets of $X$ satisfying the following conditions:
 \begin{enumerate}
-  \item[(O1)] $\emptyset\in O$, and $X\in O$.
-  \item[(O2)] If $U_1\in O$ and $U_2\in O$, then $U_1\cap U_2\in O$.
-  \item[(O3)] If $A\subset O$ then $\cup A\in O$.
+  \item[(O1)] $\emptyset\in \mathcal{O}$, and $X\in \mathcal{O}$.
+  \item[(O2)] If $U_1\in \mathcal{O}$ and $U_2\in \mathcal{O}$, then $U_1\cap U_2\in \mathcal{O}$.
+  \item[(O3)] If $A\subset \mathcal{O}$ then $\cup A\in \mathcal{O}$.
 \end{enumerate}
 The set $X$ is called a space, the elements of $X$ are called points of the
-space, and the subsets of $X$ belonging to $O$ are called open in the space, and
-the family $O$ of open subsets of $X$ is called a topology in $X$. A subset
-$A\subset X$ is called closed iff $X\setminus A$ is open.
+space, and the subsets of $X$ belonging to $\mathcal{O}$ are called 
+\textbf{open} \index{open set}
+in the space, and the family $\mathcal{O}$ of open subsets of $X$ is 
+called a topology in $X$. 
+A subset $A\subset X$ is called 
+\textbf{closed} \index{closed set}
+iff $X\setminus A$ is open.
 \end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%     neighbourhood
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition} 
+\footnote{
+  Engelking, General Topology, 1.1, p.12.
+  Note that some authors do not require $U$ to be an open set.
+}
+If for some $x\in X$ and an open set $U\subset X$ we have $x\in U$,
+we say that $U$ is a 
+\textbf{neighbourhood} \index{neighbourhood}
+of $x$.
+\end{definition} 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -358,7 +375,7 @@ This completes the proof.
 %%%%%%%%%%%%%%%%%%%
 \begin{theorem} \label{T:dist_cont}
 For every set $A$ in a metric space $(X,\rho)$ assigning to each point $x\in X$
-the distance $\rho(x,A)$ defines a continous function on $X$.
+the distance $\rho(x,A)$ defines a continuous function on $X$.
 \footnote{Engelking, General Topology, 4.1.10, p.254}
 \end{theorem}
 \begin{proof}
@@ -454,7 +471,7 @@ $\rho(x,A)\ge r>0$.
 From Proposition \ref{P:conv}, $x\in \overline{A}$ iff there exists a sequence
 $x_1,x_2,\cdots$ of points of $A$ that converges to $x$, i.e. $x=\lim{x_i}$.
 From Theorem \ref{T:dist_cont}, let function $f:X\to R$ be 
-$f(x)=\rho(x,A)$ for every $x\in X$, then this function is continous,
+$f(x)=\rho(x,A)$ for every $x\in X$, then this function is continuous,
 and thus we can exchange the function and the limit and get
 \[
   \rho(x,A)=\rho(\lim{x_i},A)=\lim\rho(x_i,A)=0.
@@ -1598,7 +1615,7 @@ $\textbf{Lipschitzian}$
 \index{Lipschitzian}
 iff there exists a finite positive number $M$ such that
 \[
-  dist[f(a),f(b)] \leq M \cdot dist(a,b),
+  \dist[f(a),f(b)] \leq M \cdot \dist(a,b),
 \]
 whenever $a,b\in X$; one refers to $M$ as a $\textbf{Lipschitz constant}$ for
 $f$. Every Lipschitzian function has a least Lipschitz constant, denoted
@@ -1675,7 +1692,7 @@ provided for all $u,v\in X$ and $a\in R$:
 If $X$ is a convex subset of a normed vector space, then $f$ is Lipschitzian 
 with $Lip(f)\leq M$ iff for $x\in X$
 \[
-  \limsup_{z\to x} dist[f(x),f(z)]/|x-z| \leq M.
+  \limsup_{z\to x} \dist[f(x),f(z)]/|x-z| \leq M.
 \]
 \end{lemma}
 \begin{proof}
@@ -1683,7 +1700,7 @@ The necessity is straightforward to verify.
 To prove the sufficiency of this condition we suppose $a,b\in X$, $\mu>M$, since
 $X$ is convex, $a+t(b-a)\in X$ for all $0\leq t\leq 1$, let
 \[
-  S=S_{a,b,\mu}=\{ t: 0\leq t\leq 1, dist[f(a),f(a+t(b-a))]\leq \mu t|b-a| \}.
+  S=S_{a,b,\mu}=\{ t: 0\leq t\leq 1, \dist[f(a),f(a+t(b-a))]\leq \mu t|b-a| \}.
 \]
 To prove that $f$ is Lipshitzian we just need to verify that $1\in S_{a,b,\mu}$
 for all $a,b\in X$ and $\mu>M$. And to prove the latter we just need to verify
@@ -1693,17 +1710,17 @@ First we verify that $\tau=\sup S\in S$. It is easy to see that
 $0\leq\tau\leq 1$ from the definition of supremum. For any $t\in S$, 
 $t\leq \tau$ we have
 \begin{align*}
-  &dist[f(a),f(a+\tau (b-a))]  \\ \notag
-  &\leq dist[f(a),f(a+t(b-a))] + dist[f(a+t(b-a)),f(a+\tau (b-a))] \\ \notag
-  &\leq \mu t |b-a| + dist[f(a+t(b-a)),f(a+\tau (b-a))] \notag.
+  &\dist[f(a),f(a+\tau (b-a))]  \\ \notag
+  &\leq \dist[f(a),f(a+t(b-a))] + \dist[f(a+t(b-a)),f(a+\tau (b-a))] \\ \notag
+  &\leq \mu t |b-a| + \dist[f(a+t(b-a)),f(a+\tau (b-a))] \notag.
 \end{align*}
 Let 
 \[
-  L_r(x) = \sup\{ dist[f(x),f(z)]/|x-z| : |z-x|<r, z\neq x \},
+  L_r(x) = \sup\{ \dist[f(x),f(z)]/|x-z| : |z-x|<r, z\neq x \},
 \]
 and
 \[
-  L(x) = \limsup_{z\to x} dist[f(x),f(z)]/|x-z|,
+  L(x) = \limsup_{z\to x} \dist[f(x),f(z)]/|x-z|,
 \]
 hence $L(x)=\lim_{r\to 0} L_r(x) < M$ for any $x\in X$.
 Now let
@@ -1720,13 +1737,13 @@ Now we can choose a $t\in S$ such that
 \]
 this is possible because $\tau=\sup S$. Hence
 \begin{align*}
-  & dist[f(a+t(b-a)),f(a+\tau (b-a))]  \notag \\
+  & \dist[f(a+t(b-a)),f(a+\tau (b-a))]  \notag \\
   &\leq L_r(a+\tau (b-a)) (\tau - t) |b-a|  \notag \\
   &\leq \mu (\tau-t) |b-a|  \notag
 \end{align*}
 and
 \begin{align*}
-  &dist[f(a),f(a+\tau (b-a))]  \\ \notag
+  &\dist[f(a),f(a+\tau (b-a))]  \\ \notag
   &\leq \mu t |b-a| + \mu (\tau -t)|b-a| \\ \notag
   &= \mu \tau |b-a|.  \notag
 \end{align*}
@@ -1739,14 +1756,14 @@ $t_1>\tau$ such that $t_1\leq 1$ and
 \]
 and 
 \begin{align*}
-  & dist[f(a+t_1(b-a)),f(a+\tau (b-a))]  \notag \\
+  & \dist[f(a+t_1(b-a)),f(a+\tau (b-a))]  \notag \\
   &\leq L_r(a+\tau (b-a)) (t_1 - \tau) |b-a|  \notag \\
   &\leq \mu (t_1-\tau) |b-a|  \notag
 \end{align*}
 Hence
 \begin{align*}
-  &dist[f(a),f(a+ t_1 (b-a))]  \\ \notag
-  &\leq dist[f(a),f(a+\tau (b-a))] + dist[f(a+t_1(b-a)),f(a+\tau (b-a))] 
+  &\dist[f(a),f(a+ t_1 (b-a))]  \\ \notag
+  &\leq \dist[f(a),f(a+\tau (b-a))] + \dist[f(a+t_1(b-a)),f(a+\tau (b-a))] 
     \\ \notag
   &\leq \mu \tau |b-a| + \mu (t_1 - \tau) |b-a| \notag \\
   &= \mu t_1 |b-a|, \notag
@@ -1920,19 +1937,19 @@ It is easy to see that $\img(g)=X$ since for any $x\in X$ we can find a
 $n=(n_1,n_2,\cdots)\in\mathcal{N}$ such that $x\in E(n_1)$, $x\in E(n_1,n_2)$,
 etc. Next we verify that $g:\mathcal{N}\to X$ is locally Lipschitzian. Note that
 given the distance function between two distinct points $m,n\in \mathcal{N}$
-given in Eq. \ref{E:dist_seq}, if $dist(m,n)<1/4$ there exists 
+given in Eq. \ref{E:dist_seq}, if $\dist(m,n)<1/4$ there exists 
 $k\in \mathcal{P}$ such that 
 \[
-  2^{-k-2}\leq dist(m,n) < 2^{-k-1}, 
+  2^{-k-2}\leq \dist(m,n) < 2^{-k-1}, 
     \qquad \text{hence $m_i=n_i$ for $i\leq k$},
 \]
 thus
 \[
-  dist[g(m),g(n)]\leq diam E(m_1,m_2,\cdots,m_k)\leq 2^{-k-2},
+  \dist[g(m),g(n)]\leq \diam E(m_1,m_2,\cdots,m_k)\leq 2^{-k-2},
 \]
 and 
 \[
-  \frac{dist[g(m),g(n)]}{dist(m,n)} \leq 1.
+  \frac{\dist[g(m),g(n)]}{\dist(m,n)} \leq 1.
 \]
 \end{proof}
 
@@ -2067,7 +2084,7 @@ $B(x_n,r_n)\cap E_n=\emptyset$ and $r_n<\frac{1}{n}$ for every $n\in N$ and
 Now $C(x_1,r_1/2) \supset C(x_2,r_2/2) \supset C(x_3,r_3/2)\supset\cdots$ so
 that $(C(x_n,r_n/2):n\in N$ is a decreasing sequence of closed sets. Moreover
 \[
-	\lim_{n\to\infty} diam(C(x_n,r_n/2))
+	\lim_{n\to\infty} \diam(C(x_n,r_n/2))
 	  = \lim_{n\to\infty} r_n
 	  \le\lim_{n\to\infty}\frac{1}{n} = 0.
 \]
@@ -2799,7 +2816,7 @@ continuity of $g$ and $g^{-1}$ follows.
 % $k_{\epsilon}\in\mathcal{P}$ such that $2^{-k_{\epsilon}-2}<\epsilon$. 
 % Then for any $p\in\mathcal{N}$ we know
 % \[
-% 	diam(U_{p|k_{\epsilon}}) < 2^{-k_{\epsilon}-2} < \epsilon,
+% 	\diam(U_{p|k_{\epsilon}}) < 2^{-k_{\epsilon}-2} < \epsilon,
 % \]
 % thus if we choose 
 % \[
@@ -2944,7 +2961,7 @@ This lemma can be easily extended to countable product of topological spaces:
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{proposition}
-Let $f_t:X_t\to Y$ be a continous function for every $t\in T$, where $X_t$ is a
+Let $f_t:X_t\to Y$ be a continuous function for every $t\in T$, where $X_t$ is a
 topological space and $Y$ is Hausdorff, then the set
 \[
   B=\{ (y,x_1,x_2,\dots)\in Y\times \prod_{t\in T} X_t: y=f_1(x_1)=f_2(x_2)=\dots \}
@@ -3021,13 +3038,17 @@ function from $\mathcal{N}$ onto $S$.
 	Note that $f^{-1}(S)=p_X(C_X)$, thus $f^{-1}(S)$ is Suslin in $X$. 
 \end{proof}
 
-Next we study relations between Suslin sets and Borel sets. Let $F$ be the
-family consisting of all sets $p(C)$ such that $C$ is closed in 
-$X\times \mathcal{N}$ and $p|_C$ is univalent.
+Next we study relations between Suslin sets and Borel sets. 
 
 %%%%%%%%%%%%%%%%%%%%%
 \begin{lemma}
-If $X$ is a metric space and $S$ is open in $X$, then $S\in F$.
+Let $X$ be a metric space, and $F$ be the family consisting of all sets 
+$p(C)$ such that $C$ is closed in $X\times \mathcal{N}$ and $p|_C$ is 
+univalent,
+\[
+  F = \{ p(C): C\subset X\times\mathcal{N}, \text{$C$ closed, $p|_C$ univalent} \},
+\]
+if $S$ is open in $X$, then $S\in F$.
 \end{lemma}
 %%%%%%%%%%%%%%%%%%%%%
 \begin{proof}
@@ -3863,7 +3884,7 @@ Here we construct a Suslin set which is not a Borel set.
 %%%  diagonal map is continuous  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{lemma} \label{L:diag_map}
-  For any topological space $(X,\mathcal{O}$, the diagonal map 
+  For any topological space $(X,\mathcal{O})$, the diagonal map 
   $f:X\to X\times X$, defined by $f(x)=(x,x)$, is continuous.
 \end{lemma}
 %%%%%%%%%%%%%%%%%%%
