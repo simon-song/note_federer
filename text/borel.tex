@@ -352,7 +352,7 @@ if $A\neq \emptyset$, and $\rho(x,\emptyset)=1$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{proposition} \label{P:dist}
+\begin{proposition} \label{P:dist_ineq}
 For a pair of points $x,y$ and a set $A$ in a metric space $(X,\rho)$ we have
 \footnote{Engelking, General Topology, 4.1.9, p.254}
 \[
@@ -376,10 +376,10 @@ This completes the proof.
 \begin{theorem} \label{T:dist_cont}
 For every set $A$ in a metric space $(X,\rho)$ assigning to each point $x\in X$
 the distance $\rho(x,A)$ defines a continuous function on $X$.
-\footnote{Engelking, General Topology, 4.1.10, p.254}
+\footnote{Engelking, General Topology, Theorem 4.1.10, p.254}
 \end{theorem}
 \begin{proof}
-Directly from Propositions \ref{P:dist} and \ref{P:cont2}.
+Directly from Propositions \ref{P:dist_ineq} and \ref{P:cont2}.
 \end{proof}
 
 
@@ -3064,7 +3064,7 @@ function from $\mathcal{N}$ onto $S$.
 Next we study relations between Suslin sets and Borel sets. 
 
 %%%%%%%%%%%%%%%%%%%%%
-\begin{lemma}
+\begin{lemma} \label{L:prod_clos}
 Let $X$ be a metric space, $S\subset X$, and
 \[
   A = \{ (x,t)\in (X\times \mathbb{R}): t \cdot \dist(x,X\setminus S) = 1 \},
@@ -3072,13 +3072,43 @@ Let $X$ be a metric space, $S\subset X$, and
 then $A$ is closed in $X\times\mathbb{R}$.
 \end{lemma}
 %%%%%%%%%%%%%%%%%%%%%
-\begin{proof}
+\begin{proof}[Proof 1]
 To prove $A$ is closed in $X\times\mathbb{R}$, we only need to 
-verify that $X\setminus A$ is open in $X\times\mathbb{R}$.
+verify that $(X\times\mathbb{R})\setminus A$ is open in $X\times\mathbb{R}$.
 For any $(x,t)\in X\setminus A$, we have
 \[
-  t \times \dist(x,X\setminus S) \neq 1,
+  t \cdot \dist(x,X\setminus S) \neq 1,
 \]
+which means either $t \cdot \dist(x,X\setminus S) > 1$, or 
+$t \cdot \dist(x,X\setminus S) < 1$.
+
+We first check the case with $x \cdot \dist(x,X\setminus S) > 1$. There exist
+$\epsilon>0$ and $\delta>0$ such that
+$(t-\delta) \cdot (\dist(x,X\setminus S)-\epsilon) > 1$, hence open set
+$B(x,\epsilon)\times (t-\delta,t+\delta)\subset (X\times\mathbb{R})\setminus A$,
+thus $(X\times\mathbb{R})\setminus A$ is open.
+
+Similarly for the case with $x \cdot \dist(x,X\setminus S) < 1$, there exist
+$\epsilon>0$ and $\delta>0$ such that
+$(t+\delta) \cdot (\dist(x,X\setminus S)+\epsilon) > 1$, hence open set
+$B(x,\epsilon)\times (t-\delta,t+\delta)\subset (X\times\mathbb{R})\setminus A$,
+thus $(X\times\mathbb{R})\setminus A$ is open.
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}[Proof 2]
+  \footnote{Adapted from Srivastava, A Course on Borel Sets, proof of 
+    Theorem 2.2.1, p.53 }
+Let $(x_n,t_n)$ be a sequence in $A$ and $\lim_n (x_n,t_n)=(x,t)$.
+Since $x_n\to x$, and distance function is continuous by Theorem \ref{T:dist_cont},
+we have
+\[
+  \dist(x_n,X\setminus S)\to \dist(x,X\setminus S)
+\]
+Since  $t_n = 1 / \dist(x_n,X\setminus S)\to t$, 
+$t = 1 / \dist(x,X\setminus S)$. Thus $\dist(x,X\setminus S)\neq 0$,
+which means $x\notin X\setminus S$, thus $x\in S$.
+\footnote{Do we need to require that $S$ is open?}
+
 
 \end{proof}
 
@@ -3100,14 +3130,15 @@ Let
 \[
   A = \{ (x,t)\in (X\times \mathbb{R}): t \cdot \dist(x,X\setminus S) = 1 \},
 \]
-For any $(x,t)\in (X\times \mathbb{R})\setminus A$, there exists $\epsilon,\delta>0$ such
-that open set $B(x,\epsilon)\times (t-\delta,t+\delta)$
-does not contain any point of $A$.
-%\footnote{e.g. $\delta>t$, and $\epsilon>\frac{\delta}{t(\delta-t)}$.}
-%$(x-\epsilon,x+\epsilon)\times (t-\delta,t+\delta)$ (of 
-%$X\times R$) does not contain point $(x,t)$. 
-Hence $(x\times \mathbb{R})\setminus A$ is open in $X\times \mathbb{R}$, thus $A$ is closed 
-in $X\times \mathbb{R}$.
+% For any $(x,t)\in (X\times \mathbb{R})\setminus A$, there exists $\epsilon,\delta>0$ such
+% that open set $B(x,\epsilon)\times (t-\delta,t+\delta)$
+% does not contain any point of $A$.
+% %\footnote{e.g. $\delta>t$, and $\epsilon>\frac{\delta}{t(\delta-t)}$.}
+% %$(x-\epsilon,x+\epsilon)\times (t-\delta,t+\delta)$ (of 
+% %$X\times R$) does not contain point $(x,t)$. 
+% Hence $(x\times \mathbb{R})\setminus A$ is open in $X\times \mathbb{R}$, thus $A$ is closed 
+% in $X\times \mathbb{R}$.
+By Lemma \ref{L:prod_clos}, $A$ is closed in $X\times\mathbb{R}$.
 
 Since $\mathbb{R}$ is a Polish space, by Theorem \ref{T:pol_bij}, there is a closed set
 $B\subset\mathcal{N}$ and a continuous bijection $\psi:B\to \mathbb{R}$. Let
@@ -4362,7 +4393,7 @@ arbitrary.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % G_delta subset of completely metrizable space is completely metrizable
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{theorem}
+\begin{theorem} \label{T:gdelta_metri}
   \footnote{
     Srivastava, A Course on Borel Sets, Theorem 2.2.1, pp.52-53;
     Tserunyan, Introduction to Descriptive Set Theory (version Nov.
@@ -4370,8 +4401,8 @@ arbitrary.
     cf. Kechris, Classical Descriptive Set Theory, Theorem 3.11, p.17,
     the proof whereof uses an explicitly defined metric.
   }
-If $X$ is completely metrizable, and $Y\subset X$ is $G_{\delta}$,
-then $Y$ is completely metrizable.
+If $X$ is completely metrizable, and $G\subset X$ is $G_{\delta}$,
+then $G$ is completely metrizable.
 \end{theorem}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{proof}
@@ -4389,12 +4420,230 @@ is continuous by Proposition \ref{P:prod_conti2}. And $f^{-1}:f(G)\to G$
 is continuous because it is the projection of the first element
 $p_1|_{f(G)}$. Hence $G$ is homeomorphic to $f(G)$.
 
-Next we verify that $f(G)$ is closed in $X\times \mathbb{R}$. Let
+By Lemma \ref{L:prod_clos}, $f(G)$ is closed in $X\times\mathbb{R}$.
+Hence $f(G)$ is completely metrizable by Proposition \ref{P:closed_complete}.
+Since $f$ is a homeomorphism, we conclude that $G$ is completely metrizable.
+
+Now consider the case when $G$ is a $G_{\delta}$ set. Let $G=\bigcap_n G_n$, where
+$G_n$ is open for any $n$. Define $f:G\to X\times\mathbb{R}^{\mathcal{P}}$ by
 \[
-  A= \{ x\in G: x \times d(x,X\setminus G) = 1  \}
+  f(x) = \Big( x, \frac{1}{d(x,X\setminus G_0)}, \frac{1}{d(x,X\setminus G_1)}, 
+           \dots \Big)
 \]
+Arguing as above, we see that $f$ embeds $G$ onto a closed subspace of
+$X\times\mathbb{R}^{\mathcal{P}}$, which completes the proof.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  final topology
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition}
+  \footnote{Muger, Topology for the Working Mathematician, Definition 6.1.1, 
+    p.97; Bourbaki, Topologie Generale, I, p.14, Proposition 6 }
+  Let $(X_i,\mathcal{T}_i)_{i\in I}$ be a family of topological spaces, and let $Y$
+  be a set. Let functions $f_i:X_i\to Y, i\in I$ be given. The
+  \textbf{final topology} \index{final topology} 
+  on $Y$ induced by the maps $f_i$ is the finest topology $\mathcal{T}$
+  such that all maps $f_i:(X_i,\mathcal{T}_i)\to (Y,\mathcal{T}), i\in I$
+  are continuous.
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  final topology: representation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{L:fin_topo}
+  \footnote{Muger, Topology for the Working Mathematician, Lemma 6.1.2, p.97}
+  The final topology always exists, is unique and is given by
+  \[
+    \mathcal{T} = \{ U\subset Y: f_i^{-1}(U)\in\mathcal{T}_i, \, \forall i\in I \}
+  \]
+\end{lemma}
+%%%%%%%%%%%%%%%
+\begin{proof}
+TODO
+\end{proof}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  sum of topologies
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{definition}
+%   \footnote{Engelking, General Topology, 2.2, p.74}
+% Suppose $\{X_s,\mathcal{T}_s\}_{s\in S}$ are a familily of pairwise disjoint 
+% topological spaces, i.e. $X_s\cap X_{s'}=\emptyset$ for $s\neq s'$. Let 
+% $X=\bigcup_{s\in S} X_s$, the topology
+% \[
+%   \mathcal{T}=\{U\subset X: U\cap X_s\in\mathcal{T}_s, \forall s\in S\}
+% \]
+% is called the 
+% \textbf{sum topology} \index{sum topology},
+% and is denoted by $\oplus_{s\in S} (X_s,\mathcal{T}_s)$.
+% \end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  direct sum of sets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition}
+  \footnote{Muger, Topology for the Working Mathematician, Definition A.2.1, 
+    p.354 (Muger calls it disjoint union); 
+    Bourbaki, Theorie des Ensembles, II, p.30, Definition 8 }
+  Let $(X_i)_{i\in I}$ be a family of sets. Then the
+  \textbf{direct sum} \index{direct sum of sets}
+  of these sets is defined by
+  \[
+    \bigoplus_{i\in I} X_i = \left\{
+      (x,i)\in (\bigcup_{k\in I} X_k) \times I: x\in X_i, \, i\in I
+    \right\}
+    = \bigcup_{i\in I} (X_i \times \{i\})
+  \]
+  For every $i\in I$, we define the
+  \textbf{inclusion map} \index{inclusion map}
+  $\iota_i: X_i\to\oplus_{k\in I} X_k$ as
+  \[
+    \iota_i(x)=(x,i), \, \forall x\in X_i.
+  \]
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  direct sum topology
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{definition} \label{D:sum_topo}
+  \footnote{Muger, Topology for the Working Mathematician, Definition 6.3.1, 
+    p.101; Bourbaki, Topologie Generale, I, p.15, Exemples III }
+  Let $(X_i,\mathcal{T}_i)_{i\in I}$ be a family of topological spaces. The
+  \textbf{direct sum topology} \index{direct sum topology}
+  on the disjoint union $\oplus_k X_k$ is the final topology $\mathcal{T}$
+  induced by the inclusion maps $\iota_i:X_i\to \oplus_k X_k$, with 
+  $\iota_i(x)=(x,i)$ for any $x\in X_i$.
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  direct sum topology: representation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+  The direct sum topology on $\oplus_k X_k$ is given by
+  \[
+    \mathcal{T}_{\oplus} 
+      = \left\{ 
+          U\subset \bigoplus_k X_k: \iota_i^{-1}(U)\in\mathcal{T}_i, 
+          \, \forall i\in I 
+        \right\}
+  \]
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+  Directly from Definition \ref{D:sum_topo} and Lemma \ref{L:fin_topo}.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  direct sum topology of disjoint sets
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma} \label{L:sum_topo_homeo}
+  Let $(X_i,\mathcal{T}_i)_{i\in I}$ be a family of mutually disjoint topological 
+  spaces, i.e. $X_i\cap X_j=\emptyset$ for each $i\neq j$.
+  Let $X=\bigcup_i X_i$,
+  then $(X,\mathcal{T})$ is homeomorphic to the direct sum topology
+  $(\oplus_k X_k, \mathcal{T}_{\oplus})$, where
+  \[
+    \mathcal{T} = \{ U\subset X: U\cap X_i\in \mathcal{T}_i, \forall i\in I \}
+  \]
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+  Define a function $f:X\to \oplus_k X_k$ as $f(x)=(x,i)$ if $x\in X_i$.
+  Since $(X_i)_{i\in I}$ is mutually disjoint, $f$ is one-to-one and onto.
+  Now for any open set $U\in \mathcal{T}_{\oplus}$,
+  $\iota_i^{-1}(U)\in\mathcal{T}_i$ for any $i\in I$, 
+  hence $f^{-1}(U)\cap X_i \in\mathcal{T}_i$,
+  thus $f^{-1}(U)\in\mathcal{T}$, so that $f$ is continuous.
+  Conversely, for any open set $V\in\mathcal{T}$, $V\cap X_i\in \mathcal{T}_i$
+  for each $i\in I$, hence $\iota_i^{-1}(f(V))\in\mathcal{T}_i$, 
+  thus $f(V)\in\mathcal{T}_{\oplus}$, so that $f^{-1}$ is continuous.
+  Thus $f$ is homeomorphic.
+\end{proof}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  turning closed set to clopen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lemma}
+  \footnote{Kechris, Classical Descriptive Set Theory, Lemma 13.2, p.82;
+    Srivastava, A Course on Borel Sets, Theorem 3.2.4, Observation 1, p.92;
+    Aliprantis and Border, Infinite Dimensional Analysis: A Hitchhiker's 
+    Guide, Lemma 4.56, p.156;
+  }
+  Let $(X,\mathcal{T})$ be Polish and $F\subset X$ closed. Let $\mathcal{T}_F$
+  be the topology generated by $\mathcal{T}\cup\{F\}$, i.e. the topology with
+  basis $\mathcal{T}\cup\{U\cap F:U\in\mathcal{T}\}$. Then $\mathcal{T}_F$ is
+  Polish, $F$ is clopen in $\mathcal{T}_F$, and 
+  $\mathcal{B}(\mathcal{T}_F)=\mathcal{B}(\mathcal{T})$.
+\end{lemma}
+%%%%%%%%%%%%%%%%%%%%%%
+\begin{proof}
+Consider the subspace topologies on $F$ and $X\setminus F$
+\[
+  \mathcal{T}|_F = \{U\cap F: U\in \mathcal{T}\},
+\]
+\[
+  \mathcal{T}|_{X\setminus F} = \{U\cap (X\setminus F): U\in \mathcal{T}\},
+\]
+%and the sum topology of these two topologies on $X$:
+and a new topology $\mathcal{T}_F$ on $X$:
+\footnote{called sum topology in Engelking, General Topology, 2.2, p.74}
+\[
+  \mathcal{T}_F = 
+    \{ U\subset X: U\cap F \in\mathcal{T}|_F, 
+                   U\cap (X\setminus F) \in\mathcal{T}|_{X\setminus F} 
+    \}
+\]
+It is easy to see that $\mathcal{T}\subset\mathcal{T}_F$, and that
+$F$ is clopen in $\mathcal{T}_F$, 
+and $\mathcal{B}(\mathcal{T}_F)=\mathcal{B}(\mathcal{T})$.
+
+% To verify that $\mathcal{T}_F$ is Polish, we construct an homeomorphism of
+% it to a $G_{\delta}$ set. Define a function $f:X\to X\times\{0,1\}$ as
+% \[
+%   f(x) = \Big( x, \ 1_{X\setminus F}(x) \Big),
+% \]
+% where $1_A:X\to \{0,1\}$ is the characteristics function:
+% \[
+%   1_A(x)=
+%     \begin{cases} 
+%       1     & \text{if $x\in A$}    \\
+%       0     & \text{if $x\in X\setminus A$}
+%     \end{cases}
+% \]
+% Note that
+% \[
+%   f(X) = (F\times\{0\}) \bigcup ((X\setminus F) \times \{1\})
+%        = \bigcap_{n=1}^{\infty}
+%            \Big(
+%              (B(F,{1/n})\times\{0\}) \bigcup ((X\setminus F) \times \{1\})
+%            \Big)
+% \]
+% which is a $G_{\delta}$ in $X\times\{0,1\}$. Hence by Theorem \ref{T:gdelta_metri}
+% $f(X)$ is Polish.
+To verify that $(X, \mathcal{T}_F)$ is Polish, we construct an homeomorphism 
+of it to a $G_{\delta}$ set. Let $G$ be the direct sum of sets 
+$F$ and $X\setminus F$:
+\[
+  G = F\oplus (X\setminus F)
+    = \left( F\times\{0\} \right) \bigcup \left( (X\setminus F) \times \{1\} \right)
+\]
+Since $F$ is closed in $(X,\mathcal{T})$, it is a $G_{\delta}$ set by
+Corollary \ref{C:g_delta}, thus
+\[
+  G = \bigcap_{n=1}^{\infty}
+      \left(
+        (B(F,{1/n})\times\{0\}) \bigcup ((X\setminus F) \times \{1\})
+      \right)
+\]
+which is a $G_{\delta}$ in $X\times\{0,1\}$. Hence by Theorem 
+\ref{T:gdelta_metri}, $G$ is Polish. Now by Lemma \ref{L:sum_topo_homeo},
+$(G,\mathcal{T}_{\oplus})$ is homeomorphic to $(X,\mathcal{T}_F)$, we conclude
+that $(X,\mathcal{T}_F)$ is Polish.
 \end{proof}
 
 
